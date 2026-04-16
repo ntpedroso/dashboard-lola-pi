@@ -1,0 +1,14 @@
+@import 'tailwindcss';
+* {
+  margin: 0;
+}
+
+@theme {
+  --color-salmao: #EB877C;
+  --color-turquesa: #5FDBD7;
+  --color-fundo: #f9f9f9;
+  --color-input-gray: #CBBFBF;
+  --color-text: #444444;
+  --font-inter: 'Inter';
+  --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+}
