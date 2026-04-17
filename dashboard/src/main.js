@@ -56,9 +56,5 @@ document.querySelector('#app').innerHTML = `
 <div class="ticks"></div>
 <section id="spacer"></section>
 `
-function toggleSidebar() {
-   const sidebar = document.getElementById('sidebar');
-   sidebar.classList.toggle('-translate-x-full');
-}
 
 setupCounter(document.querySelector('#counter'))
