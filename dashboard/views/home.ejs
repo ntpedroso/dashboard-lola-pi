@@ -1,17 +1,20 @@
 <%- include ('partials/header.ejs'); %>
 
-    <div class="flex min-h-screen">
+<div class="flex min-h-screen">
+  <%- include('partials/sidebar') %>
 
-        <%- include('partials/sidebar') %>
+  <div class="flex-1 flex flex-col min-w-0">
+    <%- include('partials/navbar') %>
 
-            <div class="flex-1 flex flex-col min-w-0">
+    <main class="flex flex-col">
+      <div class="flex flex-row justify-between p-8 items-center w-full h-24 bg-salmao">
+        <p>Bem-Vindo, Natasha!</p>
+        <div class="w-16 h-16 rounded-full overflow-hidden">
+          <img src="/imgs/profile.jpg" class="object-cover w-full h-full"/>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
 
-                <%- include('partials/navbar') %>
-
-                    <main class="p-8">
-                        hghu
-                    </main>
-            </div>
-    </div>
-
-    <%- include ('partials/footer.ejs'); %>
+<%- include ('partials/footer.ejs'); %>
