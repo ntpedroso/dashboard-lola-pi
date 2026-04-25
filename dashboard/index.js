@@ -21,6 +21,10 @@ app.get("/home", function(req,res) {
     res.render("home");
 });
 
+app.get("/cadastrarPaciente", function(req,res) {
+    res.render("cadastrarPaciente");
+});
+
 //iniciando o servidor na porta 8080
 const port = 8080;
 //precisa de uma porta e uma função pra tratar o erro (avisar caso o servidor não funcione)
