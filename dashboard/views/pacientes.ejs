@@ -1,0 +1,65 @@
+<%- include ('partials/header.ejs'); %>
+
+<div class="flex min-h-screen bg-gray-50">
+    <%- include('partials/sidebar') %>
+
+        <div class="flex-1 flex flex-col min-w-0">
+            <header class="sticky top-0 z-40"><%- include('partials/navbar') %></header>
+
+            <main class="text-text font-jakarta text-sm p-8">
+
+                <div class="px-10 pt-8 hidden lg:block">
+                    <p>
+                        Home / Pacientes / <a class="text-salmao font-semibold">Pacientes Cadastrados</a>
+                    </p>
+                </div>
+
+                <div class="flex px-8 justify-end gap-3 py-3">
+                    <a href="" class="p-4 xl:p-5 bg-white shadow-lg rounded-lg flex gap-2"><img src="/imgs/icons/add.svg"
+                            class="w-5"><p class="xl:hidden">Cadastrar</p><p class="hidden xl:block">Cadastrar Paciente</p></a>
+                    <a href="" class="p-4 xl:p-5 bg-white shadow-lg rounded-lg flex gap-2"><img
+                            src="/imgs/icons/filtrar.svg" class="w-5">Filtrar</a>
+                </div>
+
+
+                    <div class="bg-white shadow-lg rounded-xl">
+
+                        <div
+                            class="grid grid-cols-[3fr_2fr_2fr]  font-semibold text-base border-b border-b-text/50 pb-3 md:text-lg md:grid-cols-[4fr_2fr_2fr] xl:grid-cols-[4fr_2fr_2fr_2fr] px-12 pt-8">
+                            <span>Paciente</span>
+                            <span>Nível</span>
+                            <span class="hidden xl:block">Status</span>
+                            <span>Ações</span>
+                        </div>
+                        <% listaPacientes.forEach(listaPaciente => { %>
+                                <div class="grid grid-cols-[3fr_2fr_2fr] py-8 items-center md:grid-cols-[4fr_2fr_2fr] md:text-base xl:grid-cols-[4fr_2fr_2fr_2fr] xl:text-lg xl:py-4 xl:hover:bg-text/10 p-12">
+                                    <span class="flex gap-3 items-center ">
+                                        <img src="/imgs/profile.jpg" class="w-8 rounded-full md:w-10">
+                                        <p>
+                                            <%= listaPaciente.nome %>
+                                        </p>
+                                        <p class="hidden md:block">
+                                            <%= listaPaciente.sobrenome %>
+                                        </p>
+                                    </span>
+                                    <span>Nível <%= listaPaciente.nivel %></span>
+                                    <span class="hidden gap-2 xl:block">
+                                        <%= listaPaciente.status %>
+                                    </span>
+                                    <span class="flex gap-2">
+                                        <a href="/pacientes/<%= listaPaciente.id %>" class="p-2 md:p-3 bg-amarelo xl:hover:bg-amarelo/75 rounded-sm hidden md:block xl:p-4"><img
+                                                src="/imgs/icons/ver.svg" class="w-3 md:w-5"></a>
+                                        <a href="" class="p-2 md:p-3 bg-turquesa rounded-sm xl:p-4 xl:hover:bg-turquesa/75"><img
+                                                src="/imgs/icons/editar.svg" class="w-3 md:w-5 "></a>
+                                        <a href="" class="p-2 md:p-3 bg-salmao xl:hover:bg-salmao/75 rounded-sm xl:p-4"><img
+                                                src="/imgs/icons/excluir.svg" class="w-3 md:w-5 "></a>
+                                    </span>
+                                </div>
+                            <% }); %>
+                </div>
+            </main>
+        </div>
+</div>
+
+<%- include ('partials/footer.ejs'); %>
+    </div>

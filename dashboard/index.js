@@ -1,6 +1,8 @@
 //importando o módulo do express
 import express from "express";
 
+import PacienteController from "./controllers/PacienteController.js";
+
 //criando uma instância do express
 const app = express();
 
@@ -12,6 +14,8 @@ app.set('views', './views'); // Indica a pasta onde estão seus arquivos .ejs
 //definindo a pasta "public" como diretório para arquivos estáticos
 app.use(express.static('public'));
 
+app.use("/", PacienteController);
+
 //rota principal
 app.get("/", function(req, res) {
     res.render("index");
@@ -19,10 +23,6 @@ app.get("/", function(req, res) {
 
 app.get("/home", function(req,res) {
     res.render("home");
-});
-
-app.get("/cadastrarPaciente", function(req,res) {
-    res.render("cadastrarPaciente");
 });
 
 //iniciando o servidor na porta 8080
