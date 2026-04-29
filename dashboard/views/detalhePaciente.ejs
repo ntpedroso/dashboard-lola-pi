@@ -20,92 +20,103 @@
                         </a>
                     </div>
                     <div class="w-full h-auto py-8 flex flex-col gap-8">
-                        <div class="bg-white shadow-lg grid grid-cols-2 p-8 gap-5 rounded-xl xl:grid-cols-4">
-                            <div class="col-span-2 flex flex-col items-center gap-1 md:gap-2">
-                                <img src="<%= paciente.img %>" alt="foto de perfil" class="w-32 rounded-full md:w-36">
-                                <p class="text-lg font-semibold md:text-xl">
-                                    <%= paciente.nome %>
-                                        <%= paciente.sobrenome %>
-                                </p>
-                                <p class="md:text-base">
-                                    <%= paciente.status %>
-                                </p>
-                                <p class="md:text-base">Nível <%= paciente.nivel %>
-                                </p>
-                            </div>
-                            <div class="col-span-2 md:col-span-1">
-                                <p class="text-base font-semibold md:text-lg">Nome de usuário</p>
-                                <p class="md:text-base">username</p>
-                            </div>
-                            <div class="col-span-2 md:col-span-1">
-                                <p class="text-base font-semibold md:text-lg">Data de Nascimento</p>
-                                <p class="md:text-base">username</p>
-                            </div>
-                            <div class="">
-                                <p class="text-base font-semibold md:text-lg">Idade</p>
-                                <p class="md:text-base">username</p>
-                            </div>
-                            <div class="">
-                                <p class="text-base font-semibold md:text-lg">Alvo Atual</p>
-                                <p class="md:text-base">username</p>
-                            </div>
-                            <div class="">
-                                <p class="text-base font-semibold md:text-lg">Cadastrado em</p>
-                                <p class="md:text-base">username</p>
-                            </div>
-                            <div class="col-span-2 md:col-span-1">
-                                <p class="text-base font-semibold md:text-lg">Responsável</p>
-                               <p class="md:text-base">username</p>
-                            </div>
-                            <div class="">
-                                <p class="text-base font-semibold md:text-lg">Contato</p>
-                               <p class="md:text-base">username</p>
-                            </div>
-                            <div class="">
-                                <p class="text-base font-semibold md:text-lg">Ativo</p>
-                                <p class="md:text-base">username</p>
-                            </div>
-                            <div class="col-span-2 flex gap-2 justify-center md:justify-end py-3">
-
-                                <a href=""
-                                    class="block p-4 md:p-3 bg-turquesa rounded-sm xl:p-4 xl:hover:bg-turquesa/75">
-                                    <img src="/imgs/icons/editar.svg" class="w-5 md:w-5">
-                                </a>
-                                <a href=""
-                                    class="block p-4 md:p-3 bg-salmao xl:hover:bg-amarelo/75 rounded-sm  md:block xl:p-4">
-                                    <img src="/imgs/icons/excluir.svg" class="w-5 md:w-5">
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="bg-white shadow-lg rounded-xl p-8 flex flex-col gap-3">
-                            <p class="font-semibold text-lg md:text-xl">Notas</p>
-                            <ul class="px-8 flex flex-col gap-2 md:text-base">
-                                <li class="list-disc">Apresentou dificuldades na produção do encontro consonantal na
-                                    última sessão</li>
-                                <li class="list-disc">Maior dificuldade na consoante /s/</li>
-                            </ul>
-                            <div class="flex justify-center py-3 gap-3">
-                                <a href="" class="p-4 bg-roxo rounded-sm xl:p-4 xl:hover:bg-roxo/75">
-                                    <p class="text-white">Ver tudo</p>
-                                </a>
-                                <a href="" class="p-4  bg-turquesa xl:hover:bg-turquesa/75 rounded-sm xl:p-4">
-                                    <img src="/imgs/icons/editar.svg" class="w-5 md:w-5">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-x-3 gap-y-8">
+                        <div class="grid gap-8 xl:grid-cols-[3fr_1fr]">
                             <div
-                                class="bg-white shadow-xl rounded-lg p-4 flex flex-col items-center justify-between gap-5">
+                                class="bg-white shadow-lg grid grid-cols-2 p-8 gap-5 rounded-xl xl:grid-cols-[3fr_2fr_2fr_2fr] xl:grid-rows-3 xl:p-10">
+                                <div
+                                    class="flex flex-col col-span-2 items-center xl:col-span-1 xl:justify-center gap-1 md:gap-2 xl:row-span-3">
+                                    <img src="<%= paciente.img %>" alt="foto de perfil"
+                                        class="w-32 rounded-full md:w-36">
+                                    <p class="text-lg font-semibold md:text-xl">
+                                        <%= paciente.nome %>
+                                            <%= paciente.sobrenome %>
+                                    </p>
+                                    <p class="md:text-base">
+                                        <%= paciente.status %>
+                                    </p>
+                                    <p class="md:text-base">Nível <%= paciente.nivel %>
+                                    </p>
+                                </div>
+                                <div class="col-span-2 md:col-span-1 xl:col-span-1">
+                                    <p class="text-base font-semibold md:text-lg">Nome de usuário</p>
+                                    <p class="md:text-base">username</p>
+                                </div>
+                                <div class="col-span-2 md:col-span-1 xl:col-span-1">
+                                    <p class="text-base font-semibold md:text-lg">Data de Nascimento</p>
+                                    <p class="md:text-base">username</p>
+                                </div>
+                                <div class="xl:col-span-1">
+                                    <p class="text-base font-semibold md:text-lg">Idade</p>
+                                    <p class="md:text-base">username</p>
+                                </div>
+                                <div class="xl:col-start-2">
+                                    <p class="text-base font-semibold md:text-lg">Alvo Atual</p>
+                                    <p class="md:text-base">username</p>
+                                </div>
+                                <div class="">
+                                    <p class="text-base font-semibold md:text-lg">Cadastrado em</p>
+                                    <p class="md:text-base">username</p>
+                                </div>
+                                <div class="col-span-2 md:col-span-1 xl:col-span-1">
+                                    <p class="text-base font-semibold md:text-lg">Responsável</p>
+                                    <p class="md:text-base">username</p>
+                                </div>
+                                <div class="xl:col-start-2">
+                                    <p class="text-base font-semibold md:text-lg">Contato</p>
+                                    <p class="md:text-base">username</p>
+                                </div>
+                                <div class="">
+                                    <p class="text-base font-semibold md:text-lg">Ativo</p>
+                                    <p class="md:text-base">username</p>
+                                </div>
+                                <div class="col-span-2 flex gap-2 justify-center md:justify-end py-3 xl:col-span-1">
+
+                                    <a href=""
+                                        class="block p-4 md:p-3 bg-turquesa rounded-sm xl:p-4 xl:hover:bg-turquesa/75">
+                                        <img src="/imgs/icons/editar.svg" class="w-5 md:w-5">
+                                    </a>
+                                    <a href=""
+                                        class="block p-4 md:p-3 bg-salmao xl:hover:bg-amarelo/75 rounded-sm  md:block xl:p-4">
+                                        <img src="/imgs/icons/excluir.svg" class="w-5 md:w-5">
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="bg-white shadow-lg rounded-xl p-8 flex flex-col gap-3 xl:justify-between">
+                                <div>
+                                    <p class="font-semibold text-lg md:text-xl">Notas</p>
+                                    <ul class="px-8 flex flex-col gap-2 md:text-base pt-4">
+                                        <li class="list-disc">Apresentou dificuldades na produção do encontro
+                                            consonantal na
+                                            última sessão</li>
+                                        <li class="list-disc">Maior dificuldade na consoante /s/</li>
+                                    </ul>
+                                </div>
+                                <div class="flex justify-center py-3 gap-3">
+                                    <a href="" class="p-4 bg-roxo rounded-sm xl:p-4 xl:hover:bg-roxo/75">
+                                        <p class="text-white">Ver tudo</p>
+                                    </a>
+                                    <a href="" class="p-4  bg-turquesa xl:hover:bg-turquesa/75 rounded-sm xl:p-4">
+                                        <img src="/imgs/icons/editar.svg" class="w-5 md:w-5">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-x-3 gap-y-8 xl:grid-cols-4">
+                            <div
+                                class="bg-white shadow-xl rounded-lg p-4 xl:p-8 flex flex-col items-center justify-between gap-5">
                                 <p class="text-sm font-semibold md:text-xl">Média de Acertos</p>
                                 <span class="font-bold text-3xl text-salmao md:text-4xl">68,9%</span>
-                                <a href="" class="px-4 py-2 bg-turquesa rounded-lg text-sm md:py-3 md:px-5">Ver relatório</a>
+                                <a href="" class="px-4 py-2 bg-turquesa rounded-lg text-sm md:py-3 md:px-5">Ver
+                                    relatório</a>
                             </div>
                             <div
-                                class="bg-white shadow-xl rounded-lg p-4 flex flex-col items-center justify-between gap-5">
+                                class="bg-white shadow-xl rounded-lg p-4 xl:p-8 flex flex-col items-center justify-between gap-5">
                                 <p class="text-sm font-semibold text-center md:text-xl">Média de Prática Semanal</p>
                                 <span class="font-bold text-3xl text-salmao md:text-4xl">2h52min</span>
-                                <a href="" class="px-4 py-2 bg-turquesa rounded-lg text-sm md:py-3 md:px-5">Ver relatório</a>
+                                <a href="" class="px-4 py-2 bg-turquesa rounded-lg text-sm md:py-3 md:px-5">Ver
+                                    relatório</a>
                             </div>
                             <div class="col-span-2 bg-white shadow-xl rounded-lg p-8 flex flex-col gap-5">
                                 <div>

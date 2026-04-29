@@ -2,6 +2,7 @@
 import express from "express";
 
 import PacienteController from "./controllers/PacienteController.js";
+import CadastroPacienteController from "./controllers/CadastroPacienteController.js";
 
 //criando uma instância do express
 const app = express();
@@ -15,6 +16,7 @@ app.set('views', './views'); // Indica a pasta onde estão seus arquivos .ejs
 app.use(express.static('public'));
 
 app.use("/", PacienteController);
+app.use("/", CadastroPacienteController);
 
 //rota principal
 app.get("/", function(req, res) {

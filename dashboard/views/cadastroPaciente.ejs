@@ -1,0 +1,69 @@
+<%- include ('partials/header.ejs'); %>
+
+    <div class="flex min-h-screen bg-gray-50">
+        <%- include('partials/sidebar') %>
+
+            <div class="flex-1 flex flex-col min-w-0">
+
+                <header class="sticky top-0 z-40">
+                    <%- include('partials/navbar') %>
+                </header>
+                <main class="text-text font-jakarta text-sm p-8">
+                    <div class="hidden">
+                        <p>
+                            Home / Pacientes / <a href="#" class="text-salmao font-semibold">Cadastrar Pacientes</a>
+                        </p>
+                    </div>
+                    <div class="flex justify-end">
+                        <a href="/pacientes">
+                            <span>
+                                <img src="/imgs/icons/back.svg" alt="voltar">
+                            </span>
+                        </a>
+                    </div>
+                    <div class="bg-white shadow-lg rounded-xl grid grid-col-1 p-8 gap-4">
+
+                        <div class="grid justify-center gap-4">
+                            <p class="text-center">Foto de Perfil</p>
+                            <a href="" class="bg-text/15 rounded-xl p-10 flex flex-col items-center gap-1">
+                                <img src="/imgs/icons/img.svg" alt="" class="w-6">
+                                <p class="text-[14px] font-semibold">PNG, JPG ou WEBP</p>
+                                <p class="text-[10px]">(máximo 10 MB)</p>
+                            </a>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 gap-x-24">
+                            <div class="grid col-span-2 gap-1">
+                                <label>Nome</label>
+                                <input type="text" name="nome" class="p-2 border border-text/25 rounded-3xl shadow-md">
+                            </div>
+                            <div class="grid col-span-2 gap-1">
+                                <label>Sobrenome</label>
+                                <input type="text" name="sobrenome"
+                                    class="p-2 border border-text/25 rounded-3xl shadow-md">
+                            </div>
+                            <div class="grid gap-1">
+                                <label>Data de Nascimento</label>
+                                <input type="text" name="sobrenome"
+                                    class="p-2 border border-text/25 rounded-3xl shadow-md">
+                            </div>
+                            <div class="grid gap-1">
+                                <label>Sexo</label>
+                                <div class="flex gap-3">
+                                    <input type="radio" name="sexo" value="fem" class="w-5 h-5 border border-text/25">F
+                                    <input type="radio" name="sexo" value="masc" class="w-5 h-5 border border-text/25">M
+                                </div>
+                            </div>
+                            <div class="grid col-span-2 gap-1">
+                                <label>Data de Nascimento</label>
+                                <select name="" id="">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+    </div>
+
+
+    <%- include ('partials/footer.ejs'); %>
