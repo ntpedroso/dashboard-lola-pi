@@ -21,46 +21,145 @@
                             </span>
                         </a>
                     </div>
-                    <div class="bg-white shadow-lg rounded-xl grid grid-col-1 p-8 gap-4">
+                    <div class="py-6">
+                        <p class="text-xl text-center md:text-2xl">Cadastrar Paciente</p>
+                    </div>
 
-                        <div class="grid justify-center gap-4">
-                            <p class="text-center">Foto de Perfil</p>
-                            <a href="" class="bg-text/15 rounded-xl p-10 flex flex-col items-center gap-1">
+                    <form
+                        class="bg-white shadow-lg rounded-xl grid grid-col-1 xl:grid-cols-[2fr_5fr] p-8 gap-4 text-[14px] md:text-[18px] xl:grid-rows-7">
+
+                        <div
+                            class="grid justify-center gap-4  xl:col-span-1 xl:flex xl:flex-col xl:justify-start xl:row-span-3">
+                            <p class="">Foto de Perfil</p>
+
+                            <input type="file" id="fotoPerfil" accept="image/jpeg/png/webp" class="hidden">
+                            <div onclick="document.getElementById('fotoPerfil').click()" href=""
+                                class="cursor-pointer bg-text/15 rounded-xl p-10 flex flex-col items-center gap-1">
                                 <img src="/imgs/icons/img.svg" alt="" class="w-6">
                                 <p class="text-[14px] font-semibold">PNG, JPG ou WEBP</p>
                                 <p class="text-[10px]">(máximo 10 MB)</p>
-                            </a>
-                        </div>
-                        <div class="grid grid-cols-2 gap-3 gap-x-24">
-                            <div class="grid col-span-2 gap-1">
-                                <label>Nome</label>
-                                <input type="text" name="nome" class="p-2 border border-text/25 rounded-3xl shadow-md">
+
+                                <span id="nome-foto" class="text-[12px] text-gray-500">Nenhum arquivo selecionado</span>
+
+                                <script>
+                                    document.getElementById("fotoPerfil").addEventListener("change", function () {
+                                        const nome = this.files[0]?.name || "Nenhum arquivo selecionado";
+                                        document.getElementById("nome-foto").textContent = nome;
+                                    });
+                                </script>
                             </div>
-                            <div class="grid col-span-2 gap-1">
+                        </div>
+                        <div class="xl:col-span-1 xl:row-start-4 xl:row-span-1 xl:flex xl:flex-col xl:gap-3 xl:pt-8">
+                            <p class="text-center">Acesso</p>
+
+                        </div>
+                        <div class="xl:col-span-1 xl:row-start-5 xl:row-span-3 xl:flex xl:flex-col xl:gap-3">
+                            <div class="flex flex-col gap-1">
+                                <label>Login</label>
+                                <input type="text" name="nome"
+                                    class="px-4 py-2 border border-text/25 rounded-3xl shadow-md focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3">
+
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label>Senha</label>
+                                <input type="text" name="nome"
+                                    class="px-4 py-2 border border-text/25 rounded-3xl shadow-md focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3">
+                            </div>
+                        </div>
+                        <div
+                            class="grid grid-cols-2 xl:grid-cols-3  gap-3 md:gap-x-10 xl:row-span-7 xl:pl-5 xl:gap-x-5">
+                            <div class="flex flex-col col-span-2 xl:col-span-1 gap-1">
+                                <label>Nome</label>
+                                <input type="text" name="nome"
+                                    class="px-4 py-2 border border-text/25 rounded-3xl shadow-md focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3">
+                            </div>
+                            <div class="flex flex-col col-span-2 gap-1 xl:col-span-2">
                                 <label>Sobrenome</label>
                                 <input type="text" name="sobrenome"
-                                    class="p-2 border border-text/25 rounded-3xl shadow-md">
+                                    class="px-4 py-2 border border-text/25 rounded-3xl shadow-md focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3">
                             </div>
-                            <div class="grid gap-1">
+                            <div class="flex flex-col col-span-2 md:col-span-1 gap-1 xl:col-span-1">
                                 <label>Data de Nascimento</label>
                                 <input type="text" name="sobrenome"
-                                    class="p-2 border border-text/25 rounded-3xl shadow-md">
+                                    class="px-4 py-2 border border-text/25 rounded-3xl shadow-md focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3">
                             </div>
-                            <div class="grid gap-1">
+                            <div class="flex flex-col gap-1 gap-y-4 md:gap-y-6 xl:">
                                 <label>Sexo</label>
                                 <div class="flex gap-3">
-                                    <input type="radio" name="sexo" value="fem" class="w-5 h-5 border border-text/25">F
-                                    <input type="radio" name="sexo" value="masc" class="w-5 h-5 border border-text/25">M
+                                    <input type="radio" name="sexo" value="fem"
+                                        class="w-5 h-5 border border-text/25 accent-salmao focus:ring-0">F
+                                    <input type="radio" name="sexo" value="masc"
+                                        class="w-5 h-5 border border-text/25 accent-salmao focus:ring-0 focus:outline-none">M
                                 </div>
                             </div>
-                            <div class="grid col-span-2 gap-1">
-                                <label>Data de Nascimento</label>
-                                <select name="" id="">
-                                    <option value=""></option>
+                            <div class="flex flex-col md:col-span-2 gap-1 xl:col-span-1">
+                                <label>Nível de Gravidade</label>
+                                <select name="gravidade" id=""
+                                    class="border border-text/25 rounded-3xl px-4 py-2 shadow-md appearance-none bg-[length:16px_16px] bg-[right_12px_center] bg-no-repeat focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3"
+                                    style="background-image: url('/imgs/icons/seta-baixo-salmao.svg');">
+                                    <option value="leve">Leve</option>
+                                    <option value="moderado">Moderado</option>
+                                    <option value="grave">Grave</option>
+                                    <option value="severa">Severa</option>
                                 </select>
                             </div>
+                            <div class="flex flex-col gap-1 col-span-2 ">
+                                <label>Responsável</label>
+                                <input type="text" name="sobrenome"
+                                    class="px-4 py-2 border border-text/25 rounded-3xl shadow-md focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3">
+                            </div>
+                            <div class="flex flex-col  gap-1 col-span-2 md:col-span-1">
+                                <label>Contato</label>
+                                <input type="text" name="sobrenome"
+                                    class="px-4 py-2 border border-text/25 rounded-3xl shadow-md focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3">
+                            </div>
+                            <div class="flex flex-col  gap-1 col-span-2 md:col-span-1">
+                                <label>CPF</label>
+                                <input type="text" name="sobrenome"
+                                    class="px-4 py-2 border border-text/25 rounded-3xl shadow-md focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3">
+                            </div>
+                            <div class="flex flex-col  gap-1 col-span-2">
+                                <label>Endereço</label>
+                                <input type="text" name="sobrenome"
+                                    class="px-4 py-2 border border-text/25 rounded-3xl shadow-md focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3">
+                            </div>
+                            <div class="flex flex-col  gap-1 col-span-2">
+                                <label>Cidade</label>
+                                <input type="text" name="sobrenome"
+                                    class="px-4 py-2 border border-text/25 rounded-3xl shadow-md focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3">
+                            </div>
+                            <div class="flex flex-col  gap-1 col-span-2 md:col-span-1">
+                                <label>UF</label>
+                                <select name="" id=""
+                                    class="border border-text/25 rounded-3xl px-4 py-2 shadow-md appearance-none bg-[length:16px_16px] bg-[right_12px_center] bg-no-repeat md:py-3"
+                                    style="background-image: url('/imgs/icons/seta-baixo-salmao.svg');">
+                                    <% estados.forEach(estado=> { %>
+                                        <option value="<%= estado.sigla %>">
+                                            <%= estado.nome %>
+                                        </option>
+                                        <% }); %>
+                                </select>
+                            </div>
+                            <div class="flex flex-col  gap-1 col-span-2 md:col-span-1">
+                                <label>País</label>
+                                <select name="" id=""
+                                    class="border border-text/25 rounded-3xl px-4 py-2 shadow-md appearance-none bg-[length:16px_16px] bg-[right_12px_center] bg-no-repeat md:py-3"
+                                    style="background-image: url('/imgs/icons/seta-baixo-salmao.svg');">
+                                    <% paises.forEach(pais=> { %>
+                                        <option value="<%= pais.code %>">
+                                            <%= pais.nome %>
+                                        </option>
+                                        <% }); %>
+                                </select>
+                            </div>
+                            <div class="col-span-2 flex gap-3 justify-center pt-5 xl:justify-end xl:col-span-3">
+                                <a href="/detalhePaciente"
+                                    class="py-3 px-4 bg-turquesa rounded-xl md:px-6 md:py-5">Cadastrar</a>
+                                <a href="/pacientes"
+                                    class="py-3 px-4 bg-red-500 rounded-xl text-white md:px-6 md:py-5">Cancelar</a>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </main>
             </div>
     </div>
