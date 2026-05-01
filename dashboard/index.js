@@ -3,6 +3,7 @@ import express from "express";
 
 import PacienteController from "./controllers/PacienteController.js";
 import CadastroPacienteController from "./controllers/CadastroPacienteController.js";
+import RelatorioController from "./controllers/RelatorioController.js";
 
 //criando uma instância do express
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.static('public'));
 
 app.use("/", PacienteController);
 app.use("/", CadastroPacienteController);
+app.use("/", RelatorioController);
 
 //rota principal
 app.get("/", function(req, res) {
