@@ -5,6 +5,7 @@ import PacienteController from "./controllers/PacienteController.js";
 import CadastroPacienteController from "./controllers/CadastroPacienteController.js";
 import RelatorioController from "./controllers/RelatorioController.js";
 import CadastroUsuarioController from "./controllers/CadastroUsuarioController.js";
+import AlterarSenhaController from "./controllers/AlterarSenhaController.js";
 
 //criando uma instância do express
 const app = express();
@@ -21,6 +22,7 @@ app.use("/", PacienteController);
 app.use("/", CadastroPacienteController);
 app.use("/", RelatorioController);
 app.use("/", CadastroUsuarioController);
+app.use("/", AlterarSenhaController);
 
 //rota principal
 app.get("/", function(req, res) {
