@@ -14,8 +14,8 @@
           </span>
         </a>
       </div>
-      <div class="grid grid-cols-2 gap-6">
-        <div class="flex flex-col col-span-2 bg-white shadow-lg rounded-xl p-8">
+      <div class="grid grid-cols-2 xl:grid-cols-3 xl:grid-rows-2 gap-6">
+        <div class="flex flex-col col-span-2 xl:col-span-1 bg-white shadow-lg rounded-xl p-8">
           <p class="text-lg text-center">Dificuldade por fonema</p>
           <div class="flex justify-center py-8 h-72 relative">
             <canvas id="graficoFonema"></canvas>
@@ -28,7 +28,7 @@
             >
           </div>
         </div>
-        <div class="flex flex-col col-span-2 bg-white shadow-lg rounded-xl p-8">
+        <div class="flex flex-col col-span-2 xl:col-span-2 bg-white shadow-lg rounded-xl p-8">
           <p class="text-lg text-center">Média de Atividade Diária</p>
           <div class="flex justify-center py-8">
             <canvas id="graficoAtividade"></canvas>
@@ -41,7 +41,7 @@
             >
           </div>
         </div>
-        <div class="flex flex-col col-span-2 bg-white shadow-lg rounded-xl p-8">
+        <div class="flex flex-col col-span-2 xl:col-span-1 xl:row-span-1 bg-white shadow-lg rounded-xl p-8">
           <p class="text-lg text-center">Média das Sessões</p>
           <div class="flex justify-center px-8 py-12">gráfico</div>
           <div class="flex justify-center">
@@ -53,7 +53,7 @@
           </div>
         </div>
         <div
-          class="flex flex-col col-span-2 bg-white shadow-lg rounded-xl p-8 gap-5"
+          class="flex flex-col col-span-2 bg-white shadow-lg rounded-xl p-8 gap-5 xl:col-span-1 xl:row-span-2"
         >
           <p class="text-lg text-center">Evolução de Acertos</p>
           <div class="flex justify-center h-72 py-2">
@@ -67,7 +67,7 @@
             >
           </div>
         </div>
-        <div class="col-span-2 bg-white shadow-lg rounded-xl p-8">
+        <div class="col-span-2 md:col-span-1 md:flex md:flex-col md:justify-between bg-white shadow-lg rounded-xl p-8">
           <p class="text-lg text-center">Maior Evolução</p>
           <div class="flex py-12 gap-8">
             <div class="flex gap-4 items-center">
@@ -84,9 +84,37 @@
             >
           </div>
         </div>
-        <div class="col-span-2 bg-white shadow-lg rounded-xl p-8">
+        <div class="col-span-2 md:col-span-1 xl:row-span-1 bg-white shadow-lg rounded-xl p-8">
           <p class="text-lg text-center">Usuários mais ativos</p>
-          <div class="flex justify-center px-8 py-12">gráfico</div>
+          <div class="grid grid-cols-[1fr_2fr_2fr] items-center py-8 gap-8">
+            <div class="">
+              <img src="imgs/profile.jpg" alt="" class="rounded-full w-10" />
+            </div>
+            <div class="text-base">
+              <p>Joana Oliveira</p>
+            </div>
+            <div>
+              <p class="text-base font-semibold">3h52min</p>
+            </div>
+            <div class="">
+              <img src="imgs/profile.jpg" alt="" class="rounded-full w-10" />
+            </div>
+            <div class="text-base">
+              <p>Joana Oliveira</p>
+            </div>
+            <div>
+              <p class="text-base font-semibold">3h52min</p>
+            </div>
+            <div class="">
+              <img src="imgs/profile.jpg" alt="" class="rounded-full w-10" />
+            </div>
+            <div class="text-base">
+              <p>Joana Oliveira</p>
+            </div>
+            <div>
+              <p class="text-base font-semibold">3h52min</p>
+            </div>
+          </div>
           <div class="flex justify-center">
             <a
               href=""
