@@ -1,0 +1,58 @@
+<%- include ('partials/header.ejs'); %>
+
+<div class="flex min-h-screen bg-gray-50">
+  <%- include('partials/sidebar') %>
+
+  <div class="flex-1 flex flex-col min-w-0">
+    <header class="sticky top-0 z-40"><%- include('partials/navbar') %></header>
+
+    <main class="text-text font-jakarta text-sm p-8 flex flex-col gap-6">
+      <div class="px-10 pt-8 hidden lg:block">
+        <p>
+          Home /
+          <a class="text-salmao font-semibold">Atividades</a>
+        </p>
+      </div>
+      <div class="xl:hidden flex justify-end">
+        <a href="/pacientes">
+          <span>
+            <img src="/imgs/icons/back.svg" alt="voltar" />
+          </span>
+        </a>
+      </div>
+      <div class="bg-white shadow-lg rounded-xl p-8 flex flex-col">
+        <div class="flex flex-col gap-4">
+          <label class="font-semibold text-base">Selecionar Paciente</label>
+          <select
+            name="paciente"
+            id=""
+            class="border border-text/25 rounded-3xl px-4 py-2 shadow-md appearance-none bg-[length:16px_16px] bg-[right_12px_center] bg-no-repeat focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3"
+            style="
+              background-image: url(&quot;/imgs/icons/seta-baixo-salmao.svg&quot;);
+            "
+          >
+            <option value="">Selecione um paciente...</option>
+            <option value="ana">Ana Paula Silva</option>
+            <option value="carlos">Carlos Eduardo Mendes</option>
+            <option value="beatriz">Beatriz Costa</option>
+          </select>
+        </div>
+        <div class="py-20">
+            <p class="text-center">Escolha um paciente para começar a personalização.</p>
+        </div>
+        <div class="flex flex-col">
+            <p>Seleção de Fonemas</p>
+            <p>Oclusivos</p>
+            <div>
+                <span>
+                    <p>/p/</p>
+                    
+                </span>
+            </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<%- include ('partials/footer.ejs'); %>
