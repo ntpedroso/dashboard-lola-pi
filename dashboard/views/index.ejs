@@ -3,38 +3,67 @@
     <main>
         <div class="flex flex-col h-screen font-jakarta xl:flex-row">
             <div
-                class="flex flex-col justify-center items-center bg-salmao h-48 md:h-64 xl:flex-row xl:flex-1 xl:h-screen">
-                <p class="text-3xl md:text-5xl lg:text-6xl font-bold text-white">logotipo</p>
+                class="flex flex-col justify-center items-center bg-salmao h-48 md:h-64 xl:flex-col xl:gap-20 xl:flex-1 xl:h-screen">
+                <div class="hidden xl:flex flex-col xl:gap-3 text-center">
+                    <p class="text-3xl md:text-5xl font-bold text-white">Olá, bem-vindo ao</p>
+                    <p class="text-3xl md:text-5xl font-bold text-white">Painel Administrativo</p>
+                </div>
+                
+                <img src="/imgs/logo/logo-variante-turquesa.svg" alt="logotipo" class="w-40 md:w-60 xl:w-100">
+
+                <div class="hidden xl:grid grid-cols-3 gap-20 text-white pt-20 p-12">
+                    <div class="flex gap-5">
+                        <img src="imgs/icons/gestao.svg" alt="" class="w-10">
+                        <p>Gestão completa <br> dos pacientes</p>
+                    </div>
+                    <div class="flex gap-5">
+                        
+                        <img src="imgs/icons/relatorio.svg" alt="" class="w-10">
+                        <p>Relatórios e <br> Indicadores</p>
+                    </div>
+                    <div class="flex gap-5">
+                        <img src="imgs/icons/seguranca.svg" alt="" class="w-10">
+                        <p>Segurança e <br> privacidade</p>
+                    </div>
+                </div>
             </div>
 
             <div class="flex flex-1 items-center justify-center text-text bg-fundo xl:flex-1">
-                <div class="flex flex-col p-6 w-80 sm:w-96 md:w-130 lg:w-160 xl:w-120 gap-5">
-                    <p class="text-2xl md:text-3xl lg:text-4xl pb-3 text-center text-salmao font-light">Entre com sua
-                        conta</p>
-
-                    <div class="flex flex-col gap-1">
-                        <label class="text-sm md:text-lg lg:text-xl font-medium">E-mail</label>
-                        <input type="text" name="email" placeholder="Digite seu e-mail"
-                            class="p-3 md:p-4 lg:p-5 border-none shadow-md bg-white rounded-3xl text-sm lg:text-lg">
+                <div class="flex flex-col p-6 w-90 sm:w-96 md:w-130 lg:w-160 xl:w-120 gap-5">
+                    <div>
+                        <p
+                            class="text-2xl md:text-3xl lg:text-4xl pb-3 text-center text-salmao font-light xl:font-medium">
+                            Entre com sua
+                            conta</p>
+                        <p class="text-base text-text pb-3 text-center font-light">Acesse o painel e
+                            gerencie as informações dos seus pacientes com praticidade.</p>
                     </div>
 
                     <div class="flex flex-col gap-1">
-                        <label class="text-sm md:text-lg lg:text-xl font-medium">Senha</label>
+                        <label class="text-sm md:text-lg  font-medium">E-mail</label>
+                        <input type="text" name="email" placeholder="Digite seu e-mail"
+                            class="p-3 md:p-4 border border-input-gray  bg-white rounded-2xl text-sm lg:text-base focus:outline-none focus:ring-turquesa focus:ring-1">
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                        <label class="text-sm md:text-lg font-medium">Senha</label>
                         <input type="password" name="senha" placeholder="Digite sua senha"
-                            class="p-3 md:p-4 lg:p-5 border-none shadow-md bg-white rounded-3xl text-sm lg:text-lg">
+                            class="p-3 md:p-4  border border-input-gray   bg-white rounded-2xl text-sm lg:text-base focus:outline-none focus:ring-turquesa focus:ring-1">
                     </div>
 
                     <div class="flex justify-between pt-1">
                         <label class="flex items-center gap-2 cursor-pointer">
                             <input type="checkbox"
-                                class="w-4 h-4 xl:w-5 xl:h-5 bg-white cursor-pointer border rounded-3xl appearance-none checked:bg-salmao checked:border-salmao">
-                            <span class="text-xs md:text-base lg:text-lg">Lembre-me</span>
+                                class="w-4 h-4 xl:w-5 xl:h-5 bg-white cursor-pointer border rounded-3xl appearance-none checked:bg-salmao checked:border-turquesa">
+                            <span class="text-xs md:text-base ">Lembre-me</span>
                         </label>
-                        <label class="text-sm md:text-base lg:text-lg text-salmao cursor-pointer">Esqueceu a senha?</label>
+                        <a href="/alterarSenha"><label
+                                class="text-sm md:text-base lg:text-lg text-salmao cursor-pointer">Esqueceu a
+                                senha?</label></a>
                     </div>
 
                     <a href="/home"
-                        class="p-2 md:p-3 lg:p-5 lg:text-xl border-none rounded-full bg-salmao text-white hover:bg-turquesa transition-colors w-full text-center block">
+                        class="p-2 md:p-3 lg:p-4 lg:text-xl border-none rounded-full bg-salmao text-white hover:bg-turquesa transition-colors w-full text-center block">
                         Entrar
                     </a>
 
@@ -50,7 +79,7 @@
                     </div>
 
                     <p class="text-center md:text-base lg:text-lg">
-                        Não tem uma conta? <a href="#" class="text-salmao font-semibold">Registre-se</a>
+                        Não tem uma conta? <a href="/cadastroUsuario" class="text-salmao font-semibold">Registre-se</a>
                     </p>
                 </div>
             </div>
