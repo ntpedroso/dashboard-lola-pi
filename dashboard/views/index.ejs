@@ -53,13 +53,13 @@
           </p>
         </div>
 
-        <form action="/login" method="POST" class="flex flex-col gap-5">
+        <form action="/autenticacao" method="POST" class="flex flex-col gap-5">
           <div class="flex flex-col gap-1">
-            <label class="text-sm md:text-base font-medium">E-mail</label>
+            <label class="text-sm md:text-base font-medium">Usuário</label>
             <input
-              type="email"
-              name="email"
-              placeholder="Digite seu e-mail"
+              type="text"
+              name="usuario"
+              placeholder="Digite o nome de usuário"
               required
               class="w-full p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm md:text-base focus:outline-none focus:ring-turquesa focus:ring-1"
             />

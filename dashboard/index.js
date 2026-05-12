@@ -15,6 +15,10 @@ import Usuario from "./models/Usuario.js";
 
 import associations from "./config/associations.js";
 
+import Auth from "./middlewares/Auth.js";
+
+import session from "express-session";
+
 //criando uma instância do express
 const app = express();
 
@@ -67,17 +71,24 @@ app.set('views', './views'); // Indica a pasta onde estão seus arquivos .ejs
 // configurando o express para aceitar dados vindos do formulário
 app.use(express.urlencoded({ extended: false }));
 
+app.use(session({
+    secret: "minhalojasecret",
+    cookie: {maxAge: 3600000}, 
+    saveUninitialized: false, //não salva sessões vazias (sem informação)
+    resave: false, //evita que re-salve sessões
+}));
+
 app.use("/", PacienteController);
 app.use("/", RelatorioController);
 app.use("/", AtividadeController);
 app.use("/", UsuarioController);
 
 //rota principal
-app.get("/", function(req, res) {
+app.get("/", Auth, function(req, res) {
     res.render("index");
 });
 
-app.get("/home", function(req,res) {
+app.get("/home", Auth, function(req,res) {
     res.render("home");
 });
 

@@ -4,6 +4,8 @@ const router = express.Router();
 
 import Paciente from "../models/Paciente.js";
 
+import Auth from "../middlewares/Auth.js";
+
 const listaPacientes = [
     {
         id: 1,
@@ -55,6 +57,9 @@ const listaPacientes = [
         data_nasc: "07/08/2019"
     }
 ];
+router.get("/cadastroPaciente", Auth, function (req, res) {
+  res.render("cadastroPaciente");
+});
 
 router.get("/pacientes/:id", function(req,res) {
     const paciente = listaPacientes.find(p => p.id == req.params.id);
