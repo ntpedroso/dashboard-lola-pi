@@ -24,6 +24,6 @@ const fonoaudiologo = connection.define('fonoaudiologo', {
     },
 });
 
-fonoaudiologo.sync({force:false});
+//fonoaudiologo.sync({force:false});
 
 export default fonoaudiologo;

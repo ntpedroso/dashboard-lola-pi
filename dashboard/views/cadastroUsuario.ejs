@@ -1,10 +1,8 @@
 <%- include ('partials/header.ejs'); %>
 
 <main>
-  <div class="flex flex-col xl:h-screen font-jakarta xl:flex-row">
-    <div
-      class="flex flex-col justify-center items-center bg-salmao h-48 md:h-64 xl:flex-col xl:gap-20 xl:flex-1 xl:h-screen"
-    >
+  <div class="flex min-h-screen flex-col font-jakarta xl:flex-row">
+    <div class="flex flex-col justify-center items-center bg-salmao min-h-52 md:min-h-72 xl:min-h-screen xl:flex-1 xl:gap-16 px-6 py-8">
       <div class="flex flex-col xl:gap-3 text-center">
         <p class="text-3xl md:text-5xl font-bold text-white">
           Olá, bem-vindo ao
@@ -14,28 +12,26 @@
         </p>
       </div>
 
-      <img
-        src="/imgs/logo/logo-variante-turquesa.svg"
-        alt="logotipo"
-        class="xl:w-100"
-      />
+      <img src="/imgs/logo/logo-variante-turquesa.svg" alt="logotipo" class="mt-6 w-44 md:w-64 xl:mt-0 xl:w-96" />
 
-      <div class="hidden xl:grid grid-cols-3 gap-20 text-white pt-20">
-        <div class="flex gap-5">
+      <div class="hidden xl:grid grid-cols-3 gap-10 2xl:gap-20 text-white pt-10">
+        <div class="flex gap-4 items-center">
           <img src="imgs/icons/gestao.svg" alt="" class="w-10" />
           <p>
             Gestão completa <br />
             dos pacientes
           </p>
         </div>
-        <div class="flex gap-5">
+
+        <div class="flex gap-4 items-center">
           <img src="imgs/icons/relatorio.svg" alt="" class="w-10" />
           <p>
             Relatórios e <br />
             Indicadores
           </p>
         </div>
-        <div class="flex gap-5">
+
+        <div class="flex gap-4 items-center">
           <img src="imgs/icons/seguranca.svg" alt="" class="w-10" />
           <p>
             Segurança e <br />
@@ -45,68 +41,109 @@
       </div>
     </div>
 
-    <div
-      class="flex flex-1 items-center justify-center text-text bg-fundo xl:flex-1 py-5"
-    >
-      <div
-        class="flex flex-col p-6 w-90 sm:w-96 md:w-130 lg:w-160 xl:w-120 gap-6"
-      >
-        <p
-          class="text-2xl md:text-3xl lg:text-4xl text-center text-salmao font-light"
-        >
+    <div class="flex flex-1 items-center justify-center text-text bg-fundo px-4 py-8 sm:px-6 lg:px-10">
+      <div class="w-full max-w-xl rounded-3xl bg-white/70 p-5 sm:p-7 md:p-8 shadow-sm">
+        <p class="text-2xl md:text-3xl lg:text-4xl text-center text-salmao font-light">
           Crie uma conta
         </p>
-        <form action="/cadastroUsuario/cadastrar" method="POST">
-          <div class="flex flex-col gap-1">
-            <label class="text-sm md:text-lg font-medium">Nome</label>
-            <input
-              type="text"
-              name="nome"
-              placeholder="Digite seu nome"
-              required
-              class="p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm lg:text-lg focus:outline-none focus:ring-turquesa focus:ring-1"
-            />
+
+        <div class="py-8 flex items-center gap-3">
+          <div class="flex flex-1 items-center gap-2">
+            <div id="stepCircle1" class="flex h-8 w-8 items-center justify-center rounded-full bg-salmao text-sm font-semibold text-white">
+              1
+            </div>
+            <div class="h-1 flex-1 rounded-full bg-salmao"></div>
           </div>
 
-          <div class="flex flex-col gap-1">
-            <label class="text-sm md:text-lg font-medium">Sobrenome</label>
-            <input
-              type="text"
-              name="sobrenome"
-              placeholder="Digite seu sobrenome"
-              class="p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm lg:text-lg focus:outline-none focus:ring-turquesa focus:ring-1"
-            />
+          <div class="flex flex-1 items-center gap-2">
+            <div id="stepCircle2" class="flex h-8 w-8 items-center justify-center rounded-full bg-input-gray text-sm font-semibold text-white">
+              2
+            </div>
+            <div class="h-1 flex-1 rounded-full bg-input-gray"></div>
+          </div>
+        </div>
+
+        <form action="/cadastroUsuario/cadastrar" method="POST" class="flex flex-col gap-5">
+          <div id="step1" class="flex flex-col gap-4">
+            <p class="text-lg md:text-xl font-semibold text-text">
+              Dados pessoais
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="flex flex-col gap-1">
+                <label class="text-sm md:text-base font-medium">Nome</label>
+                <input type="text" name="nome" placeholder="Digite seu nome" required
+                  class="w-full p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm md:text-base focus:outline-none focus:ring-turquesa focus:ring-1" />
+              </div>
+
+              <div class="flex flex-col gap-1">
+                <label class="text-sm md:text-base font-medium">Sobrenome</label>
+                <input type="text" name="sobrenome" placeholder="Digite seu sobrenome" required
+                  class="w-full p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm md:text-base focus:outline-none focus:ring-turquesa focus:ring-1" />
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label class="text-sm md:text-base font-medium">Email</label>
+              <input type="email" name="email" placeholder="Digite seu email" required
+                class="w-full p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm md:text-base focus:outline-none focus:ring-turquesa focus:ring-1" />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="flex flex-col gap-1">
+                <label class="text-sm md:text-base font-medium">CRFa</label>
+                <input type="text" name="crfa" placeholder="Digite seu CRFa" required
+                  class="w-full p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm md:text-base focus:outline-none focus:ring-turquesa focus:ring-1" />
+              </div>
+
+              <div class="flex flex-col gap-1">
+                <label class="text-sm md:text-base font-medium">Telefone</label>
+                <input type="tel" name="telefone" placeholder="(00) 00000-0000" required
+                  class="w-full p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm md:text-base focus:outline-none focus:ring-turquesa focus:ring-1" />
+              </div>
+            </div>
+
+            <button type="button" onclick="nextStep()"
+              class="mt-2 p-3 md:p-4 md:text-lg border-none rounded-full bg-salmao text-white hover:bg-turquesa transition-colors w-full text-center block">
+              Próximo
+            </button>
           </div>
 
-          <div class="flex flex-col gap-1">
-            <label class="text-sm md:text-lg font-medium"
-              >Nome de usuário</label
-            >
-            <input
-              type="text"
-              name="usuario"
-              placeholder="example@email.com"
-              class="p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm lg:text-lg focus:outline-none focus:ring-turquesa focus:ring-1"
-            />
-          </div>
+          <div id="step2" class="hidden flex-col gap-4">
+            <p class="text-lg md:text-xl font-semibold text-text">
+              Dados de acesso
+            </p>
 
-          <div class="flex flex-col gap-1">
-            <label class="text-sm md:text-lg lg:text-xl font-medium"
-              >Senha</label
-            >
-            <input
-              type="password"
-              name="senha"
-              placeholder="Digite sua senha"
-              class="p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm lg:text-lg focus:outline-none focus:ring-turquesa focus:ring-1"
-            />
-          </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-sm md:text-base font-medium">Nome de usuário</label>
+              <input type="text" name="usuario" placeholder="Digite seu nome de usuário" required
+                class="w-full p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm md:text-base focus:outline-none focus:ring-turquesa focus:ring-1" />
+            </div>
 
-          <button type="submit"
-            class="p-2 md:p-3 lg:p-4 lg:text-xl border-none rounded-full bg-salmao text-white hover:bg-turquesa transition-colors w-full text-center block"
-          >
-            Cadastrar
-          </a>
+            <div class="flex flex-col gap-1">
+              <label class="text-sm md:text-base font-medium">Senha</label>
+              <input type="password" name="senha" placeholder="Digite sua senha" required
+                class="w-full p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm md:text-base focus:outline-none focus:ring-turquesa focus:ring-1" />
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label class="text-sm md:text-base font-medium">Confirmar senha</label>
+              <input type="password" name="confirmar_senha" placeholder="Confirme sua senha" required
+                class="w-full p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm md:text-base focus:outline-none focus:ring-turquesa focus:ring-1" />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button type="button" onclick="prevStep()"
+                class="p-3 md:p-4 md:text-lg border border-salmao rounded-full bg-white text-salmao hover:bg-salmao hover:text-white transition-colors w-full text-center block">
+                Voltar
+              </button>
+
+              <button type="submit"
+                class="p-3 md:p-4 md:text-lg border-none rounded-full bg-salmao text-white hover:bg-turquesa transition-colors w-full text-center block">
+                Cadastrar
+              </button>
+            </div>
+          </div>
 
           <div>
             <p class="text-center md:text-base lg:text-lg">
@@ -122,23 +159,48 @@
           </div>
 
           <div class="flex gap-4 justify-center">
-            <a href="#"
-              ><img
-                src="/imgs/icons/icon-google.svg"
-                class="lg:w-16 xl:w-auto xl:h-auto"
-                alt="Google"
-            /></a>
-            <a href="#"
-              ><img
-                src="/imgs/icons/icon-facebook.svg"
-                class="lg:w-16 xl:w-auto xl:h-auto"
-                alt="Facebook"
-            /></a>
+            <a href="#">
+              <img src="/imgs/icons/icon-google.svg" class="w-12 lg:w-14 xl:w-auto xl:h-auto" alt="Google" />
+            </a>
+
+            <a href="#">
+              <img src="/imgs/icons/icon-facebook.svg" class="w-12 lg:w-14 xl:w-auto xl:h-auto" alt="Facebook" />
+            </a>
           </div>
         </form>
       </div>
     </div>
   </div>
 </main>
+
+<script>
+  function nextStep() {
+    document.getElementById("step1").classList.add("hidden");
+    document.getElementById("step1").classList.remove("flex");
+
+    document.getElementById("step2").classList.remove("hidden");
+    document.getElementById("step2").classList.add("flex");
+
+    document.getElementById("stepCircle1").classList.remove("bg-salmao");
+    document.getElementById("stepCircle1").classList.add("bg-turquesa");
+
+    document.getElementById("stepCircle2").classList.remove("bg-input-gray");
+    document.getElementById("stepCircle2").classList.add("bg-salmao");
+  }
+
+  function prevStep() {
+    document.getElementById("step2").classList.add("hidden");
+    document.getElementById("step2").classList.remove("flex");
+
+    document.getElementById("step1").classList.remove("hidden");
+    document.getElementById("step1").classList.add("flex");
+
+    document.getElementById("stepCircle1").classList.remove("bg-turquesa");
+    document.getElementById("stepCircle1").classList.add("bg-salmao");
+
+    document.getElementById("stepCircle2").classList.remove("bg-salmao");
+    document.getElementById("stepCircle2").classList.add("bg-input-gray");
+  }
+</script>
 
 <%- include ('partials/footer.ejs'); %>

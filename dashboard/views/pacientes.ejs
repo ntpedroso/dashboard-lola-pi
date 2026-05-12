@@ -1,65 +1,89 @@
 <%- include ('partials/header.ejs'); %>
 
 <div class="flex min-h-screen bg-gray-50">
-    <%- include('partials/sidebar') %>
+  <%- include('partials/sidebar') %>
 
-        <div class="flex-1 flex flex-col min-w-0">
-            <header class="sticky top-0 z-40"><%- include('partials/navbar') %></header>
+  <div class="flex-1 flex flex-col min-w-0">
+    <header class="sticky top-0 z-40"><%- include('partials/navbar') %></header>
 
-            <main class="text-text font-jakarta text-sm p-8">
+    <main class="text-text font-jakarta text-sm p-4 md:p-8 flex flex-col gap-4">
 
-                <div class="px-10 pt-8 hidden lg:block">
-                    <p>
-                        Home / Pacientes / <a class="text-salmao font-semibold">Pacientes Cadastrados</a>
-                    </p>
-                </div>
+      <div class="hidden lg:block px-2">
+        <p>Home / Pacientes / <a class="text-salmao font-semibold">Pacientes Cadastrados</a></p>
+      </div>
 
-                <div class="flex justify-end gap-3 py-3">
-                    <a href="/cadastroPaciente" class="p-4 xl:p-5 bg-white shadow-lg rounded-lg flex gap-2"><img src="/imgs/icons/add.svg"
-                            class="w-5"><p class="xl:hidden">Cadastrar</p><p class="hidden xl:block">Cadastrar Paciente</p></a>
-                    <a href="" class="p-4 xl:p-5 bg-white shadow-lg rounded-lg flex gap-2"><img
-                            src="/imgs/icons/filtrar.svg" class="w-5">Filtrar</a>
-                </div>
+      <div class="flex justify-end gap-3">
+        <a href="/cadastroPaciente" class="px-4 py-3 bg-white shadow-lg rounded-xl flex items-center gap-2">
+          <img src="/imgs/icons/add.svg" class="w-5">
+          <p class="sm:hidden">Cadastrar</p>
+          <p class="hidden sm:block">Cadastrar Paciente</p>
+        </a>
+        <a href="" class="px-4 py-3 bg-white shadow-lg rounded-xl flex items-center gap-2">
+          <img src="/imgs/icons/filtrar.svg" class="w-5">
+          <p>Filtrar</p>
+        </a>
+      </div>
 
+      <div class="bg-white shadow-lg rounded-xl overflow-hidden">
 
-                    <div class="bg-white shadow-lg rounded-xl">
-
-                        <div
-                            class="grid grid-cols-[3fr_2fr_2fr]  font-semibold text-base border-b border-b-text/50 pb-3 md:text-lg md:grid-cols-[4fr_2fr_2fr] xl:grid-cols-[4fr_2fr_2fr_2fr] px-12 pt-8">
-                            <span>Paciente</span>
-                            <span>Nível</span>
-                            <span class="hidden xl:block">Status</span>
-                            <span>Ações</span>
-                        </div>
-                        <% listaPacientes.forEach(listaPaciente => { %>
-                                <div class="grid grid-cols-[3fr_2fr_2fr] py-8 items-center md:grid-cols-[4fr_2fr_2fr] md:text-base xl:grid-cols-[4fr_2fr_2fr_2fr] xl:text-lg xl:py-4 xl:hover:bg-text/10 p-12">
-                                    <span class="flex gap-3 items-center ">
-                                        <img src="/imgs/profile.jpg" class="w-8 rounded-full md:w-10">
-                                        <p>
-                                            <%= listaPaciente.nome %>
-                                        </p>
-                                        <p class="hidden md:block">
-                                            <%= listaPaciente.sobrenome %>
-                                        </p>
-                                    </span>
-                                    <span>Nível <%= listaPaciente.nivel %></span>
-                                    <span class="hidden gap-2 xl:block">
-                                        <%= listaPaciente.status %>
-                                    </span>
-                                    <span class="flex gap-2">
-                                        <a href="/pacientes/<%= listaPaciente.id %>" class="p-2 md:p-3 bg-amarelo xl:hover:bg-amarelo/75 rounded-sm hidden md:flex xl:p-4"><img
-                                                src="/imgs/icons/eye.svg" class="w-3 md:w-5"></a>
-                                        <a href="" class="p-2 md:p-3 bg-turquesa rounded-sm xl:p-4 xl:hover:bg-turquesa/75"><img
-                                                src="/imgs/icons/editar.svg" class="w-3 md:w-5 "></a>
-                                        <a href="" class="p-2 md:p-3 bg-salmao xl:hover:bg-salmao/75 rounded-sm xl:p-4"><img
-                                                src="/imgs/icons/excluir.svg" class="w-3 md:w-5 "></a>
-                                    </span>
-                                </div>
-                            <% }); %>
-                </div>
-            </main>
+        <div class="grid grid-cols-[2fr_1fr_1fr] md:grid-cols-[3fr_1fr_1fr] xl:grid-cols-[3fr_1fr_1fr_1fr] font-semibold text-sm md:text-base border-b border-text/15 px-4 md:px-8 py-5">
+          <span>Paciente</span>
+          <span>Nível</span>
+          <span class="hidden xl:block">Status</span>
+          <span>Ações</span>
         </div>
+
+        <% pacientes.forEach(listaPaciente => { %>
+        <div class="grid grid-cols-[2fr_1fr_1fr] md:grid-cols-[3fr_1fr_1fr] xl:grid-cols-[3fr_1fr_1fr_1fr] items-center px-4 md:px-8 py-4 md:py-5 border-b border-text/5 hover:bg-text/5 transition text-sm md:text-base">
+
+          <span class="flex gap-2 md:gap-3 items-center min-w-0">
+            <img src="/imgs/profile.jpg" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
+            <p class="truncate">
+              <%= listaPaciente.nome %>
+              <span class="hidden sm:inline"><%= listaPaciente.sobrenome %></span>
+            </p>
+          </span>
+
+          <span class="text-text/70">Nível 1</span>
+
+          <span class="hidden xl:block text-text/70">Em andamento</span>
+
+          <span class="flex gap-1.5 md:gap-2">
+            <a href="/pacientes/<%= listaPaciente.id %>" class="p-2 md:p-3 bg-amarelo hover:bg-amarelo/75 rounded-lg transition hidden sm:flex items-center justify-center">
+              <img src="/imgs/icons/eye.svg" class="w-3 md:w-4">
+            </a>
+            <a href="" class="p-2 md:p-3 bg-turquesa hover:bg-turquesa/75 rounded-lg transition flex items-center justify-center">
+              <img src="/imgs/icons/editar.svg" class="w-3 md:w-4">
+            </a>
+            <a href="/cadastroPaciente/excluir:<%=  listaPaciente.id %>" class="p-2 md:p-3 bg-salmao hover:bg-salmao/75 rounded-lg transition flex items-center justify-center">
+              <img src="/imgs/icons/excluir.svg" class="w-3 md:w-4">
+            </a>
+          </span>
+
+        </div>
+        <% }); %>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 md:px-8 py-5">
+          <span class="text-text/50 text-xs md:text-sm">Mostrando 1–5 de <%= pacientes.length %> pacientes</span>
+
+          <div class="flex gap-1.5">
+            <button class="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-xl border border-gray-200 opacity-30 cursor-not-allowed text-base">
+              &#8249;
+            </button>
+            <button class="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-xl border border-salmao bg-salmao text-white font-medium text-sm">1</button>
+            <button class="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-xl border border-gray-200 hover:border-turquesa hover:text-turquesa hover:bg-turquesa/10 transition text-sm">2</button>
+            <button class="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-xl border border-gray-200 hover:border-turquesa hover:text-turquesa hover:bg-turquesa/10 transition text-sm hidden sm:flex">3</button>
+            <button class="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-xl border border-gray-200 hover:border-turquesa hover:text-turquesa hover:bg-turquesa/10 transition text-sm hidden sm:flex">4</button>
+            <button class="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-xl border border-gray-200 hover:border-turquesa hover:text-turquesa hover:bg-turquesa/10 transition text-sm hidden sm:flex">5</button>
+            <button class="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-xl border border-gray-200 hover:border-turquesa hover:text-turquesa hover:bg-turquesa/10 transition text-base">
+              &#8250;
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
 </div>
 
 <%- include ('partials/footer.ejs'); %>
-    </div>

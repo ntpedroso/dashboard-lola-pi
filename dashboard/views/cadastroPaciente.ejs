@@ -25,14 +25,14 @@
                         <p class="text-xl text-center md:text-2xl">Cadastrar Paciente</p>
                     </div>
 
-                    <form
+                    <form action="/cadastroPaciente/cadastrar" method="POST"
                         class="bg-white shadow-lg rounded-xl grid grid-col-1 xl:grid-cols-[2fr_5fr] p-8 gap-4 text-[14px] md:text-[18px] xl:grid-rows-7">
 
                         <div
                             class="grid justify-center gap-4  xl:col-span-1 xl:flex xl:flex-col xl:justify-start xl:row-span-3">
                             <p class="">Foto de Perfil</p>
 
-                            <input type="file" id="fotoPerfil" accept="image/jpeg/png/webp" class="hidden">
+                            <input type="file" name="fotoPerfil" id="fotoPerfil" accept="image/jpeg/png/webp" class="hidden">
                             <div onclick="document.getElementById('fotoPerfil').click()" href=""
                                 class="cursor-pointer bg-text/15 rounded-xl p-10 flex flex-col items-center gap-1">
                                 <img src="/imgs/icons/img.svg" alt="" class="w-6">
@@ -63,81 +63,52 @@
                             </div>
                             <div class="flex flex-col col-span-2 md:col-span-1 gap-1 xl:col-span-1">
                                 <label>Data de Nascimento</label>
-                                <input type="text" name="sobrenome"
+                                <input type="date" name="data_nascimento"
                                     class="px-4 py-2 border border-text/25 rounded-3xl shadow-md focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3">
                             </div>
                             <div class="flex flex-col gap-1 gap-y-4 md:gap-y-6 xl:">
                                 <label>Sexo</label>
                                 <div class="flex gap-3">
-                                    <input type="radio" name="sexo" value="fem"
+                                    <input type="radio" name="sexo" value="Feminino"
                                         class="w-5 h-5 border border-text/25 accent-salmao focus:ring-0">F
-                                    <input type="radio" name="sexo" value="masc"
+                                    <input type="radio" name="sexo" value="Masculino"
                                         class="w-5 h-5 border border-text/25 accent-salmao focus:ring-0 focus:outline-none">M
                                 </div>
                             </div>
                             <div class="flex flex-col md:col-span-2 gap-1 xl:col-span-1">
                                 <label>Nível de Gravidade</label>
-                                <select name="gravidade" id=""
+                                <select name="nivel_gravidade" id=""
                                     class="border border-text/25 rounded-3xl px-4 py-2 shadow-md appearance-none bg-[length:16px_16px] bg-[right_12px_center] bg-no-repeat focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3"
                                     style="background-image: url('/imgs/icons/seta-baixo-salmao.svg');">
-                                    <option value="leve">Leve</option>
-                                    <option value="moderado">Moderado</option>
-                                    <option value="grave">Grave</option>
-                                    <option value="severa">Severa</option>
+                                    <option value="Leve">Leve</option>
+                                    <option value="Moderado">Moderado</option>
+                                    <option value="Grave">Grave</option>
+                                    <option value="Severa">Severa</option>
                                 </select>
                             </div>
                             <div class="flex flex-col gap-1 col-span-2 ">
                                 <label>Responsável</label>
-                                <input type="text" name="sobrenome"
+                                <input type="text" name="responsavel"
                                     class="px-4 py-2 border border-text/25 rounded-3xl shadow-md focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3">
                             </div>
                             <div class="flex flex-col  gap-1 col-span-2 md:col-span-1">
                                 <label>Contato</label>
-                                <input type="text" name="sobrenome"
+                                <input type="text" name="contato"
                                     class="px-4 py-2 border border-text/25 rounded-3xl shadow-md focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3">
                             </div>
                             <div class="flex flex-col  gap-1 col-span-2 md:col-span-1">
                                 <label>CPF</label>
-                                <input type="text" name="sobrenome"
+                                <input type="text" name="cpf"
                                     class="px-4 py-2 border border-text/25 rounded-3xl shadow-md focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3">
                             </div>
                             <div class="flex flex-col  gap-1 col-span-2">
                                 <label>Endereço</label>
-                                <input type="text" name="sobrenome"
+                                <input type="text" name="endereco"
                                     class="px-4 py-2 border border-text/25 rounded-3xl shadow-md focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3">
-                            </div>
-                            <div class="flex flex-col  gap-1 col-span-2">
-                                <label>Cidade</label>
-                                <input type="text" name="sobrenome"
-                                    class="px-4 py-2 border border-text/25 rounded-3xl shadow-md focus:outline-none focus:ring-turquesa focus:ring-1 md:py-3">
-                            </div>
-                            <div class="flex flex-col  gap-1 col-span-2 md:col-span-1">
-                                <label>UF</label>
-                                <select name="" id=""
-                                    class="border border-text/25 rounded-3xl px-4 py-2 shadow-md appearance-none bg-[length:16px_16px] bg-[right_12px_center] bg-no-repeat md:py-3"
-                                    style="background-image: url('/imgs/icons/seta-baixo-salmao.svg');">
-                                    <% estados.forEach(estado=> { %>
-                                        <option value="<%= estado.sigla %>">
-                                            <%= estado.nome %>
-                                        </option>
-                                        <% }); %>
-                                </select>
-                            </div>
-                            <div class="flex flex-col  gap-1 col-span-2 md:col-span-1">
-                                <label>País</label>
-                                <select name="" id=""
-                                    class="border border-text/25 rounded-3xl px-4 py-2 shadow-md appearance-none bg-[length:16px_16px] bg-[right_12px_center] bg-no-repeat md:py-3"
-                                    style="background-image: url('/imgs/icons/seta-baixo-salmao.svg');">
-                                    <% paises.forEach(pais=> { %>
-                                        <option value="<%= pais.code %>">
-                                            <%= pais.nome %>
-                                        </option>
-                                        <% }); %>
-                                </select>
                             </div>
                             <div class="col-span-2 flex gap-3 justify-center pt-5 xl:justify-end xl:col-span-3">
-                                <a href="/detalhePaciente"
-                                    class="py-3 px-4 bg-turquesa rounded-xl md:px-6 md:py-5">Cadastrar</a>
+                                <button type="submit"
+                                    class="py-3 px-4 bg-turquesa rounded-xl md:px-6 md:py-5">Cadastrar</button>
                                 <a href="/pacientes"
                                     class="py-3 px-4 bg-red-500 rounded-xl text-white md:px-6 md:py-5">Cancelar</a>
                             </div>

@@ -6,6 +6,10 @@ const paciente = connection.define('paciente', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    sobrenome: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     endereco: {
         type: Sequelize.STRING,
         allowNull: true
@@ -13,6 +17,10 @@ const paciente = connection.define('paciente', {
     data_nascimento: {
         type: Sequelize.DATE,
         allowNull: false
+    },
+    sexo: {
+        type: Sequelize.STRING,
+        allowNull: true
     },
     responsavel: {
         type: Sequelize.STRING,
@@ -37,6 +45,6 @@ const paciente = connection.define('paciente', {
     },
 });
 
-paciente.sync({force: false});
+//paciente.sync({force: false});
 
 export default paciente;

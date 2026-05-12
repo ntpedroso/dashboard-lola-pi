@@ -13,6 +13,6 @@ const login = connection.define('login', {
     }
 });
 
-login.sync({force: false});
+//login.sync({force: false});
 
 export default login;

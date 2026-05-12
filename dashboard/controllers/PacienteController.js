@@ -2,6 +2,8 @@ import express from "express";
 
 const router = express.Router();
 
+import Paciente from "../models/Paciente.js";
+
 const listaPacientes = [
     {
         id: 1,
@@ -54,17 +56,73 @@ const listaPacientes = [
     }
 ];
 
-router.get("/pacientes", function(req,res) {
-    res.render("pacientes", {
-        listaPacientes : listaPacientes
-    });
-});
-
 router.get("/pacientes/:id", function(req,res) {
     const paciente = listaPacientes.find(p => p.id == req.params.id);
     res.render("detalhePaciente", {
         paciente : paciente
+    });
+});
+
+router.get("/pacientes", function (req, res) {
+    Paciente.findAll()
+    .then((pacientes) => {
+      res.render("pacientes", {
+        pacientes: pacientes,
+      });
     })
-})
+    .catch((error) => {
+      console.log("Ocorreu um erro ao buscar os clientes." + error);
+    });
+});
+
+
+//rota de cadastro de usuario (subrota /cadastrar)
+router.post("/cadastroPaciente/cadastrar", (req, res) => {
+  //criando as variáveis que irão armazenar os dados vindos do formulário
+  const nome = req.body.nome;
+  const sobrenome = req.body.sobrenome;
+  const endereco = req.body.endereco;
+  const sexo = req.body.sexo;
+  const responsavel = req.body.responsavel;
+  const data_nascimento = req.body.data_nascimento;
+  const nivel_gravidade = req.body.nivel_gravidade;
+  const contato = req.body.contato;
+  const cpf = req.body.cpf;
+  // enviando os dados para o banco
+  // o método create cadastra as informações no banco
+  Paciente.create({
+    // primeiro é a coluna, segundo é a variável
+    nome: nome,
+    sobrenome: sobrenome,
+    endereco: endereco,
+    data_nascimento: data_nascimento,
+    nivel_gravidade: nivel_gravidade,
+    contato: contato,
+    cpf: cpf,
+    sexo: sexo,
+    responsavel: responsavel,
+    // se a promessa for bem sucedida, o usuário será redirecionado para a página de login
+  })
+    .then(() => {
+      res.redirect("/pacientes");
+      // falha
+    })
+    .catch((error) => {
+      console.log("Ocorreu um erro ao cadastrar o cliente" + error);
+    });
+});
+
+router.get("/cadastroPaciente/excluir:id", (req,res) => {
+    const id = req.params.id;
+    Paciente.destroy({
+        where: {
+            id: id,
+        },
+    }).then(() => {
+        res.redirect("/pacientes");
+    }).catch((error) => {
+        console.log("Ocorreu um erro ao excluir o paciente" + error);
+    });
+});
 
 export default router;
