@@ -1,6 +1,8 @@
 //importando o módulo do express
 import express from "express";
 
+import connection from "./config/sequelize-config.js";
+
 import PacienteController from "./controllers/PacienteController.js";
 import CadastroPacienteController from "./controllers/CadastroPacienteController.js";
 import RelatorioController from "./controllers/RelatorioController.js";
@@ -8,9 +10,34 @@ import CadastroUsuarioController from "./controllers/CadastroUsuarioController.j
 import AlterarSenhaController from "./controllers/AlterarSenhaController.js";
 import AtividadeController from "./controllers/AtividadeController.js";
 
+
+//importando os Models
+import Paciente from "./models/Paciente.js";
+import Fonoaudiologo from "./models/Fonoaudiologo.js";
+import Usuario from "./models/Usuario.js";
+
+//realizando a conexão com o banco de dados
+//retorna uma promessa - then (sucesso) - catch (falha)
+connection
+  .authenticate()
+  .then(() => {
+    console.log("Conexão com o banco de dados realizada com sucesso!");
+  })
+  .catch((error) => {
+    console.log(`Ocorreu um erro ao se conectar ao banco. ${error}`);
+  });
+  
 //criando uma instância do express
 const app = express();
 
+connection
+  .query("CREATE DATABASE IF NOT EXISTS lola_pi;")
+  .then(() => {
+    console.log("O banco de dados está criado!");
+  })
+  .catch((error) => {
+    console.log(`Ocorreu um erro ao criar o banco de dados. Erro ${error}`);
+  });
 
 //configurando o EJS - o set serve para configurar algo
 app.set('view engine', 'ejs');

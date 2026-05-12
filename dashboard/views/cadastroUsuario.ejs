@@ -56,82 +56,86 @@
         >
           Crie uma conta
         </p>
+        <form action="/cadastroUsuario/cadastrar" method="POST">
+          <div class="flex flex-col gap-1">
+            <label class="text-sm md:text-lg font-medium">Nome</label>
+            <input
+              type="text"
+              name="nome"
+              placeholder="Digite seu nome"
+              required
+              class="p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm lg:text-lg focus:outline-none focus:ring-turquesa focus:ring-1"
+            />
+          </div>
 
-        <div class="flex flex-col gap-1">
-          <label class="text-sm md:text-lg font-medium">Nome</label>
-          <input
-            type="text"
-            name="nome"
-            placeholder="Digite seu nome"
-            required
-            class="p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm lg:text-lg focus:outline-none focus:ring-turquesa focus:ring-1"
-          />
-        </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-sm md:text-lg font-medium">Sobrenome</label>
+            <input
+              type="text"
+              name="sobrenome"
+              placeholder="Digite seu sobrenome"
+              class="p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm lg:text-lg focus:outline-none focus:ring-turquesa focus:ring-1"
+            />
+          </div>
 
-        <div class="flex flex-col gap-1">
-          <label class="text-sm md:text-lg font-medium">Sobrenome</label>
-          <input
-            type="text"
-            name="sobrenome"
-            placeholder="Digite seu sobrenome"
-            class="p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm lg:text-lg focus:outline-none focus:ring-turquesa focus:ring-1"
-          />
-        </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-sm md:text-lg font-medium"
+              >Nome de usuário</label
+            >
+            <input
+              type="text"
+              name="usuario"
+              placeholder="example@email.com"
+              class="p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm lg:text-lg focus:outline-none focus:ring-turquesa focus:ring-1"
+            />
+          </div>
 
-        <div class="flex flex-col gap-1">
-          <label class="text-sm md:text-lg font-medium">E-mail</label>
-          <input
-            type="text"
-            name="email"
-            placeholder="example@email.com"
-            class="p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm lg:text-lg focus:outline-none focus:ring-turquesa focus:ring-1"
-          />
-        </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-sm md:text-lg lg:text-xl font-medium"
+              >Senha</label
+            >
+            <input
+              type="password"
+              name="senha"
+              placeholder="Digite sua senha"
+              class="p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm lg:text-lg focus:outline-none focus:ring-turquesa focus:ring-1"
+            />
+          </div>
 
-        <div class="flex flex-col gap-1">
-          <label class="text-sm md:text-lg lg:text-xl font-medium">Senha</label>
-          <input
-            type="password"
-            name="senha"
-            placeholder="Digite sua senha"
-            class="p-3 md:p-4 border border-input-gray bg-white rounded-2xl text-sm lg:text-lg focus:outline-none focus:ring-turquesa focus:ring-1"
-          />
-        </div>
+          <button type="submit"
+            class="p-2 md:p-3 lg:p-4 lg:text-xl border-none rounded-full bg-salmao text-white hover:bg-turquesa transition-colors w-full text-center block"
+          >
+            Cadastrar
+          </a>
 
-        <a
-          href="/home"
-          class="p-2 md:p-3 lg:p-4 lg:text-xl border-none rounded-full bg-salmao text-white hover:bg-turquesa transition-colors w-full text-center block"
-        >
-          Cadastrar
-        </a>
+          <div>
+            <p class="text-center md:text-base lg:text-lg">
+              Já tem uma conta?
+              <a href="/" class="text-salmao font-semibold">Entrar</a>
+            </p>
+          </div>
 
-        <div>
-          <p class="text-center md:text-base lg:text-lg">
-            Já tem uma conta?
-            <a href="/" class="text-salmao font-semibold">Entrar</a>
-          </p>
-        </div>
+          <div>
+            <p class="text-center text-sm md:text-base lg:text-lg">
+              ou conecte-se com
+            </p>
+          </div>
 
-        <div>
-          <p class="text-center text-sm md:text-base lg:text-lg">
-            ou conecte-se com
-          </p>
-        </div>
-
-        <div class="flex gap-4 justify-center">
-          <a href="#"
-            ><img
-              src="/imgs/icons/icon-google.svg"
-              class="lg:w-16 xl:w-auto xl:h-auto"
-              alt="Google"
-          /></a>
-          <a href="#"
-            ><img
-              src="/imgs/icons/icon-facebook.svg"
-              class="lg:w-16 xl:w-auto xl:h-auto"
-              alt="Facebook"
-          /></a>
-        </div>
+          <div class="flex gap-4 justify-center">
+            <a href="#"
+              ><img
+                src="/imgs/icons/icon-google.svg"
+                class="lg:w-16 xl:w-auto xl:h-auto"
+                alt="Google"
+            /></a>
+            <a href="#"
+              ><img
+                src="/imgs/icons/icon-facebook.svg"
+                class="lg:w-16 xl:w-auto xl:h-auto"
+                alt="Facebook"
+            /></a>
+          </div>
+        </form>
       </div>
     </div>
   </div>
