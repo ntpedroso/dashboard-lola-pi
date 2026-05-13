@@ -45,7 +45,13 @@
                     class="grid grid-cols-[2fr_1fr_1fr] md:grid-cols-[3fr_1fr_1fr] xl:grid-cols-[3fr_1fr_1fr_1fr] items-center px-4 md:px-8 py-4 md:py-5 border-b border-text/5 hover:bg-text/5 transition text-sm md:text-base">
 
                     <span class="flex gap-2 md:gap-3 items-center min-w-0">
-                      <img src="/imgs/profile.jpg" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
+                      <div class="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden bg-gray-100 shrink-0 flex items-center justify-center">
+                        <img
+                          src="<%= listaPaciente.foto_perfil %>"
+                          class="w-full h-full object-cover"
+                          alt="Foto do paciente"
+                        >
+                      </div>
                       <p class="truncate">
                         <%= listaPaciente.nome %>
                           <span class="hidden sm:inline">

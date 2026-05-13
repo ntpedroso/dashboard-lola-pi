@@ -6,6 +6,8 @@ import Paciente from "../models/Paciente.js";
 
 import Auth from "../middlewares/Auth.js";
 
+import multer from "multer";
+
 const listaPacientes = [
     {
         id: 1,
@@ -98,41 +100,41 @@ router.get("/pacientes", function (req, res) {
     });
 });
 
+//para upload de fotos com multer
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/uploads/pacientes");
+  },
+  filename: (req, file, cb) => {
+    const nomeArquivo = Date.now() + "-" + file.originalname;
+    cb(null, nomeArquivo);
+  }
+});
+
+const upload = multer({ storage });
 
 //rota de cadastro de usuario (subrota /cadastrar)
-router.post("/pacientes/cadastrar", (req, res) => {
-  //criando as variáveis que irão armazenar os dados vindos do formulário
-  const nome = req.body.nome;
-  const sobrenome = req.body.sobrenome;
-  const endereco = req.body.endereco;
-  const sexo = req.body.sexo;
-  const responsavel = req.body.responsavel;
-  const data_nascimento = req.body.data_nascimento;
-  const nivel_gravidade = req.body.nivel_gravidade;
-  const contato = req.body.contato;
-  const cpf = req.body.cpf;
-  // enviando os dados para o banco
-  // o método create cadastra as informações no banco
+router.post("/pacientes/cadastrar", upload.single("fotoPerfil"), (req, res) => {
+  const foto_perfil = req.file ? "/uploads/pacientes/" + req.file.filename : null;
+
   Paciente.create({
-    // primeiro é a coluna, segundo é a variável
-    nome: nome,
-    sobrenome: sobrenome,
-    endereco: endereco,
-    data_nascimento: data_nascimento,
-    nivel_gravidade: nivel_gravidade,
-    contato: contato,
-    cpf: cpf,
-    sexo: sexo,
-    responsavel: responsavel,
-    // se a promessa for bem sucedida, o usuário será redirecionado para a página de login
+    nome: req.body.nome,
+    sobrenome: req.body.sobrenome,
+    endereco: req.body.endereco,
+    data_nascimento: req.body.data_nascimento,
+    nivel_gravidade: req.body.nivel_gravidade,
+    contato: req.body.contato,
+    cpf: req.body.cpf,
+    sexo: req.body.sexo,
+    responsavel: req.body.responsavel,
+    foto_perfil: foto_perfil
   })
-    .then(() => {
-      res.redirect("/pacientes");
-      // falha
-    })
-    .catch((error) => {
-      console.log("Ocorreu um erro ao cadastrar o cliente" + error);
-    });
+  .then(() => {
+    res.redirect("/pacientes");
+  })
+  .catch((error) => {
+    console.log("Ocorreu um erro ao cadastrar o paciente " + error);
+  });
 });
 
 router.get("/pacientes/excluir/:id", (req,res) => {
