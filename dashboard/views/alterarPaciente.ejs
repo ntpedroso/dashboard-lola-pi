@@ -13,7 +13,7 @@
                         <div>
                             <p class="text-xs sm:text-sm text-text/60">
                                 Home / Pacientes /
-                                <span class="text-salmao font-semibold">Cadastrar Paciente</span>
+                                <span class="text-salmao font-semibold">Editar Paciente</span>
                             </p>
                         </div>
 
@@ -23,47 +23,55 @@
                             <img src="/imgs/icons/back.svg" alt="voltar" class="w-5">
                         </a>
                     </div>
-
                     <div class="py-6">
-                        <p class="text-xl text-center md:text-2xl">Cadastrar Paciente</p>
+                        <p class="text-xl text-center md:text-2xl">Editar Paciente</p>
                     </div>
 
-                    <form action="/pacientes/cadastrar" method="POST"
+                    <form action="/pacientes/alterar" method="POST"
                         class="bg-white shadow-lg rounded-2xl p-5 sm:p-6 lg:p-8 grid gap-8 xl:grid-cols-[280px_1fr]">
+                        <input type="hidden" name="id" value="<%= paciente.id %>">
 
                         <section class="flex flex-col items-center gap-4 xl:items-start">
-                            <p class="text-base font-semibold">Foto de Perfil</p>
 
-                            <input type="file" name="fotoPerfil" id="fotoPerfil"
-                                accept="image/png, image/jpeg, image/webp" class="hidden">
 
-                            <div onclick="document.getElementById('fotoPerfil').click()"
-                                class="w-full max-w-xs cursor-pointer bg-text/10 hover:bg-text/15 transition rounded-2xl p-6 flex flex-col items-center gap-1 text-center">
-                                <img src="/imgs/icons/img.svg" alt="" class="w-6">
-                                <p class="text-sm font-semibold">PNG, JPG ou WEBP</p>
-                                <p class="text-xs text-text/60">(máximo 10 MB)</p>
-                                <span id="nome-foto" class="text-xs text-gray-500 break-all">
-                                    Nenhum arquivo selecionado
-                                </span>
+                            <div class="flex flex-col items-center gap-6 w-full">
+                                <p class="text-base font-semibold">Foto de Perfil</p>
+                                <img src="<%= paciente.foto_perfil || '/imgs/profile.jpg' %>"
+                                    alt="foto atual do paciente"
+                                    class="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover shadow-md">
+
+                                <input type="file" name="fotoPerfil" id="fotoPerfil"
+                                    accept="image/png, image/jpeg, image/webp" class="hidden">
+
+                                <div onclick="document.getElementById('fotoPerfil').click()"
+                                    class="w-full max-w-xs cursor-pointer bg-text/10 hover:bg-text/15 transition rounded-2xl p-6 flex flex-col items-center gap-1 text-center">
+                                    <img src="/imgs/icons/img.svg" alt="" class="w-6">
+                                    <p class="text-sm font-semibold">PNG, JPG ou WEBP</p>
+                                    <p class="text-xs text-text/60">(máximo 10 MB)</p>
+                                    <span id="nome-foto" class="text-xs text-gray-500 break-all">
+                                        Nenhum arquivo selecionado
+                                    </span>
+                                </div>
                             </div>
                         </section>
 
                         <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5">
                             <div class="flex flex-col gap-1">
                                 <label>Nome</label>
-                                <input type="text" name="nome" required
+                                <input type="text" name="nome" required value="<%= paciente.nome %>"
                                     class="px-4 py-3 border border-text/25 rounded-3xl shadow-sm focus:outline-none focus:ring-turquesa focus:ring-1">
                             </div>
 
                             <div class="flex flex-col gap-1 md:col-span-1 xl:col-span-2">
                                 <label>Sobrenome</label>
-                                <input type="text" name="sobrenome" required
+                                <input type="text" name="sobrenome" required value="<%= paciente.sobrenome %>"
                                     class="px-4 py-3 border border-text/25 rounded-3xl shadow-sm focus:outline-none focus:ring-turquesa focus:ring-1">
                             </div>
 
                             <div class="flex flex-col gap-1">
                                 <label>Data de Nascimento</label>
                                 <input type="date" name="data_nascimento" required
+                                    value="<%= paciente.data_nascimento ? paciente.data_nascimento.toISOString().split('T')[0] : '' %>"
                                     class="px-4 py-3 border border-text/25 rounded-3xl shadow-sm focus:outline-none focus:ring-turquesa focus:ring-1">
                             </div>
 
@@ -71,14 +79,18 @@
                                 <label>Sexo</label>
                                 <div class="flex items-center gap-5 min-h-[48px]">
                                     <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="radio" name="sexo" value="Feminino" required
-                                            class="w-5 h-5 accent-salmao focus:ring-0">
+                                        <input type="radio" name="sexo" value="Feminino" <%=paciente.sexo==="Feminino"
+                                            ? "checked" : "" %>
+                                        class="w-5 h-5 accent-salmao focus:ring-0"
+                                        >
                                         <span>F</span>
                                     </label>
 
                                     <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="radio" name="sexo" value="Masculino" required
-                                            class="w-5 h-5 accent-salmao focus:ring-0">
+                                        <input type="radio" name="sexo" value="Masculino" <%=paciente.sexo==="Masculino"
+                                            ? "checked" : "" %>
+                                        class="w-5 h-5 accent-salmao focus:ring-0"
+                                        >
                                         <span>M</span>
                                     </label>
                                 </div>
@@ -89,34 +101,38 @@
                                 <select name="nivel_gravidade"
                                     class="border border-text/25 rounded-3xl px-4 py-3 shadow-sm appearance-none bg-[length:16px_16px] bg-[right_12px_center] bg-no-repeat focus:outline-none focus:ring-turquesa focus:ring-1"
                                     style="background-image: url('/imgs/icons/seta-baixo-salmao.svg');">
-                                    <option value="Leve">Leve</option>
-                                    <option value="Moderado">Moderado</option>
-                                    <option value="Grave">Grave</option>
-                                    <option value="Severa">Severa</option>
+                                    <option value="Leve" <%=paciente.nivel_gravidade==="Leve" ? "selected" : "" %>>Leve
+                                    </option>
+                                    <option value="Moderado" <%=paciente.nivel_gravidade==="Moderado" ? "selected" : ""
+                                        %>>Moderado</option>
+                                    <option value="Grave" <%=paciente.nivel_gravidade==="Grave" ? "selected" : "" %>
+                                        >Grave</option>
+                                    <option value="Severa" <%=paciente.nivel_gravidade==="Severa" ? "selected" : "" %>
+                                        >Severa</option>
                                 </select>
                             </div>
 
                             <div class="flex flex-col gap-1 md:col-span-2">
                                 <label>Responsável</label>
-                                <input type="text" name="responsavel" required
+                                <input type="text" name="responsavel" required value="<%= paciente.responsavel %>"
                                     class="px-4 py-3 border border-text/25 rounded-3xl shadow-sm focus:outline-none focus:ring-turquesa focus:ring-1">
                             </div>
 
                             <div class="flex flex-col gap-1">
                                 <label>Contato</label>
-                                <input type="text" name="contato" required
+                                <input type="text" name="contato" required value="<%= paciente.contato %>"
                                     class="px-4 py-3 border border-text/25 rounded-3xl shadow-sm focus:outline-none focus:ring-turquesa focus:ring-1">
                             </div>
 
                             <div class="flex flex-col gap-1">
                                 <label>CPF</label>
-                                <input type="text" name="cpf"
+                                <input type="text" name="cpf" value="<%= paciente.cpf %>"
                                     class="px-4 py-3 border border-text/25 rounded-3xl shadow-sm focus:outline-none focus:ring-turquesa focus:ring-1">
                             </div>
 
                             <div class="flex flex-col gap-1 md:col-span-2">
                                 <label>Endereço</label>
-                                <input type="text" name="endereco"
+                                <input type="text" name="endereco" value="<%= paciente.endereco %>"
                                     class="px-4 py-3 border border-text/25 rounded-3xl shadow-sm focus:outline-none focus:ring-turquesa focus:ring-1">
                             </div>
 
@@ -124,7 +140,7 @@
                                 class="flex flex-col sm:flex-row gap-3 justify-center sm:justify-end pt-4 md:col-span-2 xl:col-span-3 border-t border-gray-100">
                                 <button type="submit"
                                     class="w-full sm:w-auto py-3 px-6 bg-turquesa rounded-xl font-medium hover:bg-turquesa/75 transition">
-                                    Cadastrar
+                                    Alterar
                                 </button>
 
                                 <a href="/pacientes"

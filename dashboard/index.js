@@ -1,6 +1,5 @@
 //importando o módulo do express
 import express from "express";
-
 import connection from "./config/sequelize-config.js";
 
 import PacienteController from "./controllers/PacienteController.js";
@@ -14,9 +13,7 @@ import Fonoaudiologo from "./models/Fonoaudiologo.js";
 import Usuario from "./models/Usuario.js";
 
 import associations from "./config/associations.js";
-
 import Auth from "./middlewares/Auth.js";
-
 import session from "express-session";
 
 //criando uma instância do express
@@ -73,9 +70,9 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(session({
     secret: "minhalojasecret",
-    cookie: {maxAge: 3600000}, 
+    cookie: {maxAge: 360000000}, 
     saveUninitialized: false, //não salva sessões vazias (sem informação)
-    resave: false, //evita que re-salve sessões
+    resave: false, //evita que ressalve sessões
 }));
 
 app.use("/", PacienteController);
@@ -85,11 +82,17 @@ app.use("/", UsuarioController);
 
 //rota principal
 app.get("/", Auth, function(req, res) {
-    res.render("index");
+    res.render("index", {
+      erro: null
+    });
 });
 
 app.get("/home", Auth, function(req,res) {
     res.render("home");
+});
+
+app.get("/configuracoes", Auth, function(req,res) {
+    res.render("configuracoes");
 });
 
 //iniciando o servidor na porta 8080

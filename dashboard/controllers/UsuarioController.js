@@ -10,6 +10,10 @@ import Auth from "../middlewares/Auth.js";
 //importando bcrypt
 import bcrypt from "bcrypt";
 
+router.get("/cadastroUsuario", (req, res) => {
+  res.render("cadastroUsuario");
+});
+
 router.get("/alterarSenha", Auth, function (req, res) {
   res.render("alterarSenha");
 });
@@ -87,13 +91,15 @@ router.post("/autenticacao", (req, res) => {
         res.redirect("/home");
         //se a senha estiver incorreta
       } else {
-        res.send(`Senha inválida!
-                    <br><a href="/">Tente novamente.</a>`);
+        res.render("index", {
+          erro: "Usuário ou senha incorretos."
+        })
       }
     //caso o usuário não exista
     } else {
-        res.send(`O usuário informado não existe!
-            <br><a href="/">Tente novamente.</a>`);
+        res.render("index", {
+          erro: "Usuário ou senha incorretos."
+        })
     }
   });
 });

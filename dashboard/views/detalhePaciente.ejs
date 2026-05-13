@@ -1,137 +1,235 @@
 <%- include ('partials/header.ejs'); %>
 
-    <div class="flex min-h-screen bg-gray-50">
-        <%- include('partials/sidebar') %>
+<div class="flex min-h-screen bg-gray-50">
+  <%- include('partials/sidebar') %>
 
-            <div class="flex-1 flex flex-col min-w-0">
-                <header class="sticky top-0 z-40"><%- include('partials/navbar') %></header>
+  <div class="flex-1 flex flex-col min-w-0">
+    <header class="sticky top-0 z-40">
+      <%- include('partials/navbar') %>
+    </header>
 
-                <main class="text-text font-jakarta text-sm p-8">
-                    <div class="hidden">
-                        <p>
-                            Home / Pacientes / <a href="#" class="text-salmao font-semibold">Cadastrar Pacientes</a>
-                        </p>
-                    </div>
-                    <div class="flex justify-end">
-                        <a href="/pacientes">
-                            <span>
-                                <img src="/imgs/icons/back.svg" alt="voltar">
-                            </span>
-                        </a>
-                    </div>
-                    <div class="w-full h-auto py-8 flex flex-col gap-8">
-                        <div class="grid gap-8 xl:grid-cols-[3fr_1fr]">
-                            <div
-                                class="bg-white shadow-lg grid grid-cols-2 p-8 gap-5 rounded-xl xl:grid-cols-[3fr_2fr_2fr_2fr] xl:grid-rows-3 xl:p-10">
-                                <div
-                                    class="flex flex-col col-span-2 items-center xl:col-span-1 xl:justify-center gap-1 md:gap-2 xl:row-span-3">
-                                    <img src="<%= paciente.img %>" alt="foto de perfil"
-                                        class="w-32 rounded-full md:w-36">
-                                    <p class="text-lg font-semibold md:text-xl">
-                                        <%= paciente.nome %>
-                                            <%= paciente.sobrenome %>
-                                    </p>
-                                    <p class="md:text-base">
-                                        <%= paciente.status %>
-                                    </p>
-                                    <p class="md:text-base">Nível <%= paciente.nivel %>
-                                    </p>
-                                </div>
-                                <div class="col-span-2 md:col-span-1 xl:col-span-1">
-                                    <p class="text-base font-semibold md:text-lg">Nome de usuário</p>
-                                    <p class="md:text-base">username</p>
-                                </div>
-                                <div class="col-span-2 md:col-span-1 xl:col-span-1">
-                                    <p class="text-base font-semibold md:text-lg">Data de Nascimento</p>
-                                    <p class="md:text-base">username</p>
-                                </div>
-                                <div class="xl:col-span-1">
-                                    <p class="text-base font-semibold md:text-lg">Idade</p>
-                                    <p class="md:text-base">username</p>
-                                </div>
-                                <div class="xl:col-start-2">
-                                    <p class="text-base font-semibold md:text-lg">Alvo Atual</p>
-                                    <p class="md:text-base">username</p>
-                                </div>
-                                <div class="">
-                                    <p class="text-base font-semibold md:text-lg">Cadastrado em</p>
-                                    <p class="md:text-base">username</p>
-                                </div>
-                                <div class="col-span-2 md:col-span-1 xl:col-span-1">
-                                    <p class="text-base font-semibold md:text-lg">Responsável</p>
-                                    <p class="md:text-base">username</p>
-                                </div>
-                                <div class="xl:col-start-2">
-                                    <p class="text-base font-semibold md:text-lg">Contato</p>
-                                    <p class="md:text-base">username</p>
-                                </div>
-                                <div class="">
-                                    <p class="text-base font-semibold md:text-lg">Ativo</p>
-                                    <p class="md:text-base">username</p>
-                                </div>
-                                <div class="col-span-2 flex gap-2 justify-center md:justify-end py-3 xl:col-span-1">
+    <main class="text-text font-jakarta text-sm p-4 md:p-8 flex flex-col gap-4">
+      <%
+        const dataBanco = paciente.data_nascimento;
 
-                                    <a href=""
-                                        class="block p-4 md:p-3 bg-turquesa rounded-sm xl:p-4 xl:hover:bg-turquesa/75">
-                                        <img src="/imgs/icons/editar.svg" class="w-5 md:w-5">
-                                    </a>
-                                    <a href=""
-                                        class="block p-4 md:p-3 bg-salmao xl:hover:bg-amarelo/75 rounded-sm  md:block xl:p-4">
-                                        <img src="/imgs/icons/excluir.svg" class="w-5 md:w-5">
-                                    </a>
+        const dataString = dataBanco instanceof Date
+          ? dataBanco.toISOString().split("T")[0]
+          : String(dataBanco).split("T")[0];
 
-                                </div>
-                            </div>
-                            <div class="bg-white shadow-lg rounded-xl p-8 flex flex-col gap-3 xl:justify-between">
-                                <div>
-                                    <p class="font-semibold text-lg md:text-xl">Notas</p>
-                                    <ul class="px-8 flex flex-col gap-2 md:text-base pt-4">
-                                        <li class="list-disc">Apresentou dificuldades na produção do encontro
-                                            consonantal na
-                                            última sessão</li>
-                                        <li class="list-disc">Maior dificuldade na consoante /s/</li>
-                                    </ul>
-                                </div>
-                                <div class="flex justify-center py-3 gap-3">
-                                    <a href="" class="p-4 bg-roxo rounded-sm xl:p-4 xl:hover:bg-roxo/75">
-                                        <p class="text-white">Ver tudo</p>
-                                    </a>
-                                    <a href="" class="p-4  bg-turquesa xl:hover:bg-turquesa/75 rounded-sm xl:p-4">
-                                        <img src="/imgs/icons/editar.svg" class="w-5 md:w-5">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+        const [ano, mes, dia] = dataString.split("-").map(Number);
 
-                        <div class="grid grid-cols-2 gap-x-3 gap-y-8 xl:grid-cols-4">
-                            <div
-                                class="bg-white shadow-xl rounded-lg p-4 xl:p-8 flex flex-col items-center justify-between gap-5">
-                                <p class="text-sm font-semibold md:text-xl">Média de Acertos</p>
-                                <span class="font-bold text-3xl text-salmao md:text-4xl">68,9%</span>
-                                <a href="" class="px-4 py-2 bg-turquesa rounded-lg text-sm md:py-3 md:px-5">Ver
-                                    relatório</a>
-                            </div>
-                            <div
-                                class="bg-white shadow-xl rounded-lg p-4 xl:p-8 flex flex-col items-center justify-between gap-5">
-                                <p class="text-sm font-semibold text-center md:text-xl">Média de Prática Semanal</p>
-                                <span class="font-bold text-3xl text-salmao md:text-4xl">2h52min</span>
-                                <a href="" class="px-4 py-2 bg-turquesa rounded-lg text-sm md:py-3 md:px-5">Ver
-                                    relatório</a>
-                            </div>
-                            <div class="col-span-2 bg-white shadow-xl rounded-lg p-8 flex flex-col gap-5">
-                                <div>
-                                    <p class="text-lg font-semibold md:text-xl">Desempenho por fonema</p>
-                                    <p class="text-sm text-text/75">Taxa de Acertos</p>
-                                </div>
-                                <div>
-                                    gráfico
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
-    </div>
+        const nascimento = new Date(ano, mes - 1, dia);
+        const hoje = new Date();
 
-    <%- include ('partials/footer.ejs'); %>
+        let idade = hoje.getFullYear() - ano;
+
+        if (
+          hoje.getMonth() + 1 < mes ||
+          (hoje.getMonth() + 1 === mes && hoje.getDate() < dia)
+        ) {
+          idade--;
+        }
+
+        const dataFormatada = nascimento.toLocaleDateString("pt-BR");
+        const dataCadastro = new Date(paciente.createdAt).toLocaleDateString("pt-BR");
+      %>
+
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6">
+        <div>
+          <p class="hidden lg:block px-2"">
+            Home / Pacientes /
+            <span class="text-salmao font-semibold">
+              <%= paciente.nome %> <%= paciente.sobrenome %>
+            </span>
+          </p>
         </div>
+
+        <a
+          href="/pacientes"
+          class="self-end sm:self-auto flex items-center justify-center w-10 h-10 rounded-full bg-white shadow hover:bg-gray-100 transition"
+          title="Voltar"
+        >
+          <img src="/imgs/icons/back.svg" alt="voltar" class="w-5">
+        </a>
+      </div>
+
+      <div class="w-full flex flex-col gap-6 lg:gap-8">
+        <div class="grid gap-6 xl:grid-cols-[3fr_1.2fr]">
+          
+          <section class="bg-white shadow-lg rounded-2xl p-5 sm:p-6 lg:p-8">
+            <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-[1.4fr_1fr_1fr_1fr]">
+              
+              <div class="flex flex-col items-center text-center gap-2 md:col-span-2 xl:col-span-1 xl:row-span-3 xl:justify-center">
+                <img
+                  src="<%= paciente.foto_perfil || '/imgs/profile.jpg' %>"
+                  alt="foto de perfil"
+                  class="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full object-cover shadow-md"
+                >
+
+                <p class="text-lg sm:text-xl font-semibold">
+                  <%= paciente.nome %> <%= paciente.sobrenome %>
+                </p>
+
+                <span class="px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs sm:text-sm font-medium">
+                  Ativo
+                </span>
+
+                <p class="text-sm sm:text-base text-text/70">
+                  Nível <%= paciente.nivel_gravidade || 1 %>
+                </p>
+              </div>
+
+              <div>
+                <p class="text-sm text-text/60">Nome</p>
+                <p class="text-base font-semibold">
+                  <%= paciente.nome %> <%= paciente.sobrenome %>
+                </p>
+              </div>
+
+              <div>
+                <p class="text-sm text-text/60">Data de Nascimento</p>
+                <p class="text-base font-semibold">
+                  <%= dataFormatada %>
+                </p>
+              </div>
+
+              <div>
+                <p class="text-sm text-text/60">Idade</p>
+                <p class="text-base font-semibold">
+                  <%= idade %> anos
+                </p>
+              </div>
+
+              <div class="xl:col-start-2">
+                <p class="text-sm text-text/60">Alvo Atual</p>
+                <p class="text-base font-semibold">/s/</p>
+              </div>
+
+              <div>
+                <p class="text-sm text-text/60">Cadastrado em</p>
+                <p class="text-base font-semibold">
+                  <%= dataCadastro %>
+                </p>
+              </div>
+
+              <div>
+                <p class="text-sm text-text/60">Responsável</p>
+                <p class="text-base font-semibold break-words">
+                  <%= paciente.responsavel %>
+                </p>
+              </div>
+
+              <div class="xl:col-start-2">
+                <p class="text-sm text-text/60">Contato</p>
+                <p class="text-base font-semibold">
+                  <%= paciente.contato %>
+                </p>
+              </div>
+
+              <div>
+                <p class="text-sm text-text/60">CPF</p>
+                <p class="text-base font-semibold">
+                  <%= paciente.cpf %>
+                </p>
+              </div>
+
+              <div>
+                <p class="text-sm text-text/60">Sexo</p>
+                <p class="text-base font-semibold">
+                  <%= paciente.sexo %>
+                </p>
+              </div>
+
+              <div class="md:col-span-2 xl:col-span-2 xl:col-start-2">
+                <p class="text-sm text-text/60">Endereço</p>
+                <p class="text-base font-semibold break-words">
+                  <%= paciente.endereco %>
+                </p>
+              </div>
+
+              <div class="md:col-span-2 xl:col-span-4 flex flex-col sm:flex-row gap-3 sm:justify-end pt-4 border-t border-gray-100">
+                <a
+                  href="/pacientes/editar/<%= paciente.id %>"
+                  class="flex items-center justify-center gap-2 px-5 py-3 bg-turquesa rounded-xl hover:bg-turquesa/75 transition"
+                >
+                  <img src="/imgs/icons/editar.svg" class="w-5">
+                  <span class="font-medium">Editar</span>
+                </a>
+
+                <a
+                  href="/pacientes/excluir/<%= paciente.id %>"
+                  class="flex items-center justify-center gap-2 px-5 py-3 bg-salmao text-white rounded-xl hover:bg-salmao/75 transition"
+                >
+                  <img src="/imgs/icons/excluir.svg" class="w-5">
+                  <span class="font-medium">Excluir</span>
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <aside class="bg-white shadow-lg rounded-2xl p-5 sm:p-6 lg:p-8 flex flex-col gap-5 justify-between">
+            <div>
+              <p class="font-semibold text-lg md:text-xl">Notas</p>
+
+              <ul class="pl-5 flex flex-col gap-2 md:text-base pt-4 text-text/80">
+                <li class="list-disc">
+                  Apresentou dificuldades na produção do encontro consonantal na última sessão.
+                </li>
+                <li class="list-disc">
+                  Maior dificuldade na consoante /s/.
+                </li>
+              </ul>
+            </div>
+
+            <div class="flex flex-col sm:flex-row xl:flex-col 2xl:flex-row gap-3">
+              <a
+                href="#"
+                class="flex-1 text-center px-4 py-3 bg-roxo rounded-xl text-white hover:bg-roxo/75 transition"
+              >
+                Ver tudo
+              </a>
+
+              <a
+                href="#"
+                class="flex items-center justify-center px-4 py-3 bg-turquesa rounded-xl hover:bg-turquesa/75 transition"
+              >
+                <img src="/imgs/icons/editar.svg" class="w-5">
+              </a>
+            </div>
+          </aside>
+        </div>
+
+        <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 lg:gap-6">
+          <div class="bg-white shadow-lg rounded-2xl p-5 lg:p-8 flex flex-col items-center justify-between gap-5 text-center">
+            <p class="text-base font-semibold md:text-xl">Média de Acertos</p>
+            <span class="font-bold text-3xl text-salmao md:text-4xl">68,9%</span>
+            <a href="#" class="px-4 py-2 bg-turquesa rounded-xl text-sm md:py-3 md:px-5 hover:bg-turquesa/75 transition">
+              Ver relatório
+            </a>
+          </div>
+
+          <div class="bg-white shadow-lg rounded-2xl p-5 lg:p-8 flex flex-col items-center justify-between gap-5 text-center">
+            <p class="text-base font-semibold md:text-xl">Média de Prática Semanal</p>
+            <span class="font-bold text-3xl text-salmao md:text-4xl">2h52min</span>
+            <a href="#" class="px-4 py-2 bg-turquesa rounded-xl text-sm md:py-3 md:px-5 hover:bg-turquesa/75 transition">
+              Ver relatório
+            </a>
+          </div>
+
+          <div class="sm:col-span-2 bg-white shadow-lg rounded-2xl p-5 lg:p-8 flex flex-col gap-5 min-h-64">
+            <div>
+              <p class="text-lg font-semibold md:text-xl">Desempenho por fonema</p>
+              <p class="text-sm text-text/75">Taxa de Acertos</p>
+            </div>
+
+            <div class="flex flex-1 items-center justify-center rounded-xl bg-gray-50 text-text/50">
+              gráfico
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+
+<%- include ('partials/footer.ejs'); %>

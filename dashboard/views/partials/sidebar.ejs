@@ -1,80 +1,149 @@
+<div
+  id="sidebar-overlay"
+  class="fixed inset-0 z-40 hidden bg-black/40 opacity-0 backdrop-blur-sm transition-opacity duration-300 lg:hidden"
+></div>
 
-<div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden transition-opacity duration-300 opacity-0 lg:hidden"></div>
-
-<aside id="sidebar" class="fixed inset-y-0 left-0 z-50 flex flex-col bg-salmao w-4/5 h-screen transform transition-transform duration-300 ease-in-out -translate-x-full sm:w-3/5 lg:translate-x-0 lg:w-64 lg:static lg:sticky lg:top-0">
-  <div class="flex justify-end p-8">
-    <a href="#" class="lg:hidden">
-      <img src="/imgs/icons/icon-menu.svg" class="w-8" id="menu-close" />
-    </a>
+<aside
+  id="sidebar"
+  class="fixed inset-y-0 left-0 z-50 flex h-screen w-4/5 max-w-[280px] -translate-x-full flex-col bg-salmao shadow-2xl transition-transform duration-300 ease-in-out sm:w-72 lg:sticky lg:top-0 lg:w-[260px] lg:translate-x-0 lg:shadow-none"
+>
+  <div class="flex justify-end px-5 pt-5 lg:hidden">
+    <button
+      type="button"
+      id="menu-close"
+      class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 transition hover:bg-white/20"
+    >
+      <img src="/imgs/icons/icon-menu.svg" class="w-6" alt="Fechar menu" />
+    </button>
   </div>
 
-  <div class="flex flex-row items-center gap-6 lg:gap-4 w-full border-b border-white px-8 pb-6">
-    <a href="#">
-      <div class="rounded-full overflow-hidden w-20 h-20 lg:w-12 lg:h-12 border-3 border-turquesa">
-        <img src="/imgs/profile.jpg" class="object-cover w-full h-full" />
+  <div class="px-5 pt-6 pb-4">
+    <div class="rounded-2xl bg-white/10 p-4 ring-1 ring-white/20">
+      <div class="flex items-center gap-3.5">
+        <div class="relative shrink-0">
+          <img
+            src="/imgs/profile.jpg"
+            class="h-11 w-11 rounded-full object-cover ring-2 ring-turquesa/70"
+            alt="Foto de perfil"
+          />
+
+          <span
+            class="absolute bottom-0.5 right-0.5 h-2.5 w-2.5 rounded-full bg-turquesa ring-2 ring-salmao"
+          ></span>
+        </div>
+
+        <div class="min-w-0">
+          <p class="truncate text-[16px] font-semibold text-white">
+            Natasha
+          </p>
+
+          <span
+            class="rounded-full bg-turquesa/20 px-2 py-0.5 text-[11px] text-white ring-1 ring-turquesa/40"
+          >
+            Administrador
+          </span>
+        </div>
       </div>
-    </a>
-    <div class="flex flex-col text-white">
-      <p class="text-lg lg:font-base font-semibold">Natasha</p>
-      <p class="text-sm">Admin</p>
     </div>
   </div>
-  <div class="flex">
-    <ul class="w-full text-white text-base">
-      <a href="/home">
-        <li class="flex flex-row gap-5 items-align py-6 px-8 hover:bg-red-300  md:text-lg  lg:py-4">
-          <img src="/imgs/icons/icon-home.svg" class="w-6 lg:w-5" />
-          Home
-        </li>
-      </a>
-      <a href="/pacientes">
-        <li class="flex flex-row gap-5 items-align py-6 px-8 hover:bg-red-300  md:text-lg  lg:py-4">
-          <img src="/imgs/icons/icon-usuario.svg" class="w-6 lg:w-5" />
-          Pacientes
-        </li>
-      </a>
-      <a href="/relatorios">
-        <li class="flex flex-row gap-5 items-align py-6 px-8 hover:bg-red-300  md:text-lg  lg:py-4">
-          <img src="/imgs/icons/icon-grafico.svg" class="w-6 lg:w-5" />
-          Relatórios
-        </li>
-      </a>
-      <a href="/atividades">
-        <li class="flex flex-row gap-5 items-align py-6 px-8 hover:bg-red-300  md:text-lg  lg:py-4">
-          <img src="/imgs/icons/exercicios.svg" class="w-6 lg:w-5" />
-        Atividades
-        </li>
-      </a>
-      <a href="#">
-        <li class="flex flex-row gap-5 items-align py-6 px-8 hover:bg-red-300  md:text-lg  lg:py-4">
-          <img src="/imgs/icons/chat.svg" class="w-6 lg:w-5" />
-        Mensagens
-        </li>
-      </a>
-      <a href="/perfil">
-        <li class="flex flex-row gap-5 items-align py-6 px-8 hover:bg-red-300  md:text-lg  lg:py-4">
-          <img src="/imgs/icons/perfil.svg" class="w-6 lg:w-5" />
-          Perfil
-        </li>
-      </a>
-      <a href="#">
-        <li class="flex flex-row gap-5 items-align py-6 px-8 hover:bg-red-300 md:text-lg lg:py-4">
-          <img src="/imgs/icons/icon-config.svg" class="w-6 lg:w-5" />
-          Configurações
-        </li>
-      </a>
 
-    </ul>
-  </div>
-  <div class="flex flex-1 items-end gap-5 items-align py-10 px-8 w-full">
-    <ul>
-      <a href="/">
-        <li class="text-white text-lg lg:text-base flex flex-row gap-4">
-          <img src="/imgs/icons/icon-exit.svg" class="w-6 lg:w-5" />
-          Sair
-        </li>
-      </a>
+  <nav class="flex-1 overflow-y-auto px-3">
+    <p
+      class="px-3 pb-1 pt-2 text-[10px] font-medium uppercase tracking-widest text-white/50"
+    >
+      Menu
+    </p>
 
+    <ul class="flex flex-col gap-1 text-white">
+      <li>
+        <a
+          href="/home"
+          class="flex items-center gap-3 rounded-xl px-3.5 py-[12px] text-[15px] font-medium text-white/75 transition-all duration-150 hover:bg-white/10 hover:pl-[18px] hover:text-white"
+        >
+          <img src="/imgs/icons/icon-home.svg" class="w-5 shrink-0" alt="" />
+          <span>Home</span>
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/pacientes"
+          class="flex items-center gap-3 rounded-xl px-3.5 py-[12px] text-[15px] font-medium text-white/75 transition-all duration-150 hover:bg-white/10 hover:pl-[18px] hover:text-white"
+        >
+          <img src="/imgs/icons/icon-usuario.svg" class="w-5 shrink-0" alt="" />
+          <span>Pacientes</span>
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/relatorios"
+          class="flex items-center gap-3 rounded-xl px-3.5 py-[12px] text-[15px] font-medium text-white/75 transition-all duration-150 hover:bg-white/10 hover:pl-[18px] hover:text-white"
+        >
+          <img src="/imgs/icons/icon-grafico.svg" class="w-5 shrink-0" alt="" />
+          <span>Relatórios</span>
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/atividades"
+          class="flex items-center gap-3 rounded-xl px-3.5 py-[12px] text-[15px] font-medium text-white/75 transition-all duration-150 hover:bg-white/10 hover:pl-[18px] hover:text-white"
+        >
+          <img src="/imgs/icons/exercicios.svg" class="w-5 shrink-0" alt="" />
+          <span>Atividades</span>
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="#"
+          class="flex items-center gap-3 rounded-xl px-3.5 py-[12px] text-[15px] font-medium text-white/75 transition-all duration-150 hover:bg-white/10 hover:pl-[18px] hover:text-white"
+        >
+          <img src="/imgs/icons/chat.svg" class="w-5 shrink-0" alt="" />
+          <span>Mensagens</span>
+        </a>
+      </li>
     </ul>
+
+    <p
+      class="px-3 pb-1 pt-4 text-[10px] font-medium uppercase tracking-widest text-white/50"
+    >
+      Conta
+    </p>
+
+    <ul class="flex flex-col gap-1 text-white">
+      <li>
+        <a
+          href="/perfil"
+          class="flex items-center gap-3 rounded-xl px-3.5 py-[12px] text-[15px] font-medium text-white/75 transition-all duration-150 hover:bg-white/10 hover:pl-[18px] hover:text-white"
+        >
+          <img src="/imgs/icons/perfil.svg" class="w-5 shrink-0" alt="" />
+          <span>Perfil</span>
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/configuracoes"
+          class="flex items-center gap-3 rounded-xl px-3.5 py-[12px] text-[15px] font-medium text-white/75 transition-all duration-150 hover:bg-white/10 hover:pl-[18px] hover:text-white"
+        >
+          <img src="/imgs/icons/icon-config.svg" class="w-5 shrink-0" alt="" />
+          <span>Configurações</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="px-3 pb-5">
+    <div class="mb-3 h-px bg-white/20"></div>
+
+    <a
+      href="/"
+      class="group flex items-center gap-3 rounded-xl border border-white/15 bg-white/10 px-3.5 py-3 text-[15px] font-medium text-white/70 transition-all hover:border-white/25 hover:bg-white/15 hover:text-white"
+    >
+      <img src="/imgs/icons/icon-exit.svg" class="w-5 shrink-0" alt="" />
+      <span>Sair</span>
+    </a>
   </div>
 </aside>

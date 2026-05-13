@@ -1,0 +1,178 @@
+<%- include ('partials/header.ejs'); %>
+
+    <div class="flex min-h-screen bg-gray-50">
+        <%- include('partials/sidebar') %>
+
+            <div class="flex-1 flex flex-col min-w-0">
+                <header class="sticky top-0 z-40">
+                    <%- include('partials/navbar') %>
+                </header>
+
+                <main class="text-text font-jakarta text-sm p-4 sm:p-6 lg:p-8 flex flex-col gap-6">
+
+                    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                        <div>
+                            <p class="text-xs sm:text-sm text-text/60">
+                                Home / Relatórios /
+                                <span class="text-salmao font-semibold">Média de Atividade Diária</span>
+                            </p>
+                        </div>
+
+                        <a href="/relatorios"
+                            class="self-end sm:self-auto flex items-center justify-center w-10 h-10 rounded-full bg-white shadow hover:bg-gray-100 transition">
+                            <img src="/imgs/icons/back.svg" alt="voltar" class="w-5">
+                        </a>
+                    </div>
+
+                    <div class="py-6">
+                        <p class="text-xl text-center md:text-2xl">Relatórios</p>
+                    </div>
+
+                    <section class="bg-white shadow-lg rounded-2xl p-5 sm:p-6 lg:p-8">
+                        <form class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div class="flex flex-col gap-1 md:col-span-2">
+                                <label>Paciente</label>
+                                <select
+                                    class="border border-text/25 rounded-3xl px-4 py-3 focus:outline-none focus:ring-1 focus:ring-turquesa">
+                                    <option>Todos os pacientes</option>
+                                    <option>Joana Oliveira</option>
+                                    <option>Pedro Henrique</option>
+                                    <option>Maria Eduarda</option>
+                                </select>
+                            </div>
+
+                            <div class="flex flex-col gap-1">
+                                <label>Data inicial</label>
+                                <input type="date"
+                                    class="border border-text/25 rounded-3xl px-4 py-3 focus:outline-none focus:ring-1 focus:ring-turquesa">
+                            </div>
+
+                            <div class="flex flex-col gap-1">
+                                <label>Data final</label>
+                                <input type="date"
+                                    class="border border-text/25 rounded-3xl px-4 py-3 focus:outline-none focus:ring-1 focus:ring-turquesa">
+                            </div>
+
+                            <div class="md:col-span-4 flex justify-end">
+                                <button type="button"
+                                    class="w-full sm:w-auto bg-turquesa rounded-xl px-6 py-3 font-medium hover:bg-turquesa/75 transition">
+                                    Filtrar
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <section class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="bg-white shadow-lg rounded-2xl p-5 text-center">
+                            <p class="text-text/60">Média diária</p>
+                            <p class="text-4xl font-bold text-salmao mt-2">44min</p>
+                        </div>
+
+                        <div class="bg-white shadow-lg rounded-2xl p-5 text-center">
+                            <p class="text-text/60">Maior atividade</p>
+                            <p class="text-4xl font-bold text-salmao mt-2">65min</p>
+                        </div>
+
+                        <div class="bg-white shadow-lg rounded-2xl p-5 text-center">
+                            <p class="text-text/60">Total no período</p>
+                            <p class="text-4xl font-bold text-salmao mt-2">3h40</p>
+                        </div>
+                    </section>
+
+                    <section class="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-5">
+                        <div class="bg-white shadow-lg rounded-2xl p-5 sm:p-6 lg:p-8">
+                            <div class="mb-5">
+                                <p class="text-lg md:text-xl font-semibold">Atividade por dia</p>
+                                <p class="text-sm text-text/60">
+                                    Tempo médio de prática registrado diariamente
+                                </p>
+                            </div>
+
+                            <div class="h-72 flex items-center justify-center rounded-xl bg-gray-50 text-text/50">
+                                gráfico de barras aqui
+                            </div>
+                        </div>
+
+                        <div class="bg-white shadow-lg rounded-2xl p-5 sm:p-6 lg:p-8">
+                            <p class="text-lg md:text-xl font-semibold mb-4">Resumo do período</p>
+
+                            <ul class="flex flex-col gap-3 text-text/80">
+                                <li class="border-l-4 border-salmao pl-3">
+                                    O dia com maior atividade foi 04/05, com 65 minutos.
+                                </li>
+                                <li class="border-l-4 border-turquesa pl-3">
+                                    A média diária ficou em 44 minutos de prática.
+                                </li>
+                                <li class="border-l-4 border-roxo pl-3">
+                                    Houve boa frequência, mas com variação entre os dias.
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section class="bg-white shadow-lg rounded-2xl p-5 sm:p-6 lg:p-8 overflow-x-auto">
+                        <p class="text-lg md:text-xl font-semibold mb-4">
+                            Detalhamento diário
+                        </p>
+
+                        <table class="w-full min-w-[650px] text-left">
+                            <thead>
+                                <tr class="border-b text-text/60">
+                                    <th class="py-3">Data</th>
+                                    <th class="py-3">Paciente</th>
+                                    <th class="py-3">Tempo de prática</th>
+                                    <th class="py-3">Classificação</th>
+                                    <th class="py-3">Observação</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% dadosAtividade.forEach(item=> { %>
+                                    <tr class="border-b last:border-b-0">
+                                        <td class="py-4 font-semibold">
+                                            <%= item.data %>
+                                        </td>
+                                        <td class="py-4">
+                                            <%= item.paciente %>
+                                        </td>
+                                        <td class="py-4">
+                                            <%= item.minutos %> min
+                                        </td>
+                                        <td class="py-4">
+                                            <% if (item.minutos>= 60) { %>
+                                                <span
+                                                    class="px-3 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700">
+                                                    Alta
+                                                </span>
+                                                <% } else if (item.minutos>= 35) { %>
+                                                    <span
+                                                        class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-50 text-yellow-700">
+                                                        Média
+                                                    </span>
+                                                    <% } else { %>
+                                                        <span
+                                                            class="px-3 py-1 rounded-full text-xs font-medium bg-red-50 text-red-700">
+                                                            Baixa
+                                                        </span>
+                                                        <% } %>
+                                        </td>
+                                        <td class="py-4">
+                                            <% if (item.minutos>= 60) { %>
+                                                Ótima participação no dia.
+                                                <% } else if (item.minutos>= 35) { %>
+                                                    Atividade dentro do esperado.
+                                                    <% } else { %>
+                                                        Reforçar frequência de prática.
+                                                        <% } %>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </section>
+
+                </main>
+            </div>
+    </div>
+
+    <%- include ('partials/footer.ejs'); %>

@@ -1,18 +1,302 @@
 <%- include ('partials/header.ejs'); %>
 
-    <div class="flex min-h-screen bg-gray-50">
-        <%- include('partials/sidebar') %>
+<div class="flex min-h-screen bg-gray-50">
+  <%- include('partials/sidebar') %>
 
-            <div class="flex-1 flex flex-col min-w-0">
-                <header class="sticky top-0 z-40">
-                    <%- include('partials/navbar') %>
-                </header>
+  <div class="flex-1 flex flex-col min-w-0">
+    <header class="sticky top-0 z-40">
+      <%- include('partials/navbar') %>
+    </header>
 
-                <main class="text-text font-jakarta text-sm p-4 md:p-8 flex flex-col gap-4">
+    <main class="flex flex-col gap-6 bg-fundo px-4 py-5 font-jakarta text-text sm:px-6 lg:px-8">
+      <section class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p class="text-xs sm:text-sm text-text/60">
+            Home /
+            <span class="text-salmao font-semibold">Configurações</span>
+          </p>
 
-                    
-                </main>
+          <h1 class="mt-1 text-2xl font-semibold sm:text-3xl">
+            Configurações
+          </h1>
+        </div>
+      </section>
+
+      <section class="grid grid-cols-1 gap-5 xl:grid-cols-2">
+        <div class="rounded-3xl bg-white p-5 shadow-lg sm:p-6">
+          <div class="mb-6">
+            <p class="text-lg font-semibold">
+              Preferências do sistema
+            </p>
+
+            <p class="text-sm text-text/60">
+              Ajuste o funcionamento geral do painel.
+            </p>
+          </div>
+
+          <div class="flex flex-col gap-5">
+            <div class="flex items-center justify-between rounded-2xl bg-gray-50 p-4">
+              <div>
+                <p class="font-medium">Modo escuro</p>
+                <p class="text-sm text-text/60">
+                  Altera o tema do painel
+                </p>
+              </div>
+
+              <label class="relative inline-flex cursor-pointer items-center">
+                <input type="checkbox" class="peer sr-only">
+                <div class="peer h-6 w-11 rounded-full bg-gray-300 transition peer-checked:bg-turquesa"></div>
+                <div class="absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition peer-checked:translate-x-5"></div>
+              </label>
             </div>
-    </div>
 
-    <%- include ('partials/footer.ejs'); %>
+            <div class="flex items-center justify-between rounded-2xl bg-gray-50 p-4">
+              <div>
+                <p class="font-medium">Notificações</p>
+                <p class="text-sm text-text/60">
+                  Receber alertas do sistema
+                </p>
+              </div>
+
+              <label class="relative inline-flex cursor-pointer items-center">
+                <input type="checkbox" checked class="peer sr-only">
+                <div class="peer h-6 w-11 rounded-full bg-gray-300 transition peer-checked:bg-turquesa"></div>
+                <div class="absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition peer-checked:translate-x-5"></div>
+              </label>
+            </div>
+
+            <div class="flex items-center justify-between rounded-2xl bg-gray-50 p-4">
+              <div>
+                <p class="font-medium">Backup automático</p>
+                <p class="text-sm text-text/60">
+                  Salvar dados automaticamente
+                </p>
+              </div>
+
+              <label class="relative inline-flex cursor-pointer items-center">
+                <input type="checkbox" checked class="peer sr-only">
+                <div class="peer h-6 w-11 rounded-full bg-gray-300 transition peer-checked:bg-turquesa"></div>
+                <div class="absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition peer-checked:translate-x-5"></div>
+              </label>
+            </div>
+
+            <div class="flex items-center justify-between rounded-2xl bg-gray-50 p-4">
+              <div>
+                <p class="font-medium">Sessão automática</p>
+                <p class="text-sm text-text/60">
+                  Manter login ativo
+                </p>
+              </div>
+
+              <label class="relative inline-flex cursor-pointer items-center">
+                <input type="checkbox" class="peer sr-only">
+                <div class="peer h-6 w-11 rounded-full bg-gray-300 transition peer-checked:bg-turquesa"></div>
+                <div class="absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition peer-checked:translate-x-5"></div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-3xl bg-white p-5 shadow-lg sm:p-6">
+          <div class="mb-6">
+            <p class="text-lg font-semibold">
+              Preferências clínicas
+            </p>
+
+            <p class="text-sm text-text/60">
+              Configurações relacionadas aos pacientes.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 gap-4">
+            <div class="flex flex-col gap-1">
+              <label>Idioma do painel</label>
+
+              <select
+                class="rounded-3xl border border-text/20 px-4 py-3 shadow-sm focus:outline-none focus:ring-1 focus:ring-turquesa"
+              >
+                <option>Português</option>
+                <option>English</option>
+                <option>Español</option>
+              </select>
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label>Tempo padrão das atividades</label>
+
+              <select
+                class="rounded-3xl border border-text/20 px-4 py-3 shadow-sm focus:outline-none focus:ring-1 focus:ring-turquesa"
+              >
+                <option>15 minutos</option>
+                <option selected>30 minutos</option>
+                <option>45 minutos</option>
+                <option>60 minutos</option>
+              </select>
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label>Nível inicial padrão</label>
+
+              <select
+                class="rounded-3xl border border-text/20 px-4 py-3 shadow-sm focus:outline-none focus:ring-1 focus:ring-turquesa"
+              >
+                <option>Nível 1</option>
+                <option selected>Nível 2</option>
+                <option>Nível 3</option>
+              </select>
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label>Formato de relatórios</label>
+
+              <select
+                class="rounded-3xl border border-text/20 px-4 py-3 shadow-sm focus:outline-none focus:ring-1 focus:ring-turquesa"
+              >
+                <option selected>PDF</option>
+                <option>Excel</option>
+                <option>CSV</option>
+              </select>
+            </div>
+
+            <div class="pt-2">
+              <button
+                type="button"
+                class="w-full rounded-xl bg-turquesa px-6 py-3 font-medium text-white transition hover:bg-turquesa/80 sm:w-auto"
+              >
+                Salvar configurações
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="rounded-3xl bg-white p-5 shadow-lg sm:p-6">
+        <div class="mb-6">
+          <p class="text-lg font-semibold">
+            Segurança
+          </p>
+
+          <p class="text-sm text-text/60">
+            Ajustes relacionados à segurança da conta.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <button
+            class="flex items-center justify-between rounded-2xl border border-text/10 bg-gray-50 p-5 transition hover:bg-gray-100"
+          >
+            <div class="text-left">
+              <p class="font-medium">Alterar senha</p>
+              <p class="text-sm text-text/60">
+                Atualize sua senha de acesso
+              </p>
+            </div>
+
+            <span class="text-xl text-text/40">›</span>
+          </button>
+
+          <button
+            class="flex items-center justify-between rounded-2xl border border-text/10 bg-gray-50 p-5 transition hover:bg-gray-100"
+          >
+            <div class="text-left">
+              <p class="font-medium">Autenticação em 2 fatores</p>
+              <p class="text-sm text-text/60">
+                Mais segurança para o painel
+              </p>
+            </div>
+
+            <span class="text-xl text-text/40">›</span>
+          </button>
+
+          <button
+            class="flex items-center justify-between rounded-2xl border border-text/10 bg-gray-50 p-5 transition hover:bg-gray-100"
+          >
+            <div class="text-left">
+              <p class="font-medium">Sessões conectadas</p>
+              <p class="text-sm text-text/60">
+                Gerencie dispositivos ativos
+              </p>
+            </div>
+
+            <span class="text-xl text-text/40">›</span>
+          </button>
+
+          <button
+            class="flex items-center justify-between rounded-2xl border border-text/10 bg-gray-50 p-5 transition hover:bg-gray-100"
+          >
+            <div class="text-left">
+              <p class="font-medium">Logs do sistema</p>
+              <p class="text-sm text-text/60">
+                Histórico de acessos
+              </p>
+            </div>
+
+            <span class="text-xl text-text/40">›</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="rounded-3xl border border-red-200 bg-red-50 p-5 shadow-sm sm:p-6">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p class="text-lg font-semibold text-red-700">
+              Zona de perigo
+            </p>
+
+            <p class="mt-1 max-w-3xl text-sm text-red-600">
+              Ao excluir sua conta, todos os acessos administrativos serão removidos permanentemente.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onclick="document.getElementById('modalExcluirConta').classList.remove('hidden')"
+            class="w-full rounded-xl bg-red-500 px-6 py-3 font-medium text-white transition hover:bg-red-600 sm:w-auto"
+          >
+            Excluir conta
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<div
+  id="modalExcluirConta"
+  class="fixed inset-0 z-[999] hidden items-center justify-center bg-black/50 px-4 backdrop-blur-sm"
+>
+  <div class="mx-auto flex min-h-screen max-w-md items-center">
+    <div class="rounded-3xl bg-white p-6 shadow-2xl">
+      <div class="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-red-100">
+        <span class="text-2xl text-red-600">!</span>
+      </div>
+
+      <p class="text-xl font-semibold text-text">
+        Excluir conta?
+      </p>
+
+      <p class="mt-2 text-sm text-text/60">
+        Essa ação é irreversível e removerá permanentemente seu acesso ao sistema.
+      </p>
+
+      <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:justify-end">
+        <button
+          type="button"
+          onclick="document.getElementById('modalExcluirConta').classList.add('hidden')"
+          class="rounded-xl border border-text/20 px-5 py-3 font-medium transition hover:bg-gray-50"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="button"
+          class="rounded-xl bg-red-500 px-5 py-3 font-medium text-white transition hover:bg-red-600"
+        >
+          Sim, excluir
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include ('partials/footer.ejs'); %>
