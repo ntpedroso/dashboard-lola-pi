@@ -45,6 +45,7 @@ router.post("/cadastroUsuario/cadastrar", async (req, res) => {
     const novoUsuario = await Usuario.create({
       usuario: usuario,
       senha: hash,
+      tipo: "fono",
     });
 
     await Fonoaudiologo.create({
@@ -81,26 +82,48 @@ router.post("/autenticacao", (req, res) => {
 
       //se a senha for válida
       if (correct) {
-        //autoriza o login
-        //cria a sessão para o usuário
-        req.session.usuario = {
+
+        if(usuario.tipo != "fono") {
+          return res.render("index", {
+            erro: "Acesso permitido apenas para fonoaudiólogos"
+          });
+        }
+        //procure na tabela fono o registro cujo id_login seja igual ao id do usuário que acabou de logar
+        Fonoaudiologo.findOne({
+          where: {
+            id_login: usuario.id
+          }
+        }).then((fono) => {
+
+          if(!fono) {
+            return res.render("index", {
+              erro: "Fonoaudiólogo não encontrado para esse login."
+            });
+          }
+          //autoriza o login
+          //cria a sessão para o usuário
+          req.session.usuario = {
             //inserindo as informações do usuário na sessão
             id: usuario.id,
-            usuario: usuario.usuario
-        }
-        res.redirect("/home");
-        //se a senha estiver incorreta
-      } else {
-        res.render("index", {
-          erro: "Usuário ou senha incorretos."
-        })
-      }
+            usuario: usuario.usuario,
+            tipo: usuario.tipo,
+            id_fono: fono.id,
+          };
+
+          res.redirect("/home");
+        });
+  //se a senha estiver incorreta
+} else {
+  res.render("index", {
+    erro: "Usuário ou senha incorretos."
+  })
+}
     //caso o usuário não exista
     } else {
-        res.render("index", {
-          erro: "Usuário ou senha incorretos."
-        })
-    }
+    res.render("index", {
+      erro: "Usuário ou senha incorretos."
+    })
+  }
   });
 });
 

@@ -10,6 +10,10 @@ const login = connection.define('login', {
     senha: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    tipo: {
+        type: Sequelize.STRING,
+        allowNull: false
     }
 });
 

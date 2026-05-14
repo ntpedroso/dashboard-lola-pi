@@ -3,61 +3,62 @@ import express from "express";
 const router = express.Router();
 
 import Paciente from "../models/Paciente.js";
-
+import Usuario from "../models/Usuario.js"
+import bcrypt from "bcrypt";
 import Auth from "../middlewares/Auth.js";
 
 import multer from "multer";
 
 const listaPacientes = [
-    {
-        id: 1,
-        nome: "Pedro",
-        sobrenome: "Henrique",
-        nivel: 1,
-        status: "Em progresso",
-        data_nasc: "07/08/2019",
-        img: "/imgs/profile.jpg"
-    },
-    {
-        id: 2,
-        nome: "Maria",
-        sobrenome: "Eduarda",
-        nivel: 1,
-        status: "Em progresso",
-        data_nasc: "07/08/2019"
-    },
-    {
-        id: 3,
-        nome: "Maria",
-        sobrenome: "Eduarda",
-        nivel: 1,
-        status: "Em progresso",
-        data_nasc: "07/08/2019"
-    },
-    {
-        id: 4,
-        nome: "Maria",
-        sobrenome: "Eduarda",
-        nivel: 1,
-        status: "Em progresso",
-        data_nasc: "07/08/2019"
-    },
-    {
-        id: 5,
-        nome: "Maria",
-        sobrenome: "Eduarda",
-        nivel: 1,
-        status: "Em progresso",
-        data_nasc: "07/08/2019"
-    },
-    {
-        id: 6,
-        nome: "Maria",
-        sobrenome: "Eduarda",
-        nivel: 1,
-        status: "Em progresso",
-        data_nasc: "07/08/2019"
-    }
+  {
+    id: 1,
+    nome: "Pedro",
+    sobrenome: "Henrique",
+    nivel: 1,
+    status: "Em progresso",
+    data_nasc: "07/08/2019",
+    img: "/imgs/profile.jpg"
+  },
+  {
+    id: 2,
+    nome: "Maria",
+    sobrenome: "Eduarda",
+    nivel: 1,
+    status: "Em progresso",
+    data_nasc: "07/08/2019"
+  },
+  {
+    id: 3,
+    nome: "Maria",
+    sobrenome: "Eduarda",
+    nivel: 1,
+    status: "Em progresso",
+    data_nasc: "07/08/2019"
+  },
+  {
+    id: 4,
+    nome: "Maria",
+    sobrenome: "Eduarda",
+    nivel: 1,
+    status: "Em progresso",
+    data_nasc: "07/08/2019"
+  },
+  {
+    id: 5,
+    nome: "Maria",
+    sobrenome: "Eduarda",
+    nivel: 1,
+    status: "Em progresso",
+    data_nasc: "07/08/2019"
+  },
+  {
+    id: 6,
+    nome: "Maria",
+    sobrenome: "Eduarda",
+    nivel: 1,
+    status: "Em progresso",
+    data_nasc: "07/08/2019"
+  }
 ];
 router.get("/cadastroPaciente", Auth, function (req, res) {
   res.render("cadastroPaciente");
@@ -83,12 +84,12 @@ router.get("/pacientes/:id", Auth, (req, res) => {
 });
 
 router.get("/pacientes", function (req, res) {
-    
-    const mensagemExcluir = req.session.mensagemExcluir;
 
-    req.session.mensagemExcluir = null;
+  const mensagemExcluir = req.session.mensagemExcluir;
 
-    Paciente.findAll()
+  req.session.mensagemExcluir = null;
+
+  Paciente.findAll()
     .then((pacientes) => {
       res.render("pacientes", {
         pacientes: pacientes,
@@ -117,17 +118,33 @@ const upload = multer({ storage });
 router.post("/pacientes/cadastrar", upload.single("fotoPerfil"), (req, res) => {
   const foto_perfil = req.file ? "/uploads/pacientes/" + req.file.filename : null;
 
+  const id_login = req.session.usuario.id;
+  const id_fono = req.session.usuario.id_fono;
+  const usuarioPaciente = req.body.nome.toLowerCase() + Date.now();
+  const senhaPadrao = "12345";
+  const senhaHash = bcrypt.hashSync(senhaPadrao, 10);
+
   Paciente.create({
-    nome: req.body.nome,
-    sobrenome: req.body.sobrenome,
-    endereco: req.body.endereco,
-    data_nascimento: req.body.data_nascimento,
-    nivel_gravidade: req.body.nivel_gravidade,
-    contato: req.body.contato,
-    cpf: req.body.cpf,
-    sexo: req.body.sexo,
-    responsavel: req.body.responsavel,
-    foto_perfil: foto_perfil
+    usuario: usuarioPaciente,
+    senha: senhaHash,
+    tipo: "Paciente",
+  }).then((loginCriado) => {
+    return Paciente.create({
+      nome: req.body.nome,
+      sobrenome: req.body.sobrenome,
+      endereco: req.body.endereco,
+      data_nascimento: req.body.data_nascimento,
+      nivel_gravidade: req.body.nivel_gravidade,
+      contato: req.body.contato,
+      cpf: req.body.cpf,
+      sexo: req.body.sexo,
+      responsavel: req.body.responsavel,
+      foto_perfil: foto_perfil,
+
+      //chaves estrangeiras
+      id_fono: req.session.usuario.id_fono,
+      id_login: loginCriado.id,
+    });
   })
   .then(() => {
     res.redirect("/pacientes");
@@ -137,18 +154,18 @@ router.post("/pacientes/cadastrar", upload.single("fotoPerfil"), (req, res) => {
   });
 });
 
-router.get("/pacientes/excluir/:id", (req,res) => {
-    const id = req.params.id;
-    Paciente.destroy({
-        where: {
-            id: id,
-        },
-    }).then(() => {
-        req.session.mensagemExcluir = "Paciente excluído com sucesso!";
-        res.redirect("/pacientes");
-    }).catch((error) => {
-        console.log("Ocorreu um erro ao excluir o paciente" + error);
-    });
+router.get("/pacientes/excluir/:id", (req, res) => {
+  const id = req.params.id;
+  Paciente.destroy({
+    where: {
+      id: id,
+    },
+  }).then(() => {
+    req.session.mensagemExcluir = "Paciente excluído com sucesso!";
+    res.redirect("/pacientes");
+  }).catch((error) => {
+    console.log("Ocorreu um erro ao excluir o paciente" + error);
+  });
 });
 
 // rota de edição do paciente
@@ -180,15 +197,15 @@ router.post("/pacientes/alterar", Auth, (req, res) => {
   //alterando o cliente no banco
   Paciente.update(
     {
-        nome: nome,
-        sobrenome: sobrenome,
-        endereco: endereco,
-        data_nascimento: data_nascimento,
-        nivel_gravidade: nivel_gravidade,
-        contato: contato,
-        cpf: cpf,
-        sexo: sexo,
-        responsavel: responsavel,
+      nome: nome,
+      sobrenome: sobrenome,
+      endereco: endereco,
+      data_nascimento: data_nascimento,
+      nivel_gravidade: nivel_gravidade,
+      contato: contato,
+      cpf: cpf,
+      sexo: sexo,
+      responsavel: responsavel,
     },
     {
       where: {
