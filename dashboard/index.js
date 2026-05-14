@@ -6,6 +6,7 @@ import PacienteController from "./controllers/PacienteController.js";
 import RelatorioController from "./controllers/RelatorioController.js";
 import AtividadeController from "./controllers/AtividadeController.js";
 import UsuarioController from "./controllers/UsuarioController.js";
+import MensagemController from "./controllers/MensagemController.js";
 
 //importando os Models
 import Paciente from "./models/Paciente.js";
@@ -79,6 +80,7 @@ app.use("/", PacienteController);
 app.use("/", RelatorioController);
 app.use("/", AtividadeController);
 app.use("/", UsuarioController);
+app.use("/", MensagemController);
 
 //rota principal
 app.get("/", Auth, function(req, res) {

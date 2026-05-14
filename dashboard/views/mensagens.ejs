@@ -1,18 +1,196 @@
 <%- include ('partials/header.ejs'); %>
 
-    <div class="flex min-h-screen bg-gray-50">
-        <%- include('partials/sidebar') %>
+<div class="flex min-h-screen bg-gray-50">
+  <%- include('partials/sidebar') %>
 
-            <div class="flex-1 flex flex-col min-w-0">
-                <header class="sticky top-0 z-40">
-                    <%- include('partials/navbar') %>
-                </header>
+  <div class="flex-1 flex flex-col min-w-0">
+    <header class="sticky top-0 z-40"><%- include('partials/navbar') %></header>
 
-                <main class="text-text font-jakarta text-sm p-4 md:p-8 flex flex-col gap-4">
+    <main class="text-text font-jakarta text-sm p-4 md:p-8 flex flex-col gap-4" style="height: calc(100vh - 64px);">
 
-                    
-                </main>
+      <div class="hidden lg:block px-2">
+        <p>Home / <a class="text-salmao font-semibold">Mensagens</a></p>
+      </div>
+
+      <div class="flex gap-4 flex-1 min-h-0">
+
+        <div class="w-72 xl:w-80 bg-white shadow-lg rounded-xl flex flex-col min-h-0 shrink-0">
+
+          <div class="p-4 border-b border-text/10 flex flex-col gap-3">
+            <p class="font-semibold text-base">Conversas</p>
+            <div class="relative">
+              <input
+                type="text"
+                placeholder="Buscar..."
+                class="w-full pl-9 pr-4 py-2 border border-text/20 rounded-2xl text-sm focus:outline-none focus:ring-1 focus:ring-turquesa"
+              />
+              <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-text/30" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
+              </svg>
             </div>
-    </div>
+          </div>
 
-    <%- include ('partials/footer.ejs'); %>
+          <div class="flex-1 overflow-y-auto divide-y divide-text/5">
+
+            <div class="flex items-center gap-3 px-4 py-3 bg-turquesa/10 border-l-4 border-turquesa cursor-pointer">
+              <div class="relative shrink-0">
+                <img src="/imgs/profile.jpg" class="w-10 h-10 rounded-full object-cover">
+                <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-white rounded-full"></span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline gap-1">
+                  <p class="font-semibold text-sm truncate">Ana Paula Silva</p>
+                  <span class="text-[10px] text-text/40 shrink-0">14:32</span>
+                </div>
+                <p class="text-xs text-text/50 truncate">Boa tarde! Tenho uma dúvida...</p>
+              </div>
+              <span class="w-5 h-5 bg-salmao text-white text-[10px] font-bold rounded-full flex items-center justify-center shrink-0">2</span>
+            </div>
+
+            <div class="flex items-center gap-3 px-4 py-3 hover:bg-text/5 transition cursor-pointer">
+              <div class="relative shrink-0">
+                <img src="/imgs/profile.jpg" class="w-10 h-10 rounded-full object-cover">
+                <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-gray-300 border-2 border-white rounded-full"></span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline gap-1">
+                  <p class="font-semibold text-sm truncate">Carlos Eduardo</p>
+                  <span class="text-[10px] text-text/40 shrink-0">Ontem</span>
+                </div>
+                <p class="text-xs text-text/50 truncate">Ok, obrigado pela explicação!</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 px-4 py-3 hover:bg-text/5 transition cursor-pointer">
+              <div class="relative shrink-0">
+                <img src="/imgs/profile.jpg" class="w-10 h-10 rounded-full object-cover">
+                <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-white rounded-full"></span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline gap-1">
+                  <p class="font-semibold text-sm truncate">Beatriz Costa</p>
+                  <span class="text-[10px] text-text/40 shrink-0">Seg</span>
+                </div>
+                <p class="text-xs text-text/50 truncate">O Pedro praticou bastante essa semana!</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 px-4 py-3 hover:bg-text/5 transition cursor-pointer">
+              <div class="relative shrink-0">
+                <img src="/imgs/profile.jpg" class="w-10 h-10 rounded-full object-cover">
+                <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-gray-300 border-2 border-white rounded-full"></span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline gap-1">
+                  <p class="font-semibold text-sm truncate">Mariana Oliveira</p>
+                  <span class="text-[10px] text-text/40 shrink-0">Qui</span>
+                </div>
+                <p class="text-xs text-text/50 truncate">Quando será a próxima sessão?</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 px-4 py-3 hover:bg-text/5 transition cursor-pointer">
+              <div class="relative shrink-0">
+                <img src="/imgs/profile.jpg" class="w-10 h-10 rounded-full object-cover">
+                <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-white rounded-full"></span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline gap-1">
+                  <p class="font-semibold text-sm truncate">Lucas Ferreira</p>
+                  <span class="text-[10px] text-text/40 shrink-0">Ter</span>
+                </div>
+                <p class="text-xs text-text/50 truncate">Entendido, vamos tentar assim!</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="flex-1 bg-white shadow-lg rounded-xl flex flex-col min-h-0">
+
+          <div class="flex items-center gap-3 px-5 py-4 border-b border-text/10">
+            <img src="/imgs/profile.jpg" class="w-10 h-10 rounded-full object-cover shrink-0">
+            <div class="flex-1 min-w-0">
+              <p class="font-semibold text-sm">Ana Paula Silva</p>
+              <p class="text-xs text-green-400">Online agora</p>
+            </div>
+          </div>
+
+          <div class="flex-1 overflow-y-auto px-5 py-6 flex flex-col gap-4">
+
+            <div class="flex justify-center">
+              <span class="text-[11px] text-text/30 bg-gray-50 px-3 py-1 rounded-full border border-text/10">Hoje</span>
+            </div>
+
+            <div class="flex gap-2 items-end max-w-[70%]">
+              <img src="/imgs/profile.jpg" class="w-7 h-7 rounded-full object-cover shrink-0 mb-1">
+              <div>
+                <div class="bg-gray-100 rounded-2xl rounded-bl-sm px-4 py-2.5">
+                  <p class="text-sm leading-relaxed">Boa tarde! Tenho uma dúvida sobre os exercícios do /r/ que o Pedro está fazendo no jogo.</p>
+                </div>
+                <p class="text-[10px] text-text/30 mt-1 ml-1">14:30</p>
+              </div>
+            </div>
+
+            <div class="flex gap-2 items-end max-w-[70%]">
+              <img src="/imgs/profile.jpg" class="w-7 h-7 rounded-full object-cover shrink-0 mb-1">
+              <div>
+                <div class="bg-gray-100 rounded-2xl rounded-bl-sm px-4 py-2.5">
+                  <p class="text-sm leading-relaxed">Ele está tendo dificuldade com a posição final. É normal nessa fase?</p>
+                </div>
+                <p class="text-[10px] text-text/30 mt-1 ml-1">14:32</p>
+              </div>
+            </div>
+
+            <div class="flex gap-2 items-end justify-end max-w-[70%] self-end">
+              <div>
+                <div class="bg-turquesa/20 rounded-2xl rounded-br-sm px-4 py-2.5">
+                  <p class="text-sm leading-relaxed">Boa tarde! Sim, é completamente normal. O /r/ em posição final costuma ser o mais desafiador para essa faixa etária.</p>
+                </div>
+                <p class="text-[10px] text-text/30 mt-1 text-right mr-1">14:35</p>
+              </div>
+            </div>
+
+            <div class="flex gap-2 items-end justify-end max-w-[70%] self-end">
+              <div>
+                <div class="bg-turquesa/20 rounded-2xl rounded-br-sm px-4 py-2.5">
+                  <p class="text-sm leading-relaxed">Continue incentivando ele a praticar pelo app pelo menos 15 minutos por dia. Os jogos de posição final já foram ativados para ele essa semana! 🎮</p>
+                </div>
+                <p class="text-[10px] text-text/30 mt-1 text-right mr-1">14:36</p>
+              </div>
+            </div>
+
+            <div class="flex gap-2 items-end max-w-[70%]">
+              <img src="/imgs/profile.jpg" class="w-7 h-7 rounded-full object-cover shrink-0 mb-1">
+              <div>
+                <div class="bg-gray-100 rounded-2xl rounded-bl-sm px-4 py-2.5">
+                  <p class="text-sm leading-relaxed">Perfeito, obrigada pela explicação! Vou incentivar ele sim 😊</p>
+                </div>
+                <p class="text-[10px] text-text/30 mt-1 ml-1">14:38</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="px-4 py-4 border-t border-text/10">
+            <div class="flex items-center gap-2 bg-gray-50 border border-text/15 rounded-2xl px-4 py-2">
+              <input
+                type="text"
+                placeholder="Digite uma mensagem..."
+                class="flex-1 bg-transparent text-sm focus:outline-none"
+              />
+              <button class="p-2 bg-salmao rounded-xl hover:bg-salmao/80 transition shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+                  <path d="M2 21l21-9L2 3v7l15 2-15 2z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<%- include ('partials/footer.ejs'); %>
