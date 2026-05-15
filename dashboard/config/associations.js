@@ -11,4 +11,4 @@ const associations = () => {
     Paciente.belongsTo(Usuario, {foreignKey: "id_login"});
 }
 
-export default associations;
+export default associations; 

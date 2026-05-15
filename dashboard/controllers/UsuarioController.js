@@ -18,10 +18,6 @@ router.get("/alterarSenha", Auth, function (req, res) {
   res.render("alterarSenha");
 });
 
-router.get("/perfil", Auth, (req, res) => {
-  res.render("perfil");
-});
-
 router.get("/cadastroUsuario", Auth, function (req, res) {
   Usuario.findAll()
     .then((usuarios) => {
@@ -46,6 +42,7 @@ router.post("/cadastroUsuario/cadastrar", async (req, res) => {
       usuario: usuario,
       senha: hash,
       tipo: "Fono",
+      ativo: true
     });
 
     await Fonoaudiologo.create({
@@ -108,6 +105,7 @@ router.post("/autenticacao", (req, res) => {
             usuario: usuario.usuario,
             tipo: usuario.tipo,
             id_fono: fono.id,
+            nome: fono.nome,
           };
 
           res.redirect("/home");
@@ -124,6 +122,20 @@ router.post("/autenticacao", (req, res) => {
       erro: "Usuário ou senha incorretos."
     })
   }
+  });
+});
+
+router.get("/perfil", Auth, async (req, res) => {
+
+  const fono = await Fonoaudiologo.findOne({
+    where: {
+      id: req.session.usuario.id_fono
+    }
+  });
+
+  res.render("perfil", {
+    fono: fono,
+    usuario: req.session.usuario,
   });
 });
 

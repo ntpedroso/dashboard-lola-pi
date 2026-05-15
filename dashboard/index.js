@@ -46,13 +46,7 @@ connection
 // invocando a função que cria as associações
 associations();
 
-Usuario.sync({ force: false })
-  .then(() => {
-    return Fonoaudiologo.sync({ force: false });
-  })
-  .then(() => {
-    return Paciente.sync({ force: false });
-  })
+connection.sync({ alter: true })
   .then(() => {
     console.log("Entidades criadas e relacionadas com sucesso!");
   })
@@ -60,6 +54,20 @@ Usuario.sync({ force: false })
     console.log("Ocorreu um erro ao sincronizar os Models: " + error);
   });
 
+/*Usuario.sync({ alter: true })
+  .then(() => {
+    return Fonoaudiologo.sync({ alter: true });
+  })
+  .then(() => {
+    return Paciente.sync({ alter: true });
+  })
+  .then(() => {
+    console.log("Entidades criadas e relacionadas com sucesso!");
+  })
+  .catch((error) => {
+    console.log("Ocorreu um erro ao sincronizar os Models: " + error);
+  });
+*/
 
 //configurando o EJS - o set serve para configurar algo
 app.set('view engine', 'ejs');
@@ -89,8 +97,19 @@ app.get("/", Auth, function(req, res) {
     });
 });
 
-app.get("/home", Auth, function(req,res) {
-    res.render("home");
+app.get("/home", Auth, async (req, res) => {
+  const pacientes = await Paciente.findAll({
+    where: {
+      ativo: true
+    },
+    limit: 3,
+    order: [["createdAt", "DESC"]]
+  });
+
+  res.render("home", {
+    pacientes: pacientes,
+    usuario: req.session.usuario
+  });
 });
 
 app.get("/configuracoes", Auth, function(req,res) {

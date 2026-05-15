@@ -32,7 +32,7 @@ router.get("/pacientes/:id", Auth, (req, res) => {
     });
 });
 
-router.get("/pacientes", function (req, res) {
+router.get("/pacientes", Auth, function (req, res) {
 
   const mensagemExcluir = req.session.mensagemExcluir;
   const mensagemCadastrar = req.session.mensagemCadastrar;
@@ -124,7 +124,7 @@ router.post("/pacientes/cadastrar", Auth, upload.single("fotoPerfil"), (req, res
   });
 });
 
-router.get("/pacientes/excluir/:id", (req, res) => {
+router.get("/pacientes/excluir/:id", Auth, (req, res) => {
   const id = req.params.id;
 
   Paciente.update(

@@ -1,185 +1,209 @@
 <%- include ('partials/header.ejs'); %>
 
-<div class="flex min-h-screen bg-gray-50">
-  <%- include('partials/sidebar') %>
+  <div class="flex min-h-screen bg-gray-50">
+    <%- include('partials/sidebar') %>
 
-  <div class="flex-1 flex flex-col min-w-0">
-    <header class="sticky top-0 z-40"><%- include('partials/navbar') %></header>
+      <div class="flex-1 flex flex-col min-w-0">
+        <header class="sticky top-0 z-40"><%- include('partials/navbar') %></header>
 
-    <main class="text-text font-jakarta text-sm p-4 md:p-8 flex flex-col gap-6">
+        <main class="text-text font-jakarta text-sm p-4 md:p-8 flex flex-col gap-6">
 
-      <div class="hidden lg:block">
-        <p>Home / <a class="text-salmao font-semibold">Atividades</a></p>
-      </div>
-
-      <div class="flex justify-end lg:hidden">
-        <a href="/pacientes">
-          <img src="/imgs/icons/back.svg" alt="voltar" />
-        </a>
-      </div>
-
-      <div class="bg-white shadow-lg rounded-xl p-5 md:p-8 flex flex-col gap-8">
-
-        <div class="flex flex-col gap-3">
-          <label class="font-semibold text-base">Selecionar Paciente</label>
-          <select
-            id="selectPaciente"
-            name="paciente"
-            class="border border-text/25 rounded-3xl px-4 py-2.5 shadow-md appearance-none bg-[length:16px_16px] bg-[right_12px_center] bg-no-repeat focus:outline-none focus:ring-1 focus:ring-turquesa md:py-3 w-full md:max-w-sm"
-            style="background-image: url('/imgs/icons/seta-baixo-salmao.svg');">
-            <option value="">Selecione um paciente...</option>
-            <option value="ana">Ana Paula Silva</option>
-            <option value="carlos">Carlos Eduardo Mendes</option>
-            <option value="beatriz">Beatriz Costa</option>
-          </select>
-        </div>
-
-        <div id="estadoVazio" class="py-10 md:py-16">
-          <p class="text-center text-text/50">Escolha um paciente para começar a personalização.</p>
-        </div>
-
-        <div id="conteudoPersonalizacao" class="hidden flex-col gap-8">
-
-          <div class="flex flex-col gap-6">
-            <p class="text-base font-semibold">Seleção de Fonemas</p>
-
-            <div class="flex flex-col gap-4">
-              <p class="text-text/60 text-xs uppercase tracking-wide font-medium">Oclusivos</p>
-              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-                <% ['/p/', '/b/', '/t/', '/d/', '/k/', '/g/'].forEach(f => { %>
-                <label class="flex items-center gap-3 cursor-pointer group">
-                  <input type="checkbox" class="sr-only peer" />
-                  <div class="w-11 h-6 lg:w-14 lg:h-7 bg-amarelo/30 rounded-full peer-checked:bg-amarelo relative transition-colors duration-300 shrink-0
-                    after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full
-                    after:w-5 after:h-5 after:transition-transform after:duration-300 peer-checked:after:translate-x-5
-                    lg:after:w-6 lg:after:h-6 lg:peer-checked:after:translate-x-7"></div>
-                  <p class="italic text-sm lg:text-base"><%= f %></p>
-                </label>
-                <% }) %>
-              </div>
-            </div>
-
-            <div class="flex flex-col gap-4">
-              <p class="text-text/60 text-xs uppercase tracking-wide font-medium">Fricativos</p>
-              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-                <% ['/f/', '/v/', '/s/', '/z/', '/ʃ/', '/ʒ/'].forEach(f => { %>
-                <label class="flex items-center gap-3 cursor-pointer">
-                  <input type="checkbox" class="sr-only peer" />
-                  <div class="w-11 h-6 lg:w-14 lg:h-7 bg-turquesa/30 rounded-full peer-checked:bg-turquesa relative transition-colors duration-300 shrink-0
-                    after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full
-                    after:w-5 after:h-5 after:transition-transform after:duration-300 peer-checked:after:translate-x-5
-                    lg:after:w-6 lg:after:h-6 lg:peer-checked:after:translate-x-7"></div>
-                  <p class="italic text-sm lg:text-base"><%= f %></p>
-                </label>
-                <% }) %>
-              </div>
-            </div>
-
-            <div class="flex flex-col gap-4">
-              <p class="text-text/60 text-xs uppercase tracking-wide font-medium">Nasais</p>
-              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-                <% ['/m/', '/n/', '/ɲ/'].forEach(f => { %>
-                <label class="flex items-center gap-3 cursor-pointer">
-                  <input type="checkbox" class="sr-only peer" />
-                  <div class="w-11 h-6 lg:w-14 lg:h-7 bg-roxo/30 rounded-full peer-checked:bg-roxo relative transition-colors duration-300 shrink-0
-                    after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full
-                    after:w-5 after:h-5 after:transition-transform after:duration-300 peer-checked:after:translate-x-5
-                    lg:after:w-6 lg:after:h-6 lg:peer-checked:after:translate-x-7"></div>
-                  <p class="italic text-sm lg:text-base"><%= f %></p>
-                </label>
-                <% }) %>
-              </div>
-            </div>
-
-            <div class="flex flex-col gap-4">
-              <p class="text-text/60 text-xs uppercase tracking-wide font-medium">Líquidos</p>
-              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-                <% ['/l/', '/ʎ/', '/ɾ/', '/r/'].forEach(f => { %>
-                <label class="flex items-center gap-3 cursor-pointer">
-                  <input type="checkbox" class="sr-only peer" />
-                  <div class="w-11 h-6 lg:w-14 lg:h-7 bg-salmao/30 rounded-full peer-checked:bg-salmao relative transition-colors duration-300 shrink-0
-                    after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full
-                    after:w-5 after:h-5 after:transition-transform after:duration-300 peer-checked:after:translate-x-5
-                    lg:after:w-6 lg:after:h-6 lg:peer-checked:after:translate-x-7"></div>
-                  <p class="italic text-sm lg:text-base"><%= f %></p>
-                </label>
-                <% }) %>
-              </div>
-            </div>
+          <div class="hidden lg:block">
+            <p>Home / <a class="text-salmao font-semibold">Atividades</a></p>
           </div>
 
-          <hr class="border-text/10" />
+          <div class="flex justify-end lg:hidden">
+            <a href="/pacientes">
+              <img src="/imgs/icons/back.svg" alt="voltar" />
+            </a>
+          </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-            <div class="flex flex-col gap-4">
-              <p class="font-semibold text-base">Posição</p>
-              <% ['Inicial', 'Medial', 'Final'].forEach(p => { %>
-              <label class="flex items-center gap-3 cursor-pointer">
-                <input type="checkbox" class="sr-only peer" />
-                <div class="w-5 h-5 shrink-0 rounded border-2 border-gray-300 peer-checked:bg-salmao peer-checked:border-salmao relative transition-colors
-                  after:content-['✓'] after:text-white after:text-xs after:font-bold after:absolute after:inset-0
-                  after:flex after:items-center after:justify-center after:opacity-0 peer-checked:after:opacity-100 after:transition-opacity"></div>
-                <span class="text-gray-700"><%= p %></span>
-              </label>
-              <% }) %>
+          <% if (typeof mensagemAtualizar !=="undefined" && mensagemAtualizar) { %>
+            <div id="sucesso" class="bg-green-500 text-white px-4 py-3 rounded-lg mb-4">
+              <%= mensagemAtualizar %>
             </div>
+            <% } %>
 
-            <div class="flex flex-col gap-4">
-              <p class="font-semibold text-base">Tempo de Prática</p>
-              <input
-                type="range"
-                name="tempo_pratica"
-                min="5" max="120" step="5" value="15"
-                class="w-full accent-salmao cursor-pointer"
-                oninput="document.getElementById('minutos').textContent = this.value"
-              />
-              <p class="text-text/60"><span id="minutos" class="text-text font-semibold">15</span> minutos</p>
-            </div>
+          <div class="bg-white shadow-lg rounded-xl p-5 md:p-8 flex flex-col gap-8">
 
-            <div class="flex flex-col gap-4">
-              <p class="font-semibold text-base">Frequência</p>
-              <div class="flex flex-wrap gap-2">
-                <% [['seg','S'],['ter','T'],['qua','Q'],['qui','Q'],['sex','S'],['sab','S'],['dom','D']].forEach(([v,l]) => { %>
-                <label class="cursor-pointer">
-                  <input type="checkbox" name="dias" value="<%= v %>" class="sr-only peer" />
-                  <div class="w-9 h-9 rounded-full border-2 border-gray-200 flex items-center justify-center text-sm font-medium text-gray-400 peer-checked:bg-salmao peer-checked:border-salmao peer-checked:text-white transition-all">
-                    <%= l %>
+                <div class="flex flex-col gap-3">
+                  <label class="font-semibold text-base">Selecionar Paciente</label>
+                  <select id="selectPaciente" name="paciente"
+                    class="border border-text/25 rounded-3xl px-4 py-2.5 shadow-md appearance-none bg-[length:16px_16px] bg-[right_12px_center] bg-no-repeat focus:outline-none focus:ring-1 focus:ring-turquesa md:py-3 w-full md:max-w-sm"
+                    style="background-image: url('/imgs/icons/seta-baixo-salmao.svg');">
+                    <option value="">Selecione um paciente...</option>
+                    <% pacientes.forEach((paciente)=> { %>
+                      <option value="<%= paciente.id %>">
+                        <%= paciente.nome %>
+                          <%= paciente.sobrenome %>
+                      </option>
+                      <% }) %>
+                  </select>
+                </div>
+
+                <div id="estadoVazio" class="py-10 md:py-16">
+                  <p class="text-center text-text/50">Escolha um paciente para começar a personalização.</p>
+                </div>
+
+                <div id="conteudoPersonalizacao" class="hidden flex-col gap-8">
+
+                  <div class="flex flex-col gap-6">
+                    <p class="text-base font-semibold">Seleção de Fonemas</p>
+
+                    <div class="flex flex-col gap-4">
+                      <p class="text-text/60 text-xs uppercase tracking-wide font-medium">Oclusivos</p>
+                      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                        <% ['/p/', '/b/' , '/t/' , '/d/' , '/k/' , '/g/' ].forEach(f=> { %>
+                          <label class="flex items-center gap-3 cursor-pointer group">
+                            <input type="checkbox" class="sr-only peer" />
+                            <div class="w-11 h-6 lg:w-14 lg:h-7 bg-amarelo/30 rounded-full peer-checked:bg-amarelo relative transition-colors duration-300 shrink-0
+                    after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full
+                    after:w-5 after:h-5 after:transition-transform after:duration-300 peer-checked:after:translate-x-5
+                    lg:after:w-6 lg:after:h-6 lg:peer-checked:after:translate-x-7"></div>
+                            <p class="italic text-sm lg:text-base">
+                              <%= f %>
+                            </p>
+                          </label>
+                          <% }) %>
+                      </div>
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                      <p class="text-text/60 text-xs uppercase tracking-wide font-medium">Fricativos</p>
+                      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                        <% ['/f/', '/v/' , '/s/' , '/z/' , '/ʃ/' , '/ʒ/' ].forEach(f=> { %>
+                          <label class="flex items-center gap-3 cursor-pointer">
+                            <input type="checkbox" class="sr-only peer" />
+                            <div class="w-11 h-6 lg:w-14 lg:h-7 bg-turquesa/30 rounded-full peer-checked:bg-turquesa relative transition-colors duration-300 shrink-0
+                    after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full
+                    after:w-5 after:h-5 after:transition-transform after:duration-300 peer-checked:after:translate-x-5
+                    lg:after:w-6 lg:after:h-6 lg:peer-checked:after:translate-x-7"></div>
+                            <p class="italic text-sm lg:text-base">
+                              <%= f %>
+                            </p>
+                          </label>
+                          <% }) %>
+                      </div>
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                      <p class="text-text/60 text-xs uppercase tracking-wide font-medium">Nasais</p>
+                      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                        <% ['/m/', '/n/' , '/ɲ/' ].forEach(f=> { %>
+                          <label class="flex items-center gap-3 cursor-pointer">
+                            <input type="checkbox" class="sr-only peer" />
+                            <div class="w-11 h-6 lg:w-14 lg:h-7 bg-roxo/30 rounded-full peer-checked:bg-roxo relative transition-colors duration-300 shrink-0
+                    after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full
+                    after:w-5 after:h-5 after:transition-transform after:duration-300 peer-checked:after:translate-x-5
+                    lg:after:w-6 lg:after:h-6 lg:peer-checked:after:translate-x-7"></div>
+                            <p class="italic text-sm lg:text-base">
+                              <%= f %>
+                            </p>
+                          </label>
+                          <% }) %>
+                      </div>
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                      <p class="text-text/60 text-xs uppercase tracking-wide font-medium">Líquidos</p>
+                      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                        <% ['/l/', '/ʎ/' , '/ɾ/' , '/r/' ].forEach(f=> { %>
+                          <label class="flex items-center gap-3 cursor-pointer">
+                            <input type="checkbox" class="sr-only peer" />
+                            <div class="w-11 h-6 lg:w-14 lg:h-7 bg-salmao/30 rounded-full peer-checked:bg-salmao relative transition-colors duration-300 shrink-0
+                    after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full
+                    after:w-5 after:h-5 after:transition-transform after:duration-300 peer-checked:after:translate-x-5
+                    lg:after:w-6 lg:after:h-6 lg:peer-checked:after:translate-x-7"></div>
+                            <p class="italic text-sm lg:text-base">
+                              <%= f %>
+                            </p>
+                          </label>
+                          <% }) %>
+                      </div>
+                    </div>
                   </div>
-                </label>
-                <% }) %>
-              </div>
-            </div>
 
+                  <hr class="border-text/10" />
+
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                    <div class="flex flex-col gap-4">
+                      <p class="font-semibold text-base">Posição</p>
+                      <% ['Inicial', 'Medial' , 'Final' ].forEach(p=> { %>
+                        <label class="flex items-center gap-3 cursor-pointer">
+                          <input type="checkbox" class="sr-only peer" />
+                          <div
+                            class="w-5 h-5 shrink-0 rounded border-2 border-gray-300 peer-checked:bg-salmao peer-checked:border-salmao relative transition-colors
+                  after:content-['✓'] after:text-white after:text-xs after:font-bold after:absolute after:inset-0
+                  after:flex after:items-center after:justify-center after:opacity-0 peer-checked:after:opacity-100 after:transition-opacity">
+                          </div>
+                          <span class="text-gray-700">
+                            <%= p %>
+                          </span>
+                        </label>
+                        <% }) %>
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                      <p class="font-semibold text-base">Tempo de Prática</p>
+                      <input type="range" name="tempo_pratica" min="5" max="120" step="5" value="15"
+                        class="w-full accent-salmao cursor-pointer"
+                        oninput="document.getElementById('minutos').textContent = this.value" />
+                      <p class="text-text/60"><span id="minutos" class="text-text font-semibold">15</span> minutos</p>
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                      <p class="font-semibold text-base">Frequência</p>
+                      <div class="flex flex-wrap gap-2">
+                        <%
+                          [['seg','S'],['ter','T'],['qua','Q'],['qui','Q'],['sex','S'],['sab','S'],['dom','D']].forEach(([v,l])=>
+                          { %>
+                          <label class="cursor-pointer">
+                            <input type="checkbox" name="dias" value="<%= v %>" class="sr-only peer" />
+                            <div
+                              class="w-9 h-9 rounded-full border-2 border-gray-200 flex items-center justify-center text-sm font-medium text-gray-400 peer-checked:bg-salmao peer-checked:border-salmao peer-checked:text-white transition-all">
+                              <%= l %>
+                            </div>
+                          </label>
+                          <% }) %>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="flex gap-3 justify-center md:justify-end pt-2">
+                    <form action="/atividades/atualizar" method="POST">
+                      <button type="submit"
+                        class="px-6 py-2.5 bg-turquesa rounded-xl font-medium hover:opacity-90 transition">
+                        Atualizar
+                      </button>
+                    </form>
+                    <a href="#"
+                      class="px-6 py-2.5 bg-red-500 rounded-xl text-white font-medium hover:opacity-90 transition">Cancelar</a>
+                  </div>
+
+                </div>
           </div>
-
-          <div class="flex gap-3 justify-center md:justify-end pt-2">
-            <a href="#" class="px-6 py-2.5 bg-turquesa rounded-xl font-medium hover:opacity-90 transition">Atualizar</a>
-            <a href="#" class="px-6 py-2.5 bg-red-500 rounded-xl text-white font-medium hover:opacity-90 transition">Cancelar</a>
-          </div>
-
-        </div>
+        </main>
       </div>
-    </main>
   </div>
-</div>
 
-<script>
-  const select = document.getElementById('selectPaciente');
-  const estadoVazio = document.getElementById('estadoVazio');
-  const conteudo = document.getElementById('conteudoPersonalizacao');
+  <script>
+    const select = document.getElementById('selectPaciente');
+    const estadoVazio = document.getElementById('estadoVazio');
+    const conteudo = document.getElementById('conteudoPersonalizacao');
 
-  select.addEventListener('change', function () {
-    if (this.value !== '') {
-      estadoVazio.classList.add('hidden');
-      conteudo.classList.remove('hidden');
-      conteudo.classList.add('flex');
-    } else {
-      estadoVazio.classList.remove('hidden');
-      conteudo.classList.add('hidden');
-      conteudo.classList.remove('flex');
-    }
-  });
-</script>
+    select.addEventListener('change', function () {
+      if (this.value !== '') {
+        estadoVazio.classList.add('hidden');
+        conteudo.classList.remove('hidden');
+        conteudo.classList.add('flex');
+      } else {
+        estadoVazio.classList.remove('hidden');
+        conteudo.classList.add('hidden');
+        conteudo.classList.remove('flex');
+      }
+    });
+  </script>
 
-<%- include ('partials/footer.ejs'); %>
+  <%- include ('partials/footer.ejs'); %>

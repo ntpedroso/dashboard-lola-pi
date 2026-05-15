@@ -37,7 +37,6 @@ const paciente = connection.define('paciente', {
     cpf: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
     },
     foto_perfil: {
         type: Sequelize.STRING,
