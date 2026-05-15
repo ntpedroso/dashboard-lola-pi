@@ -43,6 +43,10 @@ const paciente = connection.define('paciente', {
         type: Sequelize.STRING,
         allowNull: true
     },
+    ativo: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+    }
 });
 
 //paciente.sync({force: false});

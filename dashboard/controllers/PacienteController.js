@@ -9,57 +9,6 @@ import Auth from "../middlewares/Auth.js";
 
 import multer from "multer";
 
-const listaPacientes = [
-  {
-    id: 1,
-    nome: "Pedro",
-    sobrenome: "Henrique",
-    nivel: 1,
-    status: "Em progresso",
-    data_nasc: "07/08/2019",
-    img: "/imgs/profile.jpg"
-  },
-  {
-    id: 2,
-    nome: "Maria",
-    sobrenome: "Eduarda",
-    nivel: 1,
-    status: "Em progresso",
-    data_nasc: "07/08/2019"
-  },
-  {
-    id: 3,
-    nome: "Maria",
-    sobrenome: "Eduarda",
-    nivel: 1,
-    status: "Em progresso",
-    data_nasc: "07/08/2019"
-  },
-  {
-    id: 4,
-    nome: "Maria",
-    sobrenome: "Eduarda",
-    nivel: 1,
-    status: "Em progresso",
-    data_nasc: "07/08/2019"
-  },
-  {
-    id: 5,
-    nome: "Maria",
-    sobrenome: "Eduarda",
-    nivel: 1,
-    status: "Em progresso",
-    data_nasc: "07/08/2019"
-  },
-  {
-    id: 6,
-    nome: "Maria",
-    sobrenome: "Eduarda",
-    nivel: 1,
-    status: "Em progresso",
-    data_nasc: "07/08/2019"
-  }
-];
 router.get("/cadastroPaciente", Auth, function (req, res) {
   res.render("cadastroPaciente");
 });
@@ -86,14 +35,25 @@ router.get("/pacientes/:id", Auth, (req, res) => {
 router.get("/pacientes", function (req, res) {
 
   const mensagemExcluir = req.session.mensagemExcluir;
+  const mensagemCadastrar = req.session.mensagemCadastrar;
+  const mensagemAlterar = req.session.mensagemAlterar;
+  
 
   req.session.mensagemExcluir = null;
+  req.session.mensagemCadastrar = null;
+  req.session.mensagemAlterar = null;
 
-  Paciente.findAll()
+  Paciente.findAll({
+    where: {
+      ativo : true
+    }
+  })
     .then((pacientes) => {
       res.render("pacientes", {
         pacientes: pacientes,
-        mensagemExcluir: mensagemExcluir
+        mensagemExcluir: mensagemExcluir,
+        mensagemCadastrar: mensagemCadastrar,
+        mensagemAlterar: mensagemAlterar
       });
     })
     .catch((error) => {
@@ -115,19 +75,27 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 //rota de cadastro de usuario (subrota /cadastrar)
-router.post("/pacientes/cadastrar", upload.single("fotoPerfil"), (req, res) => {
-  const foto_perfil = req.file ? "/uploads/pacientes/" + req.file.filename : null;
+router.post("/pacientes/cadastrar", Auth, upload.single("fotoPerfil"), (req, res) => {
+  const foto_perfil = req.file
+  ? "/uploads/pacientes/" + req.file.filename
+  : "/imgs/profile.png";
 
-  const id_login = req.session.usuario.id;
-  const id_fono = req.session.usuario.id_fono;
-  const usuarioPaciente = req.body.nome.toLowerCase() + Date.now();
+  const nomeLimpo = req.body.nome
+  .normalize("NFD") // separa os acentos
+  .replace(/[\u0300-\u036f]/g, "") // remove acentos
+  .replace(/\s+/g, "") // remove espaços
+  .toLowerCase();
+
+  const usuarioPaciente = nomeLimpo + Math.floor(Math.random() * 1000);
   const senhaPadrao = "12345";
   const senhaHash = bcrypt.hashSync(senhaPadrao, 10);
 
-  Paciente.create({
+  Usuario.create({
     usuario: usuarioPaciente,
     senha: senhaHash,
     tipo: "Paciente",
+    ativo: true
+
   }).then((loginCriado) => {
     return Paciente.create({
       nome: req.body.nome,
@@ -140,6 +108,7 @@ router.post("/pacientes/cadastrar", upload.single("fotoPerfil"), (req, res) => {
       sexo: req.body.sexo,
       responsavel: req.body.responsavel,
       foto_perfil: foto_perfil,
+      ativo: true,
 
       //chaves estrangeiras
       id_fono: req.session.usuario.id_fono,
@@ -147,6 +116,7 @@ router.post("/pacientes/cadastrar", upload.single("fotoPerfil"), (req, res) => {
     });
   })
   .then(() => {
+    req.session.mensagemCadastrar = "Paciente cadastrado com sucesso!";
     res.redirect("/pacientes");
   })
   .catch((error) => {
@@ -156,11 +126,17 @@ router.post("/pacientes/cadastrar", upload.single("fotoPerfil"), (req, res) => {
 
 router.get("/pacientes/excluir/:id", (req, res) => {
   const id = req.params.id;
-  Paciente.destroy({
-    where: {
-      id: id,
+
+  Paciente.update(
+    {
+      ativo : false
     },
-  }).then(() => {
+    {
+      where: {
+        id: id
+      }
+    }
+  ).then(() => {
     req.session.mensagemExcluir = "Paciente excluído com sucesso!";
     res.redirect("/pacientes");
   }).catch((error) => {
@@ -213,6 +189,7 @@ router.post("/pacientes/alterar", Auth, (req, res) => {
       },
     },
   ).then(() => {
+    req.session.mensagemAlterar = "Paciente alterado com sucesso!";
     res.redirect("/pacientes");
   });
 });

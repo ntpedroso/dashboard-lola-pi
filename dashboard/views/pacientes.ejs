@@ -25,8 +25,20 @@
           </div>
 
           <% if (typeof mensagemExcluir !=="undefined" && mensagemExcluir) { %>
-            <div class="m-4 rounded-2xl border border-turquesa bg-turquesa/30 px-4 py-3 text-roxo text-center">
+            <div id="sucesso" class="bg-red-500 text-white px-4 py-3 rounded-lg mb-4">
               <%= mensagemExcluir %>
+            </div>
+            <% } %>
+
+            <% if (typeof mensagemCadastrar !=="undefined" && mensagemCadastrar) { %>
+            <div id="sucesso" class="bg-green-500 text-white px-4 py-3 rounded-lg mb-4">
+              <%= mensagemCadastrar %>
+            </div>
+            <% } %>
+
+            <% if (typeof mensagemAlterar !=="undefined" && mensagemAlterar) { %>
+            <div id="sucesso" class="bg-green-500 text-white px-4 py-3 rounded-lg mb-4">
+              <%= mensagemAlterar %>
             </div>
             <% } %>
 

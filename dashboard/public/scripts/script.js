@@ -109,3 +109,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+  setTimeout(() => {
+    const alerta = document.getElementById("sucesso");
+
+    if (alerta) {
+      alerta.style.opacity = "0";
+      alerta.style.transform = "translateY(-10px)";
+
+      setTimeout(() => {
+        alerta.remove();
+      }, 500);
+    }
+  }, 3000);

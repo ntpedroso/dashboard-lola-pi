@@ -45,7 +45,7 @@ router.post("/cadastroUsuario/cadastrar", async (req, res) => {
     const novoUsuario = await Usuario.create({
       usuario: usuario,
       senha: hash,
-      tipo: "fono",
+      tipo: "Fono",
     });
 
     await Fonoaudiologo.create({
@@ -83,7 +83,7 @@ router.post("/autenticacao", (req, res) => {
       //se a senha for válida
       if (correct) {
 
-        if(usuario.tipo != "fono") {
+        if(usuario.tipo != "Fono") {
           return res.render("index", {
             erro: "Acesso permitido apenas para fonoaudiólogos"
           });

@@ -14,6 +14,10 @@ const login = connection.define('login', {
     tipo: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    ativo: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false
     }
 });
 
