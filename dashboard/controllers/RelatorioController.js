@@ -34,4 +34,18 @@ router.get("/relatorios/atividade", Auth, (req, res) => {
   });
 });
 
+router.get("/relatorios/acertos", Auth, (req, res) => {
+  const dadosAtividade = [
+    { data: "01/05", minutos: 35, paciente: "Joana Oliveira" },
+    { data: "02/05", minutos: 50, paciente: "Joana Oliveira" },
+    { data: "03/05", minutos: 28, paciente: "Joana Oliveira" },
+    { data: "04/05", minutos: 65, paciente: "Joana Oliveira" },
+    { data: "05/05", minutos: 42, paciente: "Joana Oliveira" }
+  ];
+
+  res.render("relatorioAcertos", {
+    dadosAtividade
+  });
+});
+
 export default router;
