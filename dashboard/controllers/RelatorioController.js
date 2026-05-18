@@ -42,10 +42,10 @@ router.get("/relatorios/fonema", Auth, async (req, res) => {
 router.get("/relatorios/atividade", Auth, async (req, res) => {
   const dadosAtividade = [
     { data: "01/05", minutos: 35, paciente: "Joana Oliveira" },
-    { data: "02/05", minutos: 50, paciente: "Joana Oliveira" },
-    { data: "03/05", minutos: 28, paciente: "Joana Oliveira" },
-    { data: "04/05", minutos: 65, paciente: "Joana Oliveira" },
-    { data: "05/05", minutos: 42, paciente: "Joana Oliveira" }
+    { data: "02/05", minutos: 50, paciente: "Julio Cesar" },
+    { data: "03/05", minutos: 28, paciente: "Cristina Santos" },
+    { data: "04/05", minutos: 65, paciente: "Letícia Alves" },
+    { data: "05/05", minutos: 42, paciente: "Pedro Henrique" }
   ];
 
   const pacientes = await Paciente.findAll({
@@ -62,11 +62,11 @@ router.get("/relatorios/atividade", Auth, async (req, res) => {
 
 router.get("/relatorios/evolucao", Auth, async (req, res) => {
   const dadosAtividade = [
-    { data: "01/05", minutos: 35, paciente: "Joana Oliveira" },
-    { data: "02/05", minutos: 50, paciente: "Joana Oliveira" },
-    { data: "03/05", minutos: 28, paciente: "Joana Oliveira" },
-    { data: "04/05", minutos: 65, paciente: "Joana Oliveira" },
-    { data: "05/05", minutos: 42, paciente: "Joana Oliveira" }
+     { data: "01/05", minutos: 35, paciente: "Joana Oliveira" },
+    { data: "02/05", minutos: 50, paciente: "Julio Cesar" },
+    { data: "03/05", minutos: 28, paciente: "Cristina Santos" },
+    { data: "04/05", minutos: 65, paciente: "Letícia Alves" },
+    { data: "05/05", minutos: 42, paciente: "Pedro Henrique" }
   ];
 
   const pacientes = await Paciente.findAll({

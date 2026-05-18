@@ -1,0 +1,177 @@
+<%- include ('partials/header.ejs'); %>
+
+<div class="flex min-h-screen bg-[#f6f7fb]">
+  <%- include('partials/sidebar') %>
+
+  <div class="flex flex-1 flex-col min-w-0">
+
+    <header class="sticky top-0 z-40">
+      <%- include('partials/navbar') %>
+    </header>
+
+    <main class="flex flex-col gap-8 p-4 sm:p-6 lg:p-8 xl:p-10 font-jakarta text-text">
+
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm text-text/50">
+            Home / Perfil /
+            <span class="font-semibold text-salmao">
+              Editar Perfil
+            </span>
+          </p>
+
+          <h1 class="mt-2 text-2xl font-semibold sm:text-3xl">
+            Editar Perfil
+          </h1>
+        </div>
+
+        <a
+          href="/perfil"
+          class="flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-md transition hover:bg-gray-100"
+        >
+          <img src="/imgs/icons/back.svg" alt="" class="w-5">
+        </a>
+      </div>
+
+      <form
+        action="/perfil/editar"
+        method="POST"
+        enctype="multipart/form-data"
+        class="grid grid-cols-1 gap-6 xl:grid-cols-[320px_1fr]"
+      >
+
+        <section class="rounded-[30px] border border-gray-100 bg-white p-6 shadow-sm sm:p-8">
+
+          <div class="flex flex-col items-center text-center">
+
+            <div class="relative">
+
+              <div class="h-32 w-32 overflow-hidden rounded-full border-4 border-white bg-gray-100 shadow-lg">
+                <img
+                  src="<%= fono.foto_perfil || '/imgs/profile.png' %>"
+                  alt="Foto de perfil"
+                  class="h-full w-full object-cover object-center"
+                >
+              </div>
+
+              <label
+                for="fotoPerfil"
+                class="absolute bottom-1 right-1 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-turquesa shadow-lg transition hover:scale-105"
+              >
+                <img src="/imgs/icons/editar.svg" class="w-5">
+              </label>
+
+              <input
+                type="file"
+                id="fotoPerfil"
+                name="fotoPerfil"
+                accept="image/png, image/jpeg, image/webp"
+                class="hidden"
+              >
+
+            </div>
+
+            <p class="mt-5 text-xl font-semibold">
+              <%= fono.nome %>
+            </p>
+
+            <p class="mt-1 text-sm text-text/50">
+              Fonoaudióloga
+            </p>
+
+          </div>
+
+        </section>
+
+        <section class="rounded-[30px] border border-gray-100 bg-white p-6 shadow-sm sm:p-8">
+
+          <div class="mb-8">
+            <h2 class="text-xl font-semibold">
+              Dados profissionais
+            </h2>
+
+            <p class="mt-1 text-sm text-text/50">
+              Atualize suas informações principais.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+
+            <div class="flex flex-col gap-1">
+              <label>Nome</label>
+
+              <input
+                type="text"
+                name="nome"
+                value="<%= fono.nome %>"
+                required
+                class="rounded-3xl border border-text/20 px-4 py-3 shadow-sm focus:outline-none focus:ring-1 focus:ring-turquesa"
+              >
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label>E-mail</label>
+
+              <input
+                type="email"
+                name="email"
+                value="<%= fono.email %>"
+                required
+                class="rounded-3xl border border-text/20 px-4 py-3 shadow-sm focus:outline-none focus:ring-1 focus:ring-turquesa"
+              >
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label>CRFa</label>
+
+              <input
+                type="text"
+                name="crfa"
+                value="<%= fono.crfa %>"
+                required
+                class="rounded-3xl border border-text/20 px-4 py-3 shadow-sm focus:outline-none focus:ring-1 focus:ring-turquesa"
+              >
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label>Telefone</label>
+
+              <input
+                type="text"
+                name="telefone"
+                value="<%= fono.telefone %>"
+                required
+                class="rounded-3xl border border-text/20 px-4 py-3 shadow-sm focus:outline-none focus:ring-1 focus:ring-turquesa"
+              >
+            </div>
+
+          </div>
+
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-end pt-6">
+
+            <a
+              href="/perfil"
+              class="rounded-xl border border-text/20 px-6 py-3 text-center font-medium transition hover:bg-gray-50"
+            >
+              Cancelar
+            </a>
+
+            <button
+              type="submit"
+              class="rounded-xl bg-turquesa px-6 py-3 font-medium text-white transition hover:bg-turquesa/80"
+            >
+              Salvar alterações
+            </button>
+
+          </div>
+
+        </section>
+
+      </form>
+
+    </main>
+
+  </div>
+</div>
+
+<%- include ('partials/footer.ejs'); %>

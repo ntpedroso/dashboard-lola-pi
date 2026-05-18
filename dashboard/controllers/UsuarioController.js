@@ -9,6 +9,21 @@ import Auth from "../middlewares/Auth.js";
 
 //importando bcrypt
 import bcrypt from "bcrypt";
+import multer from "multer";
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/uploads/fono");
+  },
+
+  filename: (req, file, cb) => {
+    const nomeArquivo = Date.now() + "-" + file.originalname;
+
+    cb(null, nomeArquivo);
+  }
+});
+
+const upload = multer({ storage });
 
 router.get("/cadastroUsuario", (req, res) => {
   res.render("cadastroUsuario");
@@ -196,16 +211,15 @@ router.get("/logout", Auth, (req, res) => {
 
 router.get("/perfil", Auth, async (req, res) => {
 
-  const fono = await Fonoaudiologo.findOne({
-    where: {
-      id: req.session.usuario.id_fono
-    }
-  });
+  const fono = await Fonoaudiologo.findByPk(
+    req.session.usuario.id_fono
+  );
 
   res.render("perfil", {
     fono: fono,
-    usuario: req.session.usuario,
+    usuario: req.session.usuario
   });
+
 });
 
 router.post("/usuario/desativar", Auth, async (req, res) => {
@@ -246,5 +260,54 @@ router.post("/usuario/reativar", async (req, res) => {
     sucesso: "Conta reativada com sucesso!"
   });
 });
+
+router.get("/perfil/editar", Auth, async (req, res) => {
+
+  const idFono = req.session.usuario.id_fono;
+
+  const fono = await Fonoaudiologo.findByPk(idFono);
+
+  res.render("editarPerfil", {
+    fono: fono,
+    usuario: req.session.usuario
+  });
+
+});
+
+router.post(
+  "/perfil/editar",
+  Auth,
+  upload.single("fotoPerfil"),
+
+  async (req, res) => {
+
+    const idFono = req.session.usuario.id_fono;
+
+    const dadosAtualizacao = {
+      nome: req.body.nome,
+      email: req.body.email,
+      crfa: req.body.crfa,
+      telefone: req.body.telefone
+    };
+
+    if (req.file) {
+      dadosAtualizacao.foto_perfil =
+        "/uploads/fono/" + req.file.filename;
+    }
+
+    await Fonoaudiologo.update(
+      dadosAtualizacao,
+      {
+        where: {
+          id: idFono
+        }
+      }
+    );
+
+    req.session.usuario.nome = req.body.nome;
+
+    res.redirect("/perfil");
+  }
+);
 
 export default router;

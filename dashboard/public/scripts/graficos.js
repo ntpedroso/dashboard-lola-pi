@@ -311,3 +311,229 @@ if (calendarElement) {
     }
   ]);
 }
+
+// =========================
+// RELATÓRIO EVOLUÇÃO
+// =========================
+
+const graficoEvolucaoRelatorio = document.getElementById('graficoEvolucaoRelatorio');
+
+if (graficoEvolucaoRelatorio) {
+
+    const ctxEvolucaoRelatorio = graficoEvolucaoRelatorio.getContext('2d');
+
+    new Chart(ctxEvolucaoRelatorio, {
+        type: 'line',
+
+        data: {
+            labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5'],
+
+            datasets: [
+                {
+                    label: 'João Pedro',
+                    data: [40, 55, 49, 75, 80],
+                    borderColor: '#E58678',
+                    backgroundColor: '#E58678',
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    fill: false
+                },
+
+                {
+                    label: 'Maria Eduarda',
+                    data: [60, 65, 80, 82, 95],
+                    borderColor: '#61D8D6',
+                    backgroundColor: '#61D8D6',
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    fill: false
+                },
+
+                {
+                    label: 'Carlos Henrique',
+                    data: [30, 40, 35, 50, 45],
+                    borderColor: '#C57BDB',
+                    backgroundColor: '#C57BDB',
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    fill: false
+                }
+            ]
+        },
+
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+
+            plugins: {
+                legend: {
+                    position: 'top',
+                    align: 'end',
+
+                    labels: {
+                        usePointStyle: true,
+                        boxWidth: 8,
+                        padding: 20,
+                        color: '#6b7280',
+
+                        font: {
+                            family: 'Plus Jakarta Sans',
+                            size: 12
+                        }
+                    }
+                }
+            },
+
+            scales: {
+
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+
+                    ticks: {
+                        callback: (value) => value + '%',
+                        color: '#9ca3af'
+                    },
+
+                    grid: {
+                        color: '#f1f5f9'
+                    }
+                },
+
+                x: {
+
+                    ticks: {
+                        color: '#9ca3af'
+                    },
+
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+}
+
+const graficoDificuldadeFonema = document.getElementById('graficoDificuldadeFonema');
+
+if (graficoDificuldadeFonema) {
+  const ctxDificuldadeFonema = graficoDificuldadeFonema.getContext('2d');
+
+  new Chart(ctxDificuldadeFonema, {
+    type: 'bar',
+    data: {
+      labels: ['/s/', '/r/', '/l/', '/ch/'],
+      datasets: [
+        {
+          label: 'Acertos',
+          data: [68, 75, 88, 60],
+          backgroundColor: '#61D8D6',
+          borderRadius: 10,
+          borderSkipped: false,
+        },
+        {
+          label: 'Erros',
+          data: [32, 25, 12, 40],
+          backgroundColor: '#E58678',
+          borderRadius: 10,
+          borderSkipped: false,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          ticks: {
+            callback: (value) => value + '%',
+            color: '#9ca3af'
+          },
+          grid: {
+            color: '#f1f5f9'
+          }
+        },
+        x: {
+          ticks: {
+            color: '#9ca3af'
+          },
+          grid: {
+            display: false
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'top',
+          align: 'end',
+          labels: {
+            usePointStyle: true,
+            boxWidth: 8,
+            padding: 20,
+            color: '#6b7280'
+          }
+        }
+      }
+    }
+  });
+}
+
+const graficoAtividadeRelatorio = document.getElementById('graficoAtividadeRelatorio');
+
+if (graficoAtividadeRelatorio) {
+  const ctxAtividadeRelatorio = graficoAtividadeRelatorio.getContext('2d');
+
+  new Chart(ctxAtividadeRelatorio, {
+    type: 'bar',
+    data: {
+      labels: ['01/05', '02/05', '03/05', '04/05', '05/05'],
+      datasets: [{
+        label: 'Minutos de prática',
+        data: [35, 50, 28, 65, 42],
+        backgroundColor: '#E58678',
+        borderRadius: 10,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            callback: (value) => value + ' min',
+            color: '#9ca3af'
+          },
+          grid: {
+            color: '#f1f5f9'
+          }
+        },
+        x: {
+          ticks: {
+            color: '#9ca3af'
+          },
+          grid: {
+            display: false
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+  });
+}

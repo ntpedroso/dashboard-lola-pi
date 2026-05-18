@@ -8,13 +8,17 @@
 
         <main class="text-text font-jakarta text-sm p-4 md:p-8 flex flex-col gap-6">
 
-          <div class="hidden lg:block">
-            <p>Home / <a class="text-salmao font-semibold">Atividades</a></p>
-          </div>
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6">
+            <div>
+              <p class="hidden lg:block px-2">
+                Home / <span class=" text-salmao font-semibold"> Atividades </span>
+              </p>
+            </div>
 
-          <div class="flex justify-end lg:hidden">
-            <a href="/pacientes">
-              <img src="/imgs/icons/back.svg" alt="voltar" />
+            <a href="/home"
+              class="self-end sm:self-auto flex items-center justify-center w-10 h-10 rounded-full bg-white shadow hover:bg-gray-100 transition"
+              title="Voltar">
+              <img src="/imgs/icons/back.svg" alt="voltar" class="w-5">
             </a>
           </div>
 
@@ -24,7 +28,7 @@
             </div>
             <% } %>
 
-          <div class="bg-white shadow-lg rounded-xl p-5 md:p-8 flex flex-col gap-8">
+              <div class="bg-white shadow-lg rounded-xl p-5 md:p-8 flex flex-col gap-8">
 
                 <div class="flex flex-col gap-3">
                   <label class="font-semibold text-base">Selecionar Paciente</label>
@@ -183,7 +187,7 @@
                   </div>
 
                 </div>
-          </div>
+              </div>
         </main>
       </div>
   </div>
