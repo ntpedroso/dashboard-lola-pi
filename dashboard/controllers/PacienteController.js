@@ -157,38 +157,31 @@ router.get("/pacientes/editar/:id", Auth, (req, res) => {
 });
 
 //rota de alteração do paciente
-router.post("/pacientes/alterar", Auth, (req, res) => {
-  //coletar os dados do formulário
+router.post("/pacientes/alterar", Auth, upload.single("fotoPerfil"), (req, res) => {
   const id = req.body.id;
-  const nome = req.body.nome;
-  const sobrenome = req.body.sobrenome;
-  const endereco = req.body.endereco;
-  const sexo = req.body.sexo;
-  const responsavel = req.body.responsavel;
-  const data_nascimento = req.body.data_nascimento;
-  const nivel_gravidade = req.body.nivel_gravidade;
-  const contato = req.body.contato;
-  const cpf = req.body.cpf;
 
-  //alterando o cliente no banco
-  Paciente.update(
-    {
-      nome: nome,
-      sobrenome: sobrenome,
-      endereco: endereco,
-      data_nascimento: data_nascimento,
-      nivel_gravidade: nivel_gravidade,
-      contato: contato,
-      cpf: cpf,
-      sexo: sexo,
-      responsavel: responsavel,
+  const dadosAtualizados = {
+    nome: req.body.nome,
+    sobrenome: req.body.sobrenome,
+    endereco: req.body.endereco,
+    data_nascimento: req.body.data_nascimento,
+    nivel_gravidade: req.body.nivel_gravidade,
+    contato: req.body.contato,
+    cpf: req.body.cpf,
+    sexo: req.body.sexo,
+    responsavel: req.body.responsavel,
+  };
+
+  if (req.file) {
+    dadosAtualizados.foto_perfil =
+      "/uploads/pacientes/" + req.file.filename;
+  }
+
+  Paciente.update(dadosAtualizados, {
+    where: {
+      id: id,
     },
-    {
-      where: {
-        id: id,
-      },
-    },
-  ).then(() => {
+  }).then(() => {
     req.session.mensagemAlterar = "Paciente alterado com sucesso!";
     res.redirect("/pacientes");
   });

@@ -106,9 +106,17 @@ app.get("/home", Auth, async (req, res) => {
     order: [["createdAt", "DESC"]]
   });
 
+  const pacientesInativos = await Paciente.findAll({
+  where: {
+    ativo: true
+  },
+  limit: 2
+});
+
   res.render("home", {
     pacientes: pacientes,
-    usuario: req.session.usuario
+    usuario: req.session.usuario,
+    pacientesInativos : pacientesInativos
   });
 });
 

@@ -31,33 +31,27 @@ router.get("/cadastroUsuario", Auth, function (req, res) {
 });
 
 router.post("/cadastroUsuario/cadastrar", async (req, res) => {
-  try {
+  const { usuario, email, senha } = req.body;
 
-    const { nome, email, crfa, telefone, usuario, senha } = req.body;
+  const usuarioExistente = await Usuario.findOne({
+    where: {
+      usuario: usuario
+    }
+  });
 
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(senha, salt);
-
-    const novoUsuario = await Usuario.create({
-      usuario: usuario,
-      senha: hash,
-      tipo: "Fono",
-      ativo: true
+  if (usuarioExistente) {
+    return res.render("cadastroUsuario", {
+      erro: "Esse nome de usuário já está em uso."
     });
-
-    await Fonoaudiologo.create({
-      nome: nome,
-      email: email,
-      crfa: crfa,
-      telefone: telefone,
-      id_login: novoUsuario.id,
-    });
-
-    res.redirect("/");
-  } catch (error) {
-    console.log("Erro ao cadastrar usuário: " + error);
-    res.redirect("/cadastroUsuario");
   }
+
+  await Usuario.create({
+    usuario: usuario,
+    email: email,
+    senha: senhaHash
+  });
+
+  res.redirect("/");
 });
 
 //rota de autenticação (login)
@@ -122,6 +116,20 @@ router.post("/autenticacao", (req, res) => {
       erro: "Usuário ou senha incorretos."
     })
   }
+  });
+});
+
+//encerrar a sessão
+router.get("/logout", (req, res) => {
+  req.session.destroy((erro) => {
+    if (erro) {
+      console.log("Erro ao encerrar sessão:", erro);
+      return res.redirect("/home");
+    }
+
+    res.clearCookie("connect.sid");
+
+    res.redirect("/");
   });
 });
 

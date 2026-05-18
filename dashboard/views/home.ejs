@@ -19,7 +19,7 @@
             </div>
 
             <div class="h-14 w-14 overflow-hidden rounded-2xl shadow-md sm:h-16 sm:w-16">
-              <img src="/imgs/profile.jpg" class="h-full w-full object-cover" alt="Foto de perfil" />
+              <img src="/imgs/10.jpg" class="h-full w-full object-cover" alt="Foto de perfil" />
             </div>
           </section>
 
@@ -30,6 +30,9 @@
                 <div>
                   <p class="text-sm text-text/60 md:text-base">
                     Pacientes Cadastrados
+                  </p>
+                  <p class="text-[10px] text-text/60 md:text-[12px]">
+                    geral
                   </p>
                 </div>
 
@@ -53,6 +56,9 @@
                   <p class="text-sm text-text/60 md:text-base">
                     Média de Acertos
                   </p>
+                  <p class="text-[10px] text-text/60 md:text-[12px]">
+                    geral
+                  </p>
                 </div>
 
                 <div class="flex items-end justify-between">
@@ -75,6 +81,9 @@
                   <p class="text-sm text-text/60 md:text-base">
                     Tempo Médio de Prática
                   </p>
+                  <p class="text-[10px] text-text/60 md:text-[12px]">
+                    geral
+                  </p>
                 </div>
 
                 <div class="flex items-end justify-between">
@@ -92,7 +101,9 @@
 
             <a href="/usuarios/inativos"
               class="group cursor-pointer rounded-3xl bg-gradient-to-br from-salmao to-salmao/80 p-5 text-white shadow-lg transition duration-200 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-xl sm:col-span-2 xl:col-span-2">
+
               <div class="flex h-full flex-col justify-between gap-5">
+
                 <div>
                   <p class="text-sm text-white/70 md:text-base">
                     Usuários Inativos
@@ -100,15 +111,38 @@
                 </div>
 
                 <div class="flex items-end justify-between">
-                  <p class="text-5xl font-bold">
-                    2
-                  </p>
+
+                  <div class="flex items-center gap-4">
+
+                    <p class="text-5xl font-bold">
+                      <%= pacientesInativos.length %>
+                    </p>
+
+                    <div class="flex items-center">
+
+                      <% pacientesInativos.forEach((paciente, index)=> { %>
+
+                        <div
+                          class="relative <%= index > 0 ? '-ml-4' : '' %> h-12 w-12 md:h-14 md:w-14 overflow-hidden rounded-full border-2 border-salmao shadow-md">
+
+                          <img src="<%= paciente.foto_perfil || '/imgs/profile.jpg' %>"
+                            class="h-full w-full object-cover" alt="">
+
+                        </div>
+
+                        <% }) %>
+
+                    </div>
+
+                  </div>
 
                   <div
                     class="rounded-2xl bg-white/10 px-4 py-2 text-sm backdrop-blur-sm transition group-hover:bg-white/20">
                     Requer atenção
                   </div>
+
                 </div>
+
               </div>
             </a>
           </section>

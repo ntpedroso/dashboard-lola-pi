@@ -113,25 +113,22 @@
               <p class="text-lg md:text-xl font-semibold text-center">
                 Usuários mais ativos
               </p>
-
               <div class="flex flex-col gap-4 py-2">
-                <div class="grid grid-cols-[auto_1fr_auto] items-center gap-3 sm:gap-5">
-                  <img src="/imgs/profile.jpg" alt="foto do usuário" class="rounded-full w-11 h-11 object-cover">
-                  <p class="text-base md:text-lg">Joana Oliveira</p>
-                  <p class="text-base md:text-lg font-semibold">3h52min</p>
-                </div>
+                <% pacientes.forEach(listaPaciente=> { %>
 
-                <div class="grid grid-cols-[auto_1fr_auto] items-center gap-3 sm:gap-5">
-                  <img src="/imgs/profile.jpg" alt="foto do usuário" class="rounded-full w-11 h-11 object-cover">
-                  <p class="text-base md:text-lg">Joana Oliveira</p>
-                  <p class="text-base md:text-lg font-semibold">3h52min</p>
-                </div>
-
-                <div class="grid grid-cols-[auto_1fr_auto] items-center gap-3 sm:gap-5">
-                  <img src="/imgs/profile.jpg" alt="foto do usuário" class="rounded-full w-11 h-11 object-cover">
-                  <p class="text-base md:text-lg">Joana Oliveira</p>
-                  <p class="text-base md:text-lg font-semibold">3h52min</p>
-                </div>
+                  <div class="grid grid-cols-[auto_1fr_auto] items-center gap-3 sm:gap-5">
+                    <% if (listaPaciente.foto_perfil) { %>
+                      <img src="<%= listaPaciente.foto_perfil %>" alt="foto do usuário"
+                        class="rounded-full w-11 h-11 object-cover">
+                      <% } else { %>
+                        <img src="/imgs/profile.png" alt="foto padrão" class="rounded-full w-11 h-11 object-cover">
+                        <% } %>
+                          <p class="text-base md:text-lg">
+                            <%= listaPaciente.nome %>
+                          </p>
+                          <p class="text-base md:text-lg font-semibold">3h52min</p>
+                  </div>
+                  <% }); %>
               </div>
 
               <div class="flex justify-center">

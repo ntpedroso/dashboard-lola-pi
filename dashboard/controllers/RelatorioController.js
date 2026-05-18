@@ -1,10 +1,22 @@
 import express from "express";
 import Auth from "../middlewares/Auth.js";
+import Paciente from "../models/Paciente.js"
 
 const router = express.Router();
 
-router.get("/relatorios", Auth, function(req,res) {
-    res.render("relatorios");
+router.get("/relatorios", Auth, async (req, res) => {
+
+  const pacientes = await Paciente.findAll({
+    where: {
+      ativo: true,
+    }
+  });
+
+  const top5 = pacientes.slice(0, 5);
+
+  res.render("relatorios", {
+    pacientes: top5,
+  });
 });
 
 router.get("/relatorios/fonema", Auth, (req, res) => {
