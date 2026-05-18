@@ -48,4 +48,18 @@ router.get("/relatorios/acertos", Auth, (req, res) => {
   });
 });
 
+router.get("/relatorios/evolucao", Auth, (req, res) => {
+  const dadosEvolucao = [
+    { semana: "Sem 1", paciente: "João", acertos: 40, erros: 60, evolucao: "Inicial" },
+    { semana: "Sem 2", paciente: "João", acertos: 55, erros: 45, evolucao: "Boa" },
+    { semana: "Sem 3", paciente: "João", acertos: 49, erros: 51, evolucao: "Oscilação" },
+    { semana: "Sem 4", paciente: "João", acertos: 75, erros: 25, evolucao: "Alta" },
+    { semana: "Sem 5", paciente: "João", acertos: 80, erros: 20, evolucao: "Alta" }
+  ];
+
+  res.render("relatorioEvolucao", {
+    dadosEvolucao
+  });
+});
+
 export default router;
