@@ -35,9 +35,13 @@
                                 <select
                                     class="border border-text/25 rounded-3xl px-4 py-3 focus:outline-none focus:ring-1 focus:ring-turquesa">
                                     <option>Todos os pacientes</option>
-                                    <option>Joana Oliveira</option>
-                                    <option>Pedro Henrique</option>
-                                    <option>Maria Eduarda</option>
+                                    <option selected>Todos os pacientes</option>
+                                    <% pacientes.forEach((listaPaciente)=> { %>
+                                        <option>
+                                            <%= listaPaciente.nome %>
+                                                <%= listaPaciente.sobrenome %>
+                                        </option>
+                                        <% }); %>
                                 </select>
                             </div>
 

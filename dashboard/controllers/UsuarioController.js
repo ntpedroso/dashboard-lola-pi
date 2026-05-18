@@ -14,11 +14,68 @@ router.get("/cadastroUsuario", (req, res) => {
   res.render("cadastroUsuario");
 });
 
-router.get("/alterarSenha", Auth, function (req, res) {
-  res.render("alterarSenha");
+router.get("/alterarSenha", function (req, res) {
+  res.render("alterarSenha", {
+    usuarioEncontrado: null,
+    erro: null,
+    sucesso: null
+  });
 });
 
-router.get("/cadastroUsuario", Auth, function (req, res) {
+router.post("/alterarSenha/procurar", async (req, res) => {
+  const usuario = req.body.usuario;
+
+  const usuarioEncontrado = await Usuario.findOne({
+    where: {
+      usuario: usuario
+    }
+  });
+
+  if (!usuarioEncontrado) {
+    return res.render("alterarSenha", {
+      usuarioEncontrado: null,
+      erro: "Usuário não encontrado."
+    });
+  }
+
+  res.render("alterarSenha", {
+    usuarioEncontrado: usuarioEncontrado,
+    erro: null
+  });
+});
+
+router.post("/alterarSenha/salvar", async (req, res) => {
+  const id = req.body.id;
+  const novaSenha = req.body.novaSenha;
+  const confirmarSenha = req.body.confirmarSenha;
+
+  if (novaSenha !== confirmarSenha) {
+    return res.render("alterarSenha", {
+      usuarioEncontrado: {
+        id: id,
+        usuario: req.body.usuario
+      },
+      erro: "As senhas não coincidem."
+    });
+  }
+
+  const senhaHash = bcrypt.hashSync(novaSenha, 10);
+
+  await Usuario.update(
+    {
+      senha: senhaHash
+    },
+    {
+      where: {
+        id: id
+      }
+    }
+  );
+
+  res.redirect("/");
+});
+
+router.get("/cadastroUsuario", function (req, res) {
   Usuario.findAll()
     .then((usuarios) => {
       res.render("cadastroUsuario", {
@@ -54,73 +111,77 @@ router.post("/cadastroUsuario/cadastrar", async (req, res) => {
   res.redirect("/");
 });
 
-//rota de autenticação (login)
-router.post("/autenticacao", (req, res) => {
-  //capturarando os dados do formulário
-  const usuario = req.body.usuario;
-  const senha = req.body.senha;
+// rota de autenticação (login)
+router.post("/autenticacao", async (req, res) => {
+  const { usuario, senha } = req.body;
 
-  //buscando o usuário no banco de dados
-  Usuario.findOne({
-    where: {
-      usuario: usuario,
-    },
-  }).then((usuario) => {
-    //se o usuário existir
-    if (usuario != undefined) {
-      //validar a senha ------------- senha do form --- senha do banco
-      const correct = bcrypt.compareSync(senha, usuario.senha);
+  try {
+    const usuarioEncontrado = await Usuario.findOne({
+      where: {
+        usuario: usuario,
+      },
+    });
 
-      //se a senha for válida
-      if (correct) {
+    if (!usuarioEncontrado) {
+      return res.render("index", {
+        erro: "Usuário ou senha incorretos.",
+      });
+    }
 
-        if(usuario.tipo != "Fono") {
-          return res.render("index", {
-            erro: "Acesso permitido apenas para fonoaudiólogos"
-          });
-        }
-        //procure na tabela fono o registro cujo id_login seja igual ao id do usuário que acabou de logar
-        Fonoaudiologo.findOne({
-          where: {
-            id_login: usuario.id
-          }
-        }).then((fono) => {
+    if (usuarioEncontrado.ativo === false || usuarioEncontrado.ativo === 0) {
+      return res.render("index", {
+        contaDesativada: true,
+        usuario: usuarioEncontrado.usuario,
+        erro: "Essa conta está desativada."
+      });
+    }
 
-          if(!fono) {
-            return res.render("index", {
-              erro: "Fonoaudiólogo não encontrado para esse login."
-            });
-          }
-          //autoriza o login
-          //cria a sessão para o usuário
-          req.session.usuario = {
-            //inserindo as informações do usuário na sessão
-            id: usuario.id,
-            usuario: usuario.usuario,
-            tipo: usuario.tipo,
-            id_fono: fono.id,
-            nome: fono.nome,
-          };
+    const correct = bcrypt.compareSync(senha, usuarioEncontrado.senha);
 
-          res.redirect("/home");
-        });
-  //se a senha estiver incorreta
-} else {
-  res.render("index", {
-    erro: "Usuário ou senha incorretos."
-  })
-}
-    //caso o usuário não exista
-    } else {
+    if (!correct) {
+      return res.render("index", {
+        erro: "Usuário ou senha incorretos.",
+      });
+    }
+
+    if (usuarioEncontrado.tipo !== "Fono") {
+      return res.render("index", {
+        erro: "Acesso permitido apenas para fonoaudiólogos.",
+      });
+    }
+
+    const fono = await Fonoaudiologo.findOne({
+      where: {
+        id_login: usuarioEncontrado.id,
+      },
+    });
+
+    if (!fono) {
+      return res.render("index", {
+        erro: "Fonoaudiólogo não encontrado para esse login.",
+      });
+    }
+
+    req.session.usuario = {
+      id: usuarioEncontrado.id,
+      usuario: usuarioEncontrado.usuario,
+      tipo: usuarioEncontrado.tipo,
+      id_fono: fono.id,
+      nome: fono.nome,
+    };
+
+    res.redirect("/home");
+  } catch (error) {
+    console.log("Erro ao autenticar usuário: " + error);
+
     res.render("index", {
-      erro: "Usuário ou senha incorretos."
-    })
+      erro: "Ocorreu um erro ao tentar fazer login.",
+    });
   }
-  });
 });
 
 //encerrar a sessão
-router.get("/logout", (req, res) => {
+router.get("/logout", Auth, (req, res) => {
   req.session.destroy((erro) => {
     if (erro) {
       console.log("Erro ao encerrar sessão:", erro);
@@ -144,6 +205,45 @@ router.get("/perfil", Auth, async (req, res) => {
   res.render("perfil", {
     fono: fono,
     usuario: req.session.usuario,
+  });
+});
+
+router.post("/usuario/desativar", Auth, async (req, res) => {
+  const id = req.session.usuario.id;
+
+  await Usuario.update(
+    {
+      ativo: false
+    },
+    {
+      where: {
+        id: id
+      }
+    }
+  );
+
+  req.session.destroy(() => {
+    res.redirect("/");
+  });
+});
+
+//reativar a conta
+router.post("/usuario/reativar", async (req, res) => {
+  const usuario = req.body.usuario;
+
+  await Usuario.update(
+    {
+      ativo: true
+    },
+    {
+      where: {
+        usuario: usuario
+      }
+    }
+  );
+
+  res.render("index", {
+    sucesso: "Conta reativada com sucesso!"
   });
 });
 

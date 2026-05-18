@@ -61,6 +61,20 @@
             </div>
             <% } %>
 
+              <% if (typeof contaDesativada !=="undefined" && contaDesativada) { %>
+
+                <form action="/usuario/reativar" method="POST" class="mt-2">
+                  <input type="hidden" name="usuario" value="<%= usuario %>">
+
+                  <button type="submit"
+                    class="w-full rounded-2xl bg-turquesa px-4 py-3 text-white transition hover:bg-turquesa/80">
+                    Reativar conta
+                  </button>
+                </form>
+
+                <% } %>
+
+
                   <form action="/autenticacao" method="POST" class="flex flex-col gap-5">
                     <div class="flex flex-col gap-1">
                       <label class="text-sm md:text-base font-medium">Usuário</label>

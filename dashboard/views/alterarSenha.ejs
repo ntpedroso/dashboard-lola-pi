@@ -22,7 +22,6 @@
       <div class="hidden xl:grid grid-cols-3 gap-10 2xl:gap-20 text-white pt-10">
         <div class="flex gap-4 items-center">
           <img src="imgs/icons/gestao.svg" alt="" class="w-10" />
-
           <p>
             Gestão completa <br />
             dos pacientes
@@ -31,7 +30,6 @@
 
         <div class="flex gap-4 items-center">
           <img src="imgs/icons/relatorio.svg" alt="" class="w-10" />
-
           <p>
             Relatórios e <br />
             Indicadores
@@ -40,7 +38,6 @@
 
         <div class="flex gap-4 items-center">
           <img src="imgs/icons/seguranca.svg" alt="" class="w-10" />
-
           <p>
             Segurança e <br />
             privacidade
@@ -51,52 +48,126 @@
 
     <div class="flex flex-1 items-center justify-center text-text bg-fundo px-4 py-8 sm:px-6 lg:px-10">
       <div class="flex w-full max-w-xl flex-col gap-5 rounded-3xl bg-white/70 p-5 sm:p-7 md:p-8 shadow-sm">
-        <p class="text-2xl md:text-3xl lg:text-4xl pb-3 text-center text-salmao font-light">
-          Alterar Senha
-        </p>
+        <div>
+          <p class="text-2xl md:text-3xl lg:text-4xl pb-3 text-center text-salmao font-light">
+            Alterar Senha
+          </p>
 
-        <form action="/alterarSenha" method="POST" class="flex flex-col gap-5">
-          <div class="flex flex-col gap-1">
-            <label class="text-sm md:text-base font-medium">
-              Nova Senha
-            </label>
+          <p class="text-sm sm:text-base text-text/70 text-center font-light">
+            Primeiro informe o nome de usuário. Depois cadastre uma nova senha.
+          </p>
+        </div>
 
-            <input
-              type="password"
-              name="senha"
-              placeholder="Digite a nova senha"
-              class="w-full p-3 md:p-4 border border-input-gray shadow-sm bg-white rounded-2xl text-sm md:text-base focus:outline-none focus:ring-turquesa focus:ring-1"
-            />
+        <% if (typeof erro !== "undefined" && erro) { %>
+          <div class="rounded-2xl border border-red-300 bg-red-50 px-4 py-3 text-sm md:text-base text-red-700 text-center">
+            <%= erro %>
           </div>
+        <% } %>
 
-          <div class="flex flex-col gap-1">
-            <label class="text-sm md:text-base font-medium">
-              Confirme a senha
-            </label>
-
-            <input
-              type="password"
-              name="confirmarSenha"
-              placeholder="Digite novamente a senha"
-              class="w-full p-3 md:p-4 border border-input-gray shadow-sm bg-white rounded-2xl text-sm md:text-base focus:outline-none focus:ring-turquesa focus:ring-1"
-            />
+        <% if (typeof sucesso !== "undefined" && sucesso) { %>
+          <div class="rounded-2xl border border-green-300 bg-green-50 px-4 py-3 text-sm md:text-base text-green-700 text-center">
+            <%= sucesso %>
           </div>
+        <% } %>
 
-          <button
-            type="submit"
-            class="p-3 md:p-4 md:text-lg border-none rounded-full bg-salmao text-white hover:bg-turquesa transition-colors w-full text-center block"
-          >
-            Alterar
-          </button>
+        <% if (!usuarioEncontrado) { %>
+          <form action="/alterarSenha/procurar" method="POST" class="flex flex-col gap-5">
+            <div class="flex flex-col gap-1">
+              <label class="text-sm md:text-base font-medium">
+                Nome de usuário
+              </label>
 
-          <div>
-            <a href="/">
-              <p class="text-center text-salmao text-sm md:text-base lg:text-lg">
-                voltar ao Login
+              <input
+                type="text"
+                name="usuario"
+                placeholder="Digite o nome de usuário"
+                required
+                class="w-full p-3 md:p-4 border border-input-gray shadow-sm bg-white rounded-2xl text-sm md:text-base focus:outline-none focus:ring-turquesa focus:ring-1"
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="p-3 md:p-4 md:text-lg border-none rounded-full bg-salmao text-white hover:bg-turquesa transition-colors w-full text-center block"
+            >
+              Procurar usuário
+            </button>
+
+            <div>
+              <a href="/">
+                <p class="text-center text-salmao text-sm md:text-base lg:text-lg">
+                  voltar ao Login
+                </p>
+              </a>
+            </div>
+          </form>
+        <% } %>
+
+        <% if (usuarioEncontrado) { %>
+          <form action="/alterarSenha/salvar" method="POST" class="flex flex-col gap-5">
+            <input type="hidden" name="id" value="<%= usuarioEncontrado.id %>">
+            <input type="hidden" name="usuario" value="<%= usuarioEncontrado.usuario %>">
+
+            <div class="rounded-2xl bg-turquesa/10 px-4 py-3 text-center">
+              <p class="text-sm text-text/70">
+                Alterando senha de:
               </p>
-            </a>
-          </div>
-        </form>
+
+              <p class="font-semibold text-salmao">
+                <%= usuarioEncontrado.usuario %>
+              </p>
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label class="text-sm md:text-base font-medium">
+                Nova Senha
+              </label>
+
+              <input
+                type="password"
+                name="novaSenha"
+                placeholder="Digite a nova senha"
+                required
+                class="w-full p-3 md:p-4 border border-input-gray shadow-sm bg-white rounded-2xl text-sm md:text-base focus:outline-none focus:ring-turquesa focus:ring-1"
+              />
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label class="text-sm md:text-base font-medium">
+                Confirme a senha
+              </label>
+
+              <input
+                type="password"
+                name="confirmarSenha"
+                placeholder="Digite novamente a senha"
+                required
+                class="w-full p-3 md:p-4 border border-input-gray shadow-sm bg-white rounded-2xl text-sm md:text-base focus:outline-none focus:ring-turquesa focus:ring-1"
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="p-3 md:p-4 md:text-lg border-none rounded-full bg-salmao text-white hover:bg-turquesa transition-colors w-full text-center block"
+            >
+              Alterar senha
+            </button>
+
+            <div class="flex justify-center gap-4">
+              <a href="/alterarSenha">
+                <p class="text-center text-turquesa text-sm md:text-base lg:text-lg">
+                  procurar outro usuário
+                </p>
+              </a>
+
+              <a href="/">
+                <p class="text-center text-salmao text-sm md:text-base lg:text-lg">
+                  voltar ao Login
+                </p>
+              </a>
+            </div>
+          </form>
+        <% } %>
       </div>
     </div>
   </div>

@@ -19,7 +19,7 @@ router.get("/relatorios", Auth, async (req, res) => {
   });
 });
 
-router.get("/relatorios/fonema", Auth, (req, res) => {
+router.get("/relatorios/fonema", Auth, async (req, res) => {
   const dadosFonema = [
     { fonema: "/s/", erros: 32, acertos: 68, dificuldade: "Alta" },
     { fonema: "/r/", erros: 25, acertos: 75, dificuldade: "Média" },
@@ -27,12 +27,19 @@ router.get("/relatorios/fonema", Auth, (req, res) => {
     { fonema: "/ch/", erros: 40, acertos: 60, dificuldade: "Alta" }
   ];
 
+  const pacientes = await Paciente.findAll({
+    where: {
+      ativo: true,
+    }
+  });
+
   res.render("relatorioFonema", {
-    dadosFonema
+    dadosFonema,
+    pacientes : pacientes
   });
 });
 
-router.get("/relatorios/atividade", Auth, (req, res) => {
+router.get("/relatorios/atividade", Auth, async (req, res) => {
   const dadosAtividade = [
     { data: "01/05", minutos: 35, paciente: "Joana Oliveira" },
     { data: "02/05", minutos: 50, paciente: "Joana Oliveira" },
@@ -40,13 +47,20 @@ router.get("/relatorios/atividade", Auth, (req, res) => {
     { data: "04/05", minutos: 65, paciente: "Joana Oliveira" },
     { data: "05/05", minutos: 42, paciente: "Joana Oliveira" }
   ];
+
+  const pacientes = await Paciente.findAll({
+    where: {
+      ativo: true,
+    }
+  });
 
   res.render("relatorioAtividade", {
-    dadosAtividade
+    dadosAtividade,
+    pacientes : pacientes
   });
 });
 
-router.get("/relatorios/acertos", Auth, (req, res) => {
+router.get("/relatorios/evolucao", Auth, async (req, res) => {
   const dadosAtividade = [
     { data: "01/05", minutos: 35, paciente: "Joana Oliveira" },
     { data: "02/05", minutos: 50, paciente: "Joana Oliveira" },
@@ -55,23 +69,17 @@ router.get("/relatorios/acertos", Auth, (req, res) => {
     { data: "05/05", minutos: 42, paciente: "Joana Oliveira" }
   ];
 
-  res.render("relatorioAcertos", {
-    dadosAtividade
+  const pacientes = await Paciente.findAll({
+    where: {
+      ativo: true,
+    }
   });
-});
-
-router.get("/relatorios/evolucao", Auth, (req, res) => {
-  const dadosEvolucao = [
-    { semana: "Sem 1", paciente: "João", acertos: 40, erros: 60, evolucao: "Inicial" },
-    { semana: "Sem 2", paciente: "João", acertos: 55, erros: 45, evolucao: "Boa" },
-    { semana: "Sem 3", paciente: "João", acertos: 49, erros: 51, evolucao: "Oscilação" },
-    { semana: "Sem 4", paciente: "João", acertos: 75, erros: 25, evolucao: "Alta" },
-    { semana: "Sem 5", paciente: "João", acertos: 80, erros: 20, evolucao: "Alta" }
-  ];
 
   res.render("relatorioEvolucao", {
-    dadosEvolucao
+    dadosAtividade,
+    pacientes: pacientes
   });
 });
+
 
 export default router;

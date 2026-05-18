@@ -9,11 +9,14 @@
     </header>
 
     <main class="text-text font-jakarta text-sm p-4 sm:p-6 lg:p-8 flex flex-col gap-6">
+
       <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p class="text-xs sm:text-sm text-text/60">
             Home / Relatórios /
-            <span class="text-salmao font-semibold">Evolução de Acertos</span>
+            <span class="text-salmao font-semibold">
+              Evolução de Acertos
+            </span>
           </p>
         </div>
 
@@ -27,26 +30,29 @@
 
       <div class="py-6">
         <p class="text-xl text-center md:text-2xl">
-          Relatório de Evolução de Acertos
+          Evolução de Acertos
         </p>
       </div>
 
       <section class="bg-white shadow-lg rounded-2xl p-5 sm:p-6 lg:p-8">
         <form class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
           <div class="flex flex-col gap-1 md:col-span-2">
             <label>Paciente</label>
+
             <select
               class="border border-text/25 rounded-3xl px-4 py-3 focus:outline-none focus:ring-1 focus:ring-turquesa"
             >
-              <option>Todos os pacientes</option>
-              <option>João</option>
-              <option>Maria</option>
-              <option>Pedro</option>
+              <option selected>Todos os pacientes</option>
+              <% pacientes.forEach((listaPaciente) => { %>
+              <option><%= listaPaciente.nome %> <%= listaPaciente.sobrenome %></option>
+              <% }); %>
             </select>
           </div>
 
           <div class="flex flex-col gap-1">
             <label>Data inicial</label>
+
             <input
               type="date"
               class="border border-text/25 rounded-3xl px-4 py-3 focus:outline-none focus:ring-1 focus:ring-turquesa"
@@ -55,6 +61,7 @@
 
           <div class="flex flex-col gap-1">
             <label>Data final</label>
+
             <input
               type="date"
               class="border border-text/25 rounded-3xl px-4 py-3 focus:outline-none focus:ring-1 focus:ring-turquesa"
@@ -69,10 +76,12 @@
               Filtrar
             </button>
           </div>
+
         </form>
       </section>
 
       <section class="grid grid-cols-1 md:grid-cols-4 gap-5">
+
         <div class="bg-white shadow-lg rounded-2xl p-5 text-center">
           <p class="text-text/60">Média de acertos</p>
           <p class="text-4xl font-bold text-salmao mt-2">80%</p>
@@ -92,12 +101,17 @@
           <p class="text-text/60">Status</p>
           <p class="text-4xl font-bold text-salmao mt-2">Alta</p>
         </div>
+
       </section>
 
       <section class="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-5">
+
         <div class="bg-white shadow-lg rounded-2xl p-5 sm:p-6 lg:p-8">
           <div class="mb-5">
-            <p class="text-lg md:text-xl font-semibold">Evolução semanal</p>
+            <p class="text-lg md:text-xl font-semibold">
+              Evolução semanal
+            </p>
+
             <p class="text-sm text-text/60">
               Comparativo fictício da taxa de acertos ao longo das semanas
             </p>
@@ -114,6 +128,7 @@
           </p>
 
           <ul class="flex flex-col gap-3 text-text/80">
+
             <li class="border-l-4 border-salmao pl-3">
               O paciente apresentou crescimento geral de 40% na taxa de acertos.
             </li>
@@ -125,17 +140,22 @@
             <li class="border-l-4 border-roxo pl-3">
               Houve uma pequena oscilação na Semana 3, mas com recuperação nas semanas seguintes.
             </li>
+
           </ul>
         </div>
+
       </section>
 
       <section class="grid grid-cols-1 xl:grid-cols-3 gap-5">
+
         <div class="bg-white shadow-lg rounded-2xl p-5 sm:p-6 lg:p-8 xl:col-span-2">
+
           <p class="text-lg md:text-xl font-semibold mb-4">
             Comparativo de desempenho
           </p>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
             <div class="rounded-2xl bg-gray-50 p-5 text-center">
               <p class="text-sm text-text/60">Semana inicial</p>
               <p class="text-3xl font-bold text-salmao mt-2">40%</p>
@@ -150,10 +170,12 @@
               <p class="text-sm text-text/60">Diferença</p>
               <p class="text-3xl font-bold text-salmao mt-2">+40%</p>
             </div>
+
           </div>
         </div>
 
         <div class="bg-white shadow-lg rounded-2xl p-5 sm:p-6 lg:p-8">
+
           <p class="text-lg md:text-xl font-semibold mb-4">
             Recomendação
           </p>
@@ -162,15 +184,19 @@
             Manter a sequência de atividades atuais e inserir novos desafios gradualmente,
             priorizando fonemas já trabalhados para consolidar os resultados.
           </p>
+
         </div>
+
       </section>
 
       <section class="bg-white shadow-lg rounded-2xl p-5 sm:p-6 lg:p-8 overflow-x-auto">
+
         <p class="text-lg md:text-xl font-semibold mb-4">
           Detalhamento semanal
         </p>
 
         <table class="w-full min-w-[650px] text-left">
+
           <thead>
             <tr class="border-b text-text/60">
               <th class="py-3">Semana</th>
@@ -183,60 +209,80 @@
           </thead>
 
           <tbody>
-            <% dadosEvolucao.forEach(item => { %>
-              <tr class="border-b last:border-b-0">
-                <td class="py-4 font-semibold">
-                  <%= item.semana %>
-                </td>
 
-                <td class="py-4">
-                  <%= item.paciente %>
-                </td>
+            <tr class="border-b">
+              <td class="py-4 font-semibold">Sem 1</td>
+              <td class="py-4">João Pedro</td>
+              <td class="py-4">40%</td>
+              <td class="py-4">60%</td>
 
-                <td class="py-4">
-                  <%= item.acertos %>%
-                </td>
+              <td class="py-4">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-text/70">
+                  Inicial
+                </span>
+              </td>
 
-                <td class="py-4">
-                  <%= item.erros %>%
-                </td>
+              <td class="py-4">
+                Início do acompanhamento.
+              </td>
+            </tr>
 
-                <td class="py-4">
-                  <% if (item.evolucao === "Alta") { %>
-                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700">
-                      Alta
-                    </span>
-                  <% } else if (item.evolucao === "Boa") { %>
-                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-50 text-yellow-700">
-                      Boa
-                    </span>
-                  <% } else if (item.evolucao === "Oscilação") { %>
-                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-red-50 text-red-700">
-                      Oscilação
-                    </span>
-                  <% } else { %>
-                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-text/70">
-                      Inicial
-                    </span>
-                  <% } %>
-                </td>
+            <tr class="border-b">
+              <td class="py-4 font-semibold">Sem 2</td>
+              <td class="py-4">João Pedro</td>
+              <td class="py-4">55%</td>
+              <td class="py-4">45%</td>
 
-                <td class="py-4">
-                  <% if (item.evolucao === "Alta") { %>
-                    Excelente evolução no período.
-                  <% } else if (item.evolucao === "Boa") { %>
-                    Apresentou melhora consistente.
-                  <% } else if (item.evolucao === "Oscilação") { %>
-                    Reforçar prática para estabilizar desempenho.
-                  <% } else { %>
-                    Início do acompanhamento.
-                  <% } %>
-                </td>
-              </tr>
-            <% }) %>
+              <td class="py-4">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-50 text-yellow-700">
+                  Boa
+                </span>
+              </td>
+
+              <td class="py-4">
+                Apresentou melhora consistente.
+              </td>
+            </tr>
+
+            <tr class="border-b">
+              <td class="py-4 font-semibold">Sem 3</td>
+              <td class="py-4">João Pedro</td>
+              <td class="py-4">49%</td>
+              <td class="py-4">51%</td>
+
+              <td class="py-4">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-red-50 text-red-700">
+                  Oscilação
+                </span>
+              </td>
+
+              <td class="py-4">
+                Reforçar prática para estabilizar desempenho.
+              </td>
+            </tr>
+
+            <tr>
+              <td class="py-4 font-semibold">Sem 4</td>
+              <td class="py-4">João Pedro</td>
+              <td class="py-4">80%</td>
+              <td class="py-4">20%</td>
+
+              <td class="py-4">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700">
+                  Alta
+                </span>
+              </td>
+
+              <td class="py-4">
+                Excelente evolução no período.
+              </td>
+            </tr>
+
           </tbody>
+
         </table>
       </section>
+
     </main>
   </div>
 </div>

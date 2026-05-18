@@ -14,7 +14,7 @@
                         <div>
                             <p class="text-xs sm:text-sm text-text/60">
                                 Home / Relatórios /
-                                <span class="text-salmao font-semibold">Média de Atividade Diária</span>
+                                <span class="text-salmao font-semibold">Atividade Diária</span>
                             </p>
                         </div>
 
@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="py-6">
-                        <p class="text-xl text-center md:text-2xl">Relatórios</p>
+                        <p class="text-xl text-center md:text-2xl">Atividade Diária</p>
                     </div>
 
                     <section class="bg-white shadow-lg rounded-2xl p-5 sm:p-6 lg:p-8">
@@ -35,9 +35,13 @@
                                 <select
                                     class="border border-text/25 rounded-3xl px-4 py-3 focus:outline-none focus:ring-1 focus:ring-turquesa">
                                     <option>Todos os pacientes</option>
-                                    <option>Joana Oliveira</option>
-                                    <option>Pedro Henrique</option>
-                                    <option>Maria Eduarda</option>
+                                    <option selected>Todos os pacientes</option>
+                                    <% pacientes.forEach((listaPaciente)=> { %>
+                                        <option>
+                                            <%= listaPaciente.nome %>
+                                                <%= listaPaciente.sobrenome %>
+                                        </option>
+                                        <% }); %>
                                 </select>
                             </div>
 
@@ -133,7 +137,8 @@
                                             <%= item.data %>
                                         </td>
                                         <td class="py-4">
-                                            <%= item.paciente %>
+                                             <% pacientes.forEach(paciente=> { %>
+                                            <%= paciente.nome %> <%= paciente.sobrenome  }); %>
                                         </td>
                                         <td class="py-4">
                                             <%= item.minutos %> min
