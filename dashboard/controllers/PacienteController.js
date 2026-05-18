@@ -18,18 +18,34 @@ router.get("/alterarPaciente", Auth, function (req, res) {
 });
 
 router.get("/pacientes/:id", Auth, (req, res) => {
+
   const id = req.params.id;
 
-  Paciente.findByPk(id)
+  Paciente.findByPk(id, {
+    include: [
+      {
+        model: Usuario,
+        as: "login"
+      }
+    ]
+  })
+
     .then((paciente) => {
+
       res.render("detalhePaciente", {
         paciente: paciente
       });
+
     })
+
     .catch((error) => {
+
       console.log("Erro ao buscar paciente: " + error);
+
       res.redirect("/pacientes");
+
     });
+
 });
 
 router.get("/pacientes", Auth, function (req, res) {

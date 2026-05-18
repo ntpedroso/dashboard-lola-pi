@@ -173,6 +173,82 @@
                 </aside>
               </div>
 
+              <section class="bg-white shadow-lg rounded-2xl p-5 sm:p-6 lg:p-8">
+                <div class="flex flex-col gap-2 mb-6">
+                  <p class="text-lg md:text-xl font-semibold">
+                    Acesso ao Aplicativo
+                  </p>
+
+                  <p class="text-sm text-text/60">
+                    Credenciais geradas automaticamente para o responsável acessar o jogo.
+                  </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                  <div class="rounded-2xl bg-gray-50 p-5 border border-gray-100">
+                    <p class="text-xs uppercase tracking-widest text-text/40 font-semibold">
+                      Usuário gerado
+                    </p>
+
+                    <div class="mt-4 flex items-center gap-3">
+                      <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-turquesa">
+                        <img src="/imgs/icons/perfil.svg" class="w-5">
+                      </div>
+
+                      <div>
+                        <p class="text-lg font-semibold text-text">
+                          <%= paciente.login.usuario %>
+                        </p>
+
+                        <p class="text-sm text-text/50">
+                          Login criado automaticamente
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="rounded-2xl bg-gray-50 p-5 border border-gray-100">
+                    <p class="text-xs uppercase tracking-widest text-text/40 font-semibold">
+                      Senha
+                    </p>
+
+                    <div class="mt-4 flex items-center justify-between gap-3">
+
+                      <div class="flex items-center gap-3">
+                        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-salmao">
+                          <img src="/imgs/icons/seguranca.svg" class="w-5">
+                        </div>
+
+                        <div>
+                          <p class="text-lg font-semibold tracking-[0.25em] text-text">
+                            ••••••••
+                          </p>
+
+                          <p class="text-sm text-text/50">
+                            Senha protegida
+                          </p>
+                        </div>
+                      </div>
+
+                      <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
+                        Gerada
+                      </span>
+
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="mt-5 rounded-2xl border border-turquesa/20 bg-turquesa/5 p-4">
+                  <p class="text-sm leading-relaxed text-text/70">
+                    Por segurança, a senha do responsável não é exibida no painel administrativo.
+                    O sistema gera automaticamente as credenciais de acesso do aplicativo no momento
+                    do cadastro do paciente.
+                  </p>
+                </div>
+              </section>
+
               <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 lg:gap-6">
                 <div
                   class="bg-white shadow-lg rounded-2xl p-5 lg:p-8 flex flex-col items-center justify-between gap-5 text-center">

@@ -103,27 +103,45 @@ router.get("/cadastroUsuario", function (req, res) {
 });
 
 router.post("/cadastroUsuario/cadastrar", async (req, res) => {
-  const { usuario, email, senha } = req.body;
+  try {
+    const { nome, email, crfa, telefone, usuario, senha } = req.body;
 
-  const usuarioExistente = await Usuario.findOne({
-    where: {
-      usuario: usuario
+    const usuarioExistente = await Usuario.findOne({
+      where: { usuario: usuario }
+    });
+
+    if (usuarioExistente) {
+      return res.render("cadastroUsuario", {
+        erro: "Esse nome de usuário já está em uso."
+      });
     }
-  });
 
-  if (usuarioExistente) {
-    return res.render("cadastroUsuario", {
-      erro: "Esse nome de usuário já está em uso."
+    const senhaHash = bcrypt.hashSync(senha, 10);
+
+    const novoUsuario = await Usuario.create({
+      usuario: usuario,
+      email: email,
+      senha: senhaHash,
+      tipo: "Fono",
+      ativo: true
+    });
+
+    await Fonoaudiologo.create({
+      nome: nome,
+      email: email,
+      crfa: crfa,
+      telefone: telefone,
+      id_login: novoUsuario.id
+    });
+
+    res.redirect("/");
+  } catch (error) {
+    console.log("Erro ao cadastrar usuário:", error);
+
+    res.render("cadastroUsuario", {
+      erro: "Ocorreu um erro ao cadastrar o usuário."
     });
   }
-
-  await Usuario.create({
-    usuario: usuario,
-    email: email,
-    senha: senhaHash
-  });
-
-  res.redirect("/");
 });
 
 // rota de autenticação (login)

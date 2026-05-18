@@ -7,8 +7,8 @@ const associations = () => {
     Paciente.belongsTo(Fonoaudiologo, {foreignKey: "id_fono"});
     Usuario.hasOne(Fonoaudiologo, {foreignKey: "id_login"});
     Fonoaudiologo.belongsTo(Usuario, {foreignKey: "id_login"});
-    Usuario.hasOne(Paciente, {foreignKey: "id_login"});
-    Paciente.belongsTo(Usuario, {foreignKey: "id_login"});
+    Usuario.hasOne(Paciente, {foreignKey: "id_login", as: "login"});
+    Paciente.belongsTo(Usuario, {foreignKey: "id_login", as: "login"});
 }
 
 export default associations; 
