@@ -201,6 +201,7 @@ router.post("/autenticacao", async (req, res) => {
       tipo: usuarioEncontrado.tipo,
       id_fono: fono.id,
       nome: fono.nome,
+      foto_perfil: fono.foto_perfil
     };
 
     res.redirect("/home");

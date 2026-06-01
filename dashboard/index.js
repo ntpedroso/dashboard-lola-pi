@@ -84,6 +84,12 @@ app.use(session({
     resave: false, //evita que ressalve sessões
 }));
 
+app.use((req, res, next) => {
+  res.locals.usuario = req.session.usuario || null;
+  next();
+});
+
+
 app.use("/", PacienteController);
 app.use("/", RelatorioController);
 app.use("/", AtividadeController);
