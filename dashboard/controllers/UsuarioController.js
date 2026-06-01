@@ -281,7 +281,6 @@ router.post("/usuario/reativar", async (req, res) => {
 });
 
 router.get("/perfil/editar", Auth, async (req, res) => {
-
   const idFono = req.session.usuario.id_fono;
 
   const fono = await Fonoaudiologo.findByPk(idFono);
@@ -290,16 +289,13 @@ router.get("/perfil/editar", Auth, async (req, res) => {
     fono: fono,
     usuario: req.session.usuario
   });
-
 });
 
 router.post(
   "/perfil/editar",
   Auth,
   upload.single("fotoPerfil"),
-
   async (req, res) => {
-
     const idFono = req.session.usuario.id_fono;
 
     const dadosAtualizacao = {
@@ -314,16 +310,18 @@ router.post(
         "/uploads/fono/" + req.file.filename;
     }
 
-    await Fonoaudiologo.update(
-      dadosAtualizacao,
-      {
-        where: {
-          id: idFono
-        }
+    await Fonoaudiologo.update(dadosAtualizacao, {
+      where: {
+        id: idFono
       }
-    );
+    });
 
     req.session.usuario.nome = req.body.nome;
+
+    if (req.file) {
+      req.session.usuario.foto_perfil =
+        "/uploads/fono/" + req.file.filename;
+    }
 
     res.redirect("/perfil");
   }
